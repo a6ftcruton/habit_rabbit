@@ -11,18 +11,18 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'figaro'
 gem 'omniauth-twitter'
 gem 'twitter'
-# Use jquery as the JavaScript library
-
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
-gem 'rspec-rails',   group: :test
 gem "codeclimate-test-reporter", group: :test, require: nil
+gem 'better_errors'
+gem 'binding_of_caller'
 
 group :test do
+  gem 'rspec-rails'
   gem 'capybara'
   gem 'poltergeist'
   gem 'launchy'

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :habits
+
   validates :provider,
   :uid,
   :name,
