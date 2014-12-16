@@ -5,7 +5,8 @@ class Habit < ActiveRecord::Base
 
   def streak_days
     # self.events.where(completed: true) # && days in a row
-    # I have no idea if this works.
+    # I have no idea if this works.  Thinking we might need to get more specific with
+    # the date (we need to see if there was a completed event at any point during the day)
     counter = 0
     day = Date.yesterday
     event = self.events.last
