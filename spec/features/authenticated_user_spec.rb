@@ -1,6 +1,7 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe 'authenticated user' do
+include Capybara::DSL
 
   it 'visits dashboard' do
     visit '/dashboard'
