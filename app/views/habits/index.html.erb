@@ -1,0 +1,20 @@
+<h1>Welcome</h1>
+
+<%#= unless current_user @habits.empty? %>
+  <h2>Your Habits</h2>
+  <%#= current_user.habits.each do |habit| %>
+    <%# habit.name %>
+  <%# end %>
+<%# end %>
+
+<%= button_tag "Create Custom Habit", id: 'create-custom' %>
+
+<div style="display:none" id="create-habit-form">
+  <%= form_tag(habits_path, method: :post, remote: true) do %>
+    <%= label_tag :name %>:
+    <%= text_field_tag :name %><br />
+
+    <%= submit_tag "Create" %>
+  <% end %>
+</div>
+<script src="assets/habit_scripts.js"></script>
