@@ -19,17 +19,22 @@ describe 'habit' do
   it 'can find its own event streak' do
     @habit.name = "Meditation"
     @habit.save
-    5.times do
+
+    @habit.events.create(completed: true)
+
+    3.times do
+      @habit.events.create(completed: false)
+    end
+
+    2.times do
       @habit.events.create(completed: true)
     end
 
-    @habit.events.last.created_at = "2014-12-17 20:40:46.855146"
-    @habit.events.last.save
-    @habit.events.fourth.created_at = "2014-12-16 20:40:46.855146"
-    @habit.events.fourth.save
-    @habit.events.third.created_at = "2014-12-15 20:40:46.855146"
-    @habit.events.third.save
 
-    expect(@habit.streak_days).to eq(3)
+    @habit.events.each do |event|
+      puts event.completed
+    end
+
+    expect(@habit.streak_days).to eq(2)
   end
 end
