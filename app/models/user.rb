@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
   has_many :habits
 
-  validates :provider,
-  :uid,
-  :name,
-  :image,
-  :oauth_token,
-  :oauth_secret, presence: true
+  # validates :provider,
+  # :uid,
+  # :name,
+  # :image,
+  # :oauth_token,
+  # :oauth_secret, presence: true
 
   def self.from_omniauth(auth)
     where(uid: auth.uid).first_or_initialize.tap do |user|
