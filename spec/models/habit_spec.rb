@@ -30,11 +30,6 @@ describe 'habit' do
       @habit.events.create(completed: true)
     end
 
-
-    @habit.events.each do |event|
-      puts event.completed
-    end
-
     expect(@habit.streak_days).to eq(2)
   end
 end
