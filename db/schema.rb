@@ -42,11 +42,8 @@ ActiveRecord::Schema.define(version: 20141217215632) do
     t.string   "image"
     t.string   "oauth_token"
     t.string   "oauth_secret"
-<<<<<<< HEAD
     t.string   "github_name"
-=======
     t.string   "email_address"
->>>>>>> master
   end
 
 end
