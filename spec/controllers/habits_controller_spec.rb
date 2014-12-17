@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe HabitsController, :type => :controller do
   describe 'current_user' do
     before(:each) do
-      @user = User.create(name:'joe')
+      @user = User.create(name:'joe', email_address: 'joe@yomama.com')
     end
 
     it 'finds a user when user_id is set' do
