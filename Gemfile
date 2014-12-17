@@ -17,7 +17,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'spring',        group: :development
-gem "codeclimate-test-reporter", group: :test, require: nil
 gem 'better_errors'
 gem 'binding_of_caller'
 
@@ -27,4 +26,6 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'database_cleaner'
+  gem 'codeclimate-test-reporter'
+  gem 'faker'
 end
