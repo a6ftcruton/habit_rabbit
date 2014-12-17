@@ -32,4 +32,5 @@ group :test do
   gem 'codeclimate-test-reporter'
   gem 'faker'
   gem 'sms-spec'
+  gem 'rack_session_access'
 end
