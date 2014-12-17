@@ -8,8 +8,14 @@
     <%= submit_tag "Add Github Username" %>
   <% end %>
 <% else %>
-  <h2>Github Stats</h2>
-  Username: <%= @github_user.name %>
+  <h2 id="github-stats-toggle">Github Stats</h2>
+  <div style="display:none" id="github-stats">
+  Name: <%= @github_user.name %><br/>
+  Username: <%= current_user.github_name %><br/>
+  Your Repos:<br/> <% @github_user.rels[:repos].get.data.each do |repo| %>
+                <li><%= repo.name %></li>
+              <% end %>
+  </div>
 <% end %>
 
 <% unless current_user.habits.empty? %>
