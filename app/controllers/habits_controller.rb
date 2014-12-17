@@ -2,6 +2,7 @@ class HabitsController < ApplicationController
 
   def index
     @habit = Habit.new
+    @github_user = Octokit.user(current_user.github_name)
   end
 
   def new
