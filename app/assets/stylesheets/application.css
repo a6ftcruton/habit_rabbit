@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
+.main_header {
+  padding-top: 5cm;
+  text-align: center;
+}
