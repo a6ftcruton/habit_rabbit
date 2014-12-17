@@ -11,9 +11,6 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'figaro'
 gem 'omniauth-twitter'
 gem 'twitter'
-gem 'twilio-ruby'
-# Use jquery as the JavaScript library
-
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
@@ -28,7 +25,7 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'poltergeist'
+  gem 'factory_girl_rails'
   gem 'launchy'
   gem 'database_cleaner'
-  gem 'sms-spec'
 end
