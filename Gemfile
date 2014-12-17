@@ -23,6 +23,8 @@ gem 'spring',        group: :development
 gem 'better_errors'
 gem 'binding_of_caller'
 
+gem 'octokit'
+
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
