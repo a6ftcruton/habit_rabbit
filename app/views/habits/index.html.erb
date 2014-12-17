@@ -2,7 +2,7 @@
 
 <% if !@github_user %>
   <h2>Add your Github Username to Track Your Github Stats</h2>
-  <%= form_tag(add_github_path, method: :post, remote: true) do %>
+  <%= form_tag(add_github_path, method: :post) do %>
     <%= label_tag "Github Username" %>
     <%= text_field_tag :name %>
     <%= submit_tag "Add Github Username" %>

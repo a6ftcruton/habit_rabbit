@@ -27,12 +27,10 @@ class HabitsController < ApplicationController
   end
 
   def add_github
-    respond_to do |format|
-      user = User.find(current_user.id)
-      puts user
-      user.github_name = params[:name]
-      user.save
-    end
+    user = User.find(current_user.id)
+    user.github_name = params[:name]
+    user.save
+    redirect_to dashboard_path
   end
 
   private
