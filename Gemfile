@@ -11,6 +11,9 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'figaro'
 gem 'omniauth-twitter'
 gem 'twitter'
+gem 'twilio-ruby'
+# Use jquery as the JavaScript library
+
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
@@ -28,4 +31,5 @@ group :test do
   gem 'database_cleaner'
   gem 'codeclimate-test-reporter'
   gem 'faker'
+  gem 'sms-spec'
 end
