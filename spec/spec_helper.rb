@@ -13,4 +13,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  SmsSpec.driver = :"twilio-ruby"
+
 end
