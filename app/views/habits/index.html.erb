@@ -1,6 +1,16 @@
-<h1>Welcome</h1>
+<h1>Welcome <%= current_user.name %></h1>
 
-<%= @github_user.name %>
+<% if !@github_user %>
+  <h2>Add your Github Username to Track Your Github Stats</h2>
+  <%= form_tag(add_github_path, method: :post, remote: true) do %>
+    <%= label_tag "Github Username" %>
+    <%= text_field_tag :name %>
+    <%= submit_tag "Add Github Username" %>
+  <% end %>
+<% else %>
+  <h2>Github Stats</h2>
+  Username: <%= @github_user.name %>
+<% end %>
 
 <% unless current_user.habits.empty? %>
   <h2>Your Habits</h2>

@@ -2,7 +2,9 @@ class HabitsController < ApplicationController
 
   def index
     @habit = Habit.new
-    @github_user = Octokit.user(current_user.github_name)
+    if !current_user.github_name.nil? && !current_user.github_name.empty?
+      @github_user = Octokit.user(current_user.github_name)
+    end
   end
 
   def new
@@ -21,5 +23,14 @@ class HabitsController < ApplicationController
   end
 
   def show
+  end
+
+  def add_github
+    respond_to do |format|
+      user = User.find(current_user.id)
+      puts user
+      user.github_name = params[:name]
+      user.save
+    end
   end
 end
