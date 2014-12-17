@@ -1,4 +1,5 @@
 class HabitsController < ApplicationController
+  before_action :verify_user
 
   def index
     @habit = Habit.new
@@ -20,5 +21,10 @@ class HabitsController < ApplicationController
   end
 
   def show
+  end
+
+  private
+  def verify_user
+    redirect_to root_path unless current_user
   end
 end
