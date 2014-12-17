@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'authenticated user' do
+describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
   it 'visits dashboard' do
@@ -20,5 +20,5 @@ describe 'authenticated user' do
     click_on('Create Custom Habit')
     expect(page).to have_css('#create-habit-form')
   end
-  
+
 end
