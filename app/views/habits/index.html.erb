@@ -1,11 +1,13 @@
 <h1>Welcome</h1>
 
-<%#= unless current_user @habits.empty? %>
+<% unless current_user.habits.empty? %>
   <h2>Your Habits</h2>
-  <%#= current_user.habits.each do |habit| %>
-    <%# habit.name %>
-  <%# end %>
-<%# end %>
+  <div class="habit-list">
+    <% current_user.habits.each do |habit| %>
+      <li><%= habit.name %></li>
+    <% end %>
+  </div>
+<% end %>
 
 <%= button_tag "Create Custom Habit", id: 'create-custom' %>
 

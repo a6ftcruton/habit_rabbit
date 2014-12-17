@@ -9,9 +9,9 @@ class HabitsController < ApplicationController
 
   def create
     respond_to do |format|
-      @habit = Habit.create(name: params[:name])
+      @habit = Habit.create(name: params[:name], user_id: current_user.id)
       if @habit.save!
-        format.js {}
+        format.js {@habit}
       else
         flash[:notice] = "Your habit must have a name"
         render :back
