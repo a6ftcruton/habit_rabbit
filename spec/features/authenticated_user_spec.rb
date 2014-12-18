@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
@@ -36,7 +34,6 @@ describe 'authenticated user', type: :feature do
 
   it 'displays all habits' do
     skip
-  before do
     sign_in_with_twitter
     @habit = create(:habit)
   end
