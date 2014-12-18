@@ -1,4 +1,5 @@
 class HabitsController < ApplicationController
+  before_action :ensure_user
 
   def index
     @habit = Habit.new

@@ -3,22 +3,35 @@ require 'rails_helper'
 describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
-  it 'visits dashboard' do
-    visit '/dashboard'
-    expect(page).to have_content "Welcome"
+  before do
+    sign_in_with_twitter
+    @habit = create(:habit)
   end
 
-  it 'displays all habits' do
+  it 'can visit dashboard' do
     visit '/dashboard'
-    expect(page).to have_content "Your Habits"
-    expect(page).to have_content "Push Ups"
+    expect(page).to have_content "Welcome Yukon Cornelius"
   end
 
-  it 'can create custom streak', js: true do
+  # Habits:
+  # ==================================
+  it 'can create a new habit', js: true do
     visit '/dashboard'
-    expect(page).to have_css('#create-custom')
+    expect(page).to_not have_content 'push ups'
     click_on('Create Custom Habit')
-    expect(page).to have_css('#create-habit-form')
+    page.fill_in('Name', with: 'push ups')
+    click_on('Create')
+    expect(page).to have_content 'Your Habit was saved successfully.'
   end
 
+  it 'can view habit details'
+  it 'can edit a habit' 
+  it 'can delete a habit'
+  it 'can add notification to a habit'
+
+  # Notifications:
+  # ==================================
+  it 'can edit notifications'
+  it 'can stop notification'
+  
 end

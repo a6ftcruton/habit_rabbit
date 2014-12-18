@@ -1,10 +1,9 @@
-<h1>Welcome</h1>
-
+<h1>Welcome <%= current_user.name %></h1>
 <% unless current_user.habits.empty? %>
   <h2>Your Habits</h2>
   <div class="habit-list">
     <% current_user.habits.each do |habit| %>
-      <li><%= habit.name %></li>
+      <li class="habit-name"><%= habit.name %></li>
     <% end %>
   </div>
 <% end %>
