@@ -17,4 +17,11 @@ class Habit < ActiveRecord::Base
     end
     counter
   end
+
+  def self.notify?
+    habits = Habit.where(notifications: true)
+    habits.each do |habit|
+      TextWorker.perform_async(habit.id)
+    end
+  end
 end
