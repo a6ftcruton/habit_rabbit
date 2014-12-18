@@ -4,7 +4,7 @@
 <% if current_user.nil? %>
   <%= link_to "Log in with Twitter", "/auth/twitter", class: 'button tiny' %>
   <%= link_to "Log in with Email", "#", class: 'button tiny'%>
-  <%= link_to "Create Account with Email", "#", class: 'button tiny' %>
+  <%= link_to "Create Account with Email", "", class: 'button tiny' %>
 <% else %>
   <%= link_to "Log Out", signout_path, class: 'button tiny' %>
 <% end %>

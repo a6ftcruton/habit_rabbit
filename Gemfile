@@ -32,3 +32,7 @@ group :test do
   gem 'sms-spec'
   gem 'rack_session_access'
 end
+
+group :development, :test do
+  gem "pry"
+end
