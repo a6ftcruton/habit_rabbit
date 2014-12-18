@@ -29,7 +29,7 @@
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
         </li>
       <% end %>
-    <%= submit_tag "Update Notifications" %>
+    <%= submit_tag "Update Notifications", id: 'update-notifications' %>
     <% end %>
     </div>
   <% end %>

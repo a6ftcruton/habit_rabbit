@@ -1,12 +1,10 @@
+require 'rails_helper'
+
 describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
   before do
     sign_in_with_twitter
-  end
-
-  it 'displays all habits' do
-    @habit = create(:habit)
   end
 
   it 'can visit dashboard' do
@@ -40,10 +38,19 @@ describe 'authenticated user', type: :feature do
   it 'can view habit details'
   it 'can edit a habit'
   it 'can delete a habit'
-  it 'can add notification to a habit' do
-
-    # visit '/dashboard'
-    # click_on()
+  it 'can add notification to a habit', js: true do
+    user = User.first
+    visit '/dashboard'
+    click_on('Create Custom Habit')
+    page.fill_in('Habit', with: 'push ups')
+    click_on('Create Habit')
+    visit '/dashboard'
+    expect(page).to have_content('push ups')
+    expect(user.habits.first.notifications).to be_falsey
+    check('notification_ids[]')
+    page.find('#update-notifications').click
+    visit '/dashboard'
+    expect(user.habits.first.notifications).to be_truthy
   end
 
   # Notifications:

@@ -2,6 +2,7 @@ class HabitsController < ApplicationController
   before_action :verify_user
 
   def index
+    # raise HELL
     @habit = Habit.new
     if !current_user.github_name.nil? && !current_user.github_name.empty?
       @github_user = Octokit.user(current_user.github_name)
