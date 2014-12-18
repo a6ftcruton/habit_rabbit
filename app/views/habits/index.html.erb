@@ -27,6 +27,8 @@
       <% current_user.habits.each do |habit| %>
         <li>
           <%= habit.name %> |
+          <%= link_to "More Information", habit_path %>
+          <%= link_to "Edit Habit", edit_habit_path %>
           Notifications:
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
         </li>

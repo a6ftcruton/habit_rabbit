@@ -51,6 +51,7 @@ describe 'authenticated user', type: :feature do
     click_on('Create Habit')
     expect(page).to have_content 'Your Habit was saved successfully.'
   end
+
   #
   # it 'can receive a tweet', js: true do
   #   visit '/dashboard'
