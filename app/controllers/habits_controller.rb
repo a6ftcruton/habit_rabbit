@@ -54,7 +54,7 @@ class HabitsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def update
+  def update_notifications
     respond_to do |format|
       current_user.habits.each do |habit|
         habit.notifications = false
