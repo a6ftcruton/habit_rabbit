@@ -13,8 +13,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    current_user.phone = params[:phone]
+    current_user.save
+    redirect_to '/dashboard'
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
   end
+
 end

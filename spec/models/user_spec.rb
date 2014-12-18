@@ -46,4 +46,9 @@ describe "user" do
       expect(u.is_twitter?).to eq(false)
     end
   end
+
+  it 'can have a phone number' do
+    user = User.new(name: 'joe')
+    # expect
+  end
 end
