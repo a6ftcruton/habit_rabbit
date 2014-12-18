@@ -4,6 +4,7 @@ describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
   before do
+    # Habit.destroy_all
     sign_in_with_twitter
   end
 
