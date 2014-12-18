@@ -31,9 +31,31 @@ class HabitsController < ApplicationController
   end
 
   def show
+    @habit = Habit.find(params[:id])
+  end
+
+  def edit
+    @habit = Habit.find(params[:id])
   end
 
   def update
+    @habit = Habit.find(params[:id])
+    @habit.update(name: params[:habit][:name])
+    if @habit.save
+      redirect_to dashboard_path
+    else
+      flash[:notice] = "Please Try again"
+      redirect_to :back
+    end
+  end
+
+  def destroy
+    @habit = Habit.find(params[:id])
+    @habit.destroy
+    redirect_to dashboard_path
+  end
+
+  def update_notifications
     respond_to do |format|
       current_user.habits.each do |habit|
         habit.notifications = false

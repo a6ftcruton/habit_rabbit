@@ -21,10 +21,13 @@
   <% unless current_user.habits.empty? %>
     <h2>Your Habits</h2>
     <div class="habit-list">
-    <%= form_tag(habit_update_path, method: :post, remote: true) do %>
+    <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
       <% current_user.habits.each do |habit| %>
         <li>
           <%= habit.name %> |
+          <%= link_to "More Information", habit_path(habit) %>
+          <%= link_to "Edit Habit", edit_habit_path(habit) %>
+          <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %>
           Notifications:
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
         </li>
