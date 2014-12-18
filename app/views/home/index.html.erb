@@ -1,9 +1,10 @@
-Welcome to our home page where we will sell you on the idea get you addicted to it and then charge you all your monies
+<div class="main_header">
+  <h2>Habit Rabbit</h2>
 
 <% if current_user.nil? %>
-  <%= link_to "Log in with Twitter", "/auth/twitter" %>
-  <%= link_to "Log in with Email", "#" %>
-  <%= link_to "Log in with Email", "#" %>
+  <%= link_to "Log in with Twitter", "/auth/twitter", class: 'button tiny' %>
+  <%= link_to "Log in with Email", "#", class: 'button tiny'%>
+  <%= link_to "Create Account with Email", "#", class: 'button tiny' %>
 <% else %>
-  <%= link_to "Log Out", signout_path %>
+  <%= link_to "Log Out", signout_path, class: 'button tiny' %>
 <% end %>
