@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217215632) do
+ActiveRecord::Schema.define(version: 20141218165316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20141217215632) do
     t.string   "oauth_secret"
     t.string   "email_address"
     t.string   "github_name"
+    t.string   "password_digest"
   end
 
 end
