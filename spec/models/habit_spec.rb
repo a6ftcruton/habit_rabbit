@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe 'habit' do
 
   before do

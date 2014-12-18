@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 describe "user" do
 
   describe "non-twitter user creation" do

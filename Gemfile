@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+ruby '2.1.4'
 gem 'rails', '4.1.6'
 gem 'pg'
 gem 'sass-rails', '~> 4.0.3'
@@ -29,7 +30,6 @@ gem 'whenever', :require => false
 gem 'sinatra', '>= 1.3.0', :require => nil
 
 group :test do
-  gem 'rspec-rails'
   gem 'capybara'
   gem 'poltergeist'
   gem 'factory_girl_rails'
@@ -42,5 +42,6 @@ group :test do
 end
 
 group :development, :test do
+  gem 'rspec-rails'
   gem "pry"
 end
