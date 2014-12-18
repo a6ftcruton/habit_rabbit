@@ -15,7 +15,7 @@ class HabitsController < ApplicationController
     respond_to do |format|
       @habit = Habit.create(name: params[:title], user_id: current_user.id)
       if @habit.save!
-        TextNotification.send_text(current_user)
+        # TextNotification.send_text(current_user)
         format.js {@habit}
 
 
