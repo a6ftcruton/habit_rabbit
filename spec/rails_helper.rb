@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'capybara/poltergeist'
+require "rack_session_access/capybara"
 
 Capybara.javascript_driver = :poltergeist
 Capybara.default_wait_time = 5

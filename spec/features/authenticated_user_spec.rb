@@ -26,13 +26,11 @@ describe 'authenticated user', type: :feature do
       fill_in 'user_password', with: 'password'
       fill_in 'user_password_confirmation', with: 'password'
       click_link_or_button 'Create My Account'
-      # save_and_open_page
       expect(page).to have_content("Welcome, Aaron")
     end
   end
 
   it 'displays all habits' do
-    skip
     sign_in_with_twitter
     @habit = create(:habit)
   end
