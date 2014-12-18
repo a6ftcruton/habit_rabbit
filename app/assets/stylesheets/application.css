@@ -12,4 +12,26 @@
  *
  *= require_tree .
  *= require_self
+ *= require foundation_and_overrides
+
  */
+.main_header {
+  padding-top: 5cm;
+  text-align: center;
+  font-family: "Helvetica";
+}
+
+.page_header {
+  padding-top: 1cm;
+  margin-left: 4em;
+  font-family: "Helvetica";
+}
+
+#habit-button {
+  padding-top: 1em;
+}
+
+.flash {
+  padding-top: 1em;
+  margin-left: 4em;
+}

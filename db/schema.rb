@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141216200737) do
+ActiveRecord::Schema.define(version: 20141218170437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20141216200737) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "notifications"
   end
 
   add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree
@@ -42,6 +43,9 @@ ActiveRecord::Schema.define(version: 20141216200737) do
     t.string   "image"
     t.string   "oauth_token"
     t.string   "oauth_secret"
+    t.string   "github_name"
+    t.string   "email_address"
+    t.string   "phone"
   end
 
 end

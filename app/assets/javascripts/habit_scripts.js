@@ -1,5 +1,7 @@
-
- $('#create-custom').click(function() {
-    $('#create-habit-form').toggle() 
+$('#create-custom').click(function() {
+    $('#create-habit-form').toggle()
 });
 
+$('#github-stats-toggle').click(function() {
+    $('#github-stats').toggle()
+});
