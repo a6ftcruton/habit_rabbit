@@ -18,4 +18,15 @@
 .main_header {
   padding-top: 5cm;
   text-align: center;
+  font-family: "Helvetica";
+}
+
+.page_header {
+  padding-top: 1cm;
+  margin-left: 4em;
+  font-family: "Helvetica";
+}
+
+#habit-button {
+  padding-top: 1em;
 }
