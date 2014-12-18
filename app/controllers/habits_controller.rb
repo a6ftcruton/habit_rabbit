@@ -34,7 +34,6 @@ class HabitsController < ApplicationController
   end
 
   def add_notification
-    # raise params.inspect
     current_user.habits.each do |habit|
       habit.notifications = false
       habit.save
