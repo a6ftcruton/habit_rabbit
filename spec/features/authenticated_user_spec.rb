@@ -33,7 +33,6 @@ describe 'authenticated user', type: :feature do
     end
   end
 
-
   it 'displays all habits' do
     skip
   before do

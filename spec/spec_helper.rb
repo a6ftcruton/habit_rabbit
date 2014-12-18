@@ -13,8 +13,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  # SmsSpec.driver = :"twilio-ruby"
-
   def sign_in_with_twitter
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
