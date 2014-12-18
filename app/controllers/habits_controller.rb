@@ -32,6 +32,16 @@ class HabitsController < ApplicationController
   def show
   end
 
+  def edit
+    
+  end
+
+  def destroy
+    @habit = Habit.find(params[:id])
+    @habit.destroy
+    redirect_to dashboard_path
+  end
+
   def add_github
     user = User.find(current_user.id)
     user.github_name = params[:name]
