@@ -1,7 +1,8 @@
-<h1>Welcome <%= current_user.name %></h1>
+<div class="page_header">
+  <h5>Welcome, <%= current_user.name %></h5>
 
 <% if !@github_user %>
-  <h2>Add your Github Username to Track Your Github Stats</h2>
+  <h4>Add your Github Username to Track Your Github Stats</h4>
   <%= form_tag(add_github_path, method: :post) do %>
     <%= label_tag "Github Username" %>
     <%= text_field_tag :name %>
@@ -27,14 +28,17 @@
   </div>
 <% end %>
 
-<%= button_tag "Create Custom Habit", id: 'create-custom' %>
+<div id="habit-button">
+  <%= button_tag "Create Custom Habit", id: 'create-custom' %>
+</div>
 
 <div style="display:none" id="create-habit-form">
   <%= form_tag(habits_path, method: :post, remote: true) do %>
-    <%= label_tag :name %>:
+    <%= label_tag :name, "Habit:" %>
     <%= text_field_tag :name %><br />
 
     <%= submit_tag "Create" %>
   <% end %>
+</div>
 </div>
 <script src="assets/habit_scripts.js"></script>

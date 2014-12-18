@@ -1,7 +1,11 @@
-Welcome to our home page where we will sell you on the idea get you addicted to it and then charge you all your monies
+<div class="main_header">
 
-<% if current_user.nil? %>
-  <%= link_to "Log in with Twitter", "/auth/twitter" %>
-<% else %>
-  <%= link_to "Log Out", signout_path %>
-<% end %>
+  <h2>Habit Rabbit</h2>
+
+  <% if current_user.nil? %>
+    <a href="/auth/twitter" class="button tiny">Log in with Twitter</a>
+    <a href="#" class="button tiny">Log in with GitHub (coming soon)</a>
+  <% else %>
+    <a href="/signout" class="button tiny">Log Out</a>
+  <% end %>
+</div>

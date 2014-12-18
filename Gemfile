@@ -14,6 +14,7 @@ gem 'twitter'
 gem 'twilio-ruby'
 # Use jquery as the JavaScript library
 
+gem 'foundation-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
