@@ -24,7 +24,10 @@
     <h2>Your Habits</h2>
     <div class="habit-list">
       <% current_user.habits.each do |habit| %>
-        <li><%= habit.name %></li>
+        <li>
+          <%= habit.name %>
+
+        </li>
       <% end %>
     </div>
   <% end %>
