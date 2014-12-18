@@ -3,22 +3,38 @@ require 'rails_helper'
 describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
-  it 'can log in using email from home page' do
-    user = User.create(name: 'Aaron',
-                       email_address: 'stuff@yomama.com',
-                       password: 'password',
-                       password_confirmation: 'password'
-                       )
-    visit root_path
-    click_link 'Log in with Email'
-    fill_in 'Email', with: 'stuff@yomama.com'
-    fill_in 'Password', with: 'Aaron'
-    expect(page).to have_content("Welcome, Aaron")
+  describe 'logging in' do
+    it 'can log in using email from home page' do
+      user = User.create(name: 'Aaron',
+                         email_address: 'stuff@yomama.com',
+                         password: 'password',
+                         password_confirmation: 'password'
+                         )
+      visit root_path
+      click_link 'Log in with Email'
+      fill_in 'user_email_address', with: 'stuff@yomama.com'
+      fill_in 'user_password', with: 'password'
+      click_link_or_button 'Login'
+      expect(page).to have_content("Welcome, Aaron")
+    end
+
+    it 'can log in using twitter from home page'
   end
 
-  it 'can create an account using email from home page'
+  describe 'creating an account' do
+    it 'can create an account using email from home page' do
+      visit root_path
+      click_link "Create Account with Email"
+      fill_in 'user_name', with: 'Aaron'
+      fill_in 'user_email_address', with: 'jokes@laugh.com'
+      fill_in 'user_password', with: 'password'
+      fill_in 'user_password_confirmation', with: 'password'
+      click_link_or_button 'Create My Account'
+      # save_and_open_page
+      expect(page).to have_content("Welcome, Aaron")
+    end
+  end
 
-  it 'can log in using twitter from home page'
 
   it 'displays all habits' do
     skip

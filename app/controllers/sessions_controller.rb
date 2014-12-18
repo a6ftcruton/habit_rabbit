@@ -10,10 +10,17 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def signin
+    @user = User.new
+  end
+
   def login
-    user = User.find_by(email_address: params[:email_address])
-    if user && user.authenticate(params[:password])
-    session[:user_id] = user.id
-    redirect_to dashboard_path
+    user = User.find_by(email_address: params[:user][:email_address])
+    if user && user.authenticate(params[:user][:password])
+      session[:user_id] = user.id
+      redirect_to dashboard_path
+    else
+      redirect_to root_path
+    end
   end
 end

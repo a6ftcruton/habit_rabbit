@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get '/dashboard', to: 'habits#index', as: 'dashboard'
   post 'twilio/voice' => 'twilio#voice'
-  get 'sessions/login', to: 'sessions#login', as: 'login'
+  get 'sessions/signin', to: 'sessions#signin', as: 'signin'
+  post 'sessions/login', to: 'sessions#login', as: 'login'
   # get 'twilio/text/:number', to: 'twilio#send_text', as: 'twilio_text'
 
   resources :habits
