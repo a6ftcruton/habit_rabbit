@@ -22,11 +22,12 @@ describe 'authenticated user', type: :feature do
     click_on('Create Custom Habit')
     expect(page).to have_css('#create-habit-form')
   end
-
-  it 'can receive a tweet', js: true do
-    visit '/dashboard'
-    click_on('Create Custom Habit')
-    expect(page).to have_css('#manage-habit-form')
-  end
+  #
+  # it 'can receive a tweet', js: true do
+  #   visit '/dashboard'
+  #   click_on('Create Custom Habit')
+  #   expect(page).to have_css('#manage-habit-form')
+  # end
+  
 
 end

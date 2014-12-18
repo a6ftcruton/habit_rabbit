@@ -37,4 +37,12 @@
     <%= submit_tag "Create" %>
   <% end %>
 </div>
+
+<%= form_tag(user_path(current_user), method: :patch) do %>
+  <%= label_tag :phone, "Phone Number" %>:
+  <%= text_field_tag :phone %><br />
+
+  <%= submit_tag "Create" %>
+<% end %>
+
 <script src="assets/habit_scripts.js"></script>

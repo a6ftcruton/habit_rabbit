@@ -16,6 +16,11 @@ class HabitsController < ApplicationController
       @habit = Habit.create(name: params[:name], user_id: current_user.id)
       if @habit.save!
         format.js {@habit}
+        send_text(current_user, params[:name])
+
+        # send text. "congrats, good luck"
+
+
       else
         flash[:notice] = "Your habit must have a name"
         render :back
