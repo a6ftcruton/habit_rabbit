@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   # get 'twilio/text/:number', to: 'twilio#send_text', as: 'twilio_text'
 
   resources :habits
+  resources :users, only: [:update]
+
 
   post '/add_github', to: 'habits#add_github', as: 'add_github'
-
+  post '/add_notification', to: 'habits#add_notification', as: 'add_notification'
 end

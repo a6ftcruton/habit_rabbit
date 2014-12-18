@@ -8,7 +8,9 @@ require 'spec_helper'
 require "rack_session_access/capybara"
 ActiveRecord::Migration.maintain_test_schema!
 Capybara.javascript_driver = :poltergeist
-
+Capybara.register_driver :poltergeist do |app|
+   Capybara::Poltergeist::Driver.new(app, :inspector => true, :window_size => [1920, 1080], :js_errors => false)
+end
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = true
@@ -33,4 +35,6 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  config.include FactoryGirl::Syntax::Methods
 end

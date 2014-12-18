@@ -12,4 +12,9 @@ describe "user" do
     user2 = User.new(email_address: 'stuff@yomama.com')
     expect(user2).to_not be_valid
   end
+
+  it 'can have a phone number' do
+    user = User.new(name: 'joe')
+    # expect
+  end
 end
