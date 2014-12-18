@@ -1,12 +1,11 @@
 require 'twilio-ruby'
 
-class Twilio
+class Twilio < ActiveRecord::Base
   include Webhookable
   after_filter :set_header
   skip_before_action :verify_authenticity_token
 
-  def send_text(user, habit)
-    # customer_phone_number = params[:number]
+  def send_text(user)
     user_phone_number = user.phone_number
 
     twilio_sid = ENV["TWILIO_SID"]
@@ -17,7 +16,8 @@ class Twilio
 
     @twilio_client.account.sms.messages.create(
     from: twilio_phone_number,
-    to: user_phone_number,
+    to: twilio_phone_number,
+    #to: user_phone_number,
     body: "We are now tracking your #{habit}!"
     )
 
