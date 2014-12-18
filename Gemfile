@@ -27,6 +27,8 @@ gem 'binding_of_caller'
 
 gem 'octokit'
 
+gem 'sidekiq'
+
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
