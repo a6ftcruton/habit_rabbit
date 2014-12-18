@@ -36,12 +36,14 @@ describe 'authenticated user', type: :feature do
   end
 
   it 'can visit dashboard' do
+    sign_in_with_twitter
     visit '/dashboard'
     expect(page).to have_content "Welcome, Yukon Cornelius"
   end
   # Habits:
   # ==================================
   it 'can create a new habit', js: true do
+    sign_in_with_twitter
     visit '/dashboard'
     expect(page).to_not have_content 'push ups'
     click_on('Create Custom Habit')
