@@ -11,7 +11,9 @@ class SessionsController < ApplicationController
   end
 
   def login
-    user = User.find(params:)
-    session[:user_id] =
+    user = User.find_by(email_address: params[:email_address])
+    if user && user.authenticate(params[:password])
+    session[:user_id] = user.id
+    redirect_to dashboard_path
   end
 end
