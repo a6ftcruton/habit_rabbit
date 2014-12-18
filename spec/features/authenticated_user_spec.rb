@@ -17,14 +17,10 @@ describe 'authenticated user', type: :feature do
       click_link_or_button 'Login'
       expect(page).to have_content("Welcome, Aaron")
     end
-
-    it 'can log in using twitter from home page'
   end
 
-  describe 'creating an account' do
-
+  describe 'creating an account with email' do
     it 'can create an account using email from home page' do
-      p User.all.inspect
       visit root_path
       click_link "Create Account with Email"
       fill_in 'user_name', with: 'Aaron'
