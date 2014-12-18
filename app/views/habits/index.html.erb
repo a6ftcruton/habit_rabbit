@@ -1,7 +1,5 @@
-<div class="page_header">
-  <h5>Welcome, <%= current_user.name %></h5>
-</div>
 <div class='large-12 columns'>
+  <h5>Welcome, <%= current_user.name %></h5>
   <% if !@github_user %>
     <h4>Add your Github Username to Track Your Github Stats</h4>
     <%= form_tag(add_github_path, method: :post) do %>
