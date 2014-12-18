@@ -1,4 +1,22 @@
-<h1>Welcome</h1>
+<h1>Welcome <%= current_user.name %></h1>
+
+<% if !@github_user %>
+  <h2>Add your Github Username to Track Your Github Stats</h2>
+  <%= form_tag(add_github_path, method: :post) do %>
+    <%= label_tag "Github Username" %>
+    <%= text_field_tag :name %>
+    <%= submit_tag "Add Github Username" %>
+  <% end %>
+<% else %>
+  <h2 id="github-stats-toggle">Github Stats</h2>
+  <div style="display:none" id="github-stats">
+  Name: <%= @github_user.name %><br/>
+  Username: <%= current_user.github_name %><br/>
+  Your Repos:<br/> <% @github_user.rels[:repos].get.data.each do |repo| %>
+                <li><%= repo.name %></li>
+              <% end %>
+  </div>
+<% end %>
 
 <% unless current_user.habits.empty? %>
   <h2>Your Habits</h2>
@@ -13,7 +31,7 @@
 
 <div style="display:none" id="create-habit-form">
   <%= form_tag(habits_path, method: :post, remote: true) do %>
-    <%= label_tag :name %>:
+    <%= label_tag :name, "Habit" %>:
     <%= text_field_tag :name %><br />
 
     <%= submit_tag "Create" %>
