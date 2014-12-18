@@ -23,12 +23,16 @@
   <% unless current_user.habits.empty? %>
     <h2>Your Habits</h2>
     <div class="habit-list">
+    <%= form_tag(add_notification_path, method: :post) do %>
       <% current_user.habits.each do |habit| %>
         <li>
-          <%= habit.name %>
-
+          <%= habit.name %> |
+          Notifications:
+          <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
         </li>
       <% end %>
+    <%= submit_tag "Update Notifications" %>
+    <% end %>
     </div>
   <% end %>
 

@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   resources :habits
 
   post '/add_github', to: 'habits#add_github', as: 'add_github'
-
+  post '/add_notification', to: 'habits#add_notification', as: 'add_notification'
 end

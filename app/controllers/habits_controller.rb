@@ -33,6 +33,20 @@ class HabitsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def add_notification
+    # raise params.inspect
+    current_user.habits.each do |habit|
+      habit.notifications = false
+      habit.save
+    end
+    habits = Habit.find(params[:notification_ids])
+    habits.each do |habit|
+      habit.notifications = true
+      habit.save
+    end
+    redirect_to dashboard_path
+  end
+
   private
 
   def verify_user
