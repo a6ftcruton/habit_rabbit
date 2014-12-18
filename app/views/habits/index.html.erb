@@ -34,7 +34,7 @@
 
 <div style="display:none" id="create-habit-form">
   <%= form_tag(habits_path, method: :post, remote: true) do %>
-    <%= label_tag :name, "Habit" %>:
+    <%= label_tag :name, "Habit:" %>
     <%= text_field_tag :name %><br />
 
     <%= submit_tag "Create" %>
