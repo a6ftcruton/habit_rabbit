@@ -13,18 +13,15 @@ gem 'figaro'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem 'twilio-ruby'
-# Use jquery as the JavaScript library
-
 gem 'foundation-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-
 gem 'spring',        group: :development
 gem 'better_errors'
 gem 'binding_of_caller'
-
+gem 'bcrypt'
 gem 'octokit'
 gem 'sidekiq'
 gem 'whenever', :require => false
@@ -42,4 +39,8 @@ group :test do
   gem 'faker'
   gem 'sms-spec'
   gem 'rack_session_access'
+end
+
+group :development, :test do
+  gem "pry"
 end

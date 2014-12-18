@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20141218170437) do
     t.string   "oauth_secret"
     t.string   "email_address"
     t.string   "github_name"
+    t.string   "password_digest"
     t.string   "phone"
   end
 
