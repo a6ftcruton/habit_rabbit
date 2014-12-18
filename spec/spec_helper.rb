@@ -20,12 +20,12 @@ RSpec.configure do |config|
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
       'provider' => 'twitter',
       'uid' => "1580517942",
-      'info' => { "name" => "Yukon Cornelius", 
+      'info' => { "name" => "Yukon Cornelius",
                   "image" => 'http://pbs.twimg.com/profile_images/37880000010996' },
       'credentials' => {
-                  "token" => '1580517942-CyrOIdoU2cTwu4fQvclmRkM95OQUbCKbPnwUdLr', 
+                  "token" => '1580517942-CyrOIdoU2cTwu4fQvclmRkM95OQUbCKbPnwUdLr',
                   "secret" => '3BHUkZsVUZYn0c0J19mv0iuDghiCK55ZUGkDZTCpjPn9d' }
-    }) 
+    })
     visit "/auth/twitter/callback"
   end
 end

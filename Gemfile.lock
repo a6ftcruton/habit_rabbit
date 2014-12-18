@@ -124,9 +124,6 @@ GEM
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rack_session_access (0.1.1)
-      builder (>= 2.0.0)
-      rack (>= 1.0.0)
     rails (4.1.6)
       actionmailer (= 4.1.6)
       actionpack (= 4.1.6)
@@ -145,10 +142,6 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
-    rspec (2.99.0)
-      rspec-core (~> 2.99.0)
-      rspec-expectations (~> 2.99.0)
-      rspec-mocks (~> 2.99.0)
     rspec-collection_matchers (1.1.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.2)
@@ -182,8 +175,6 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
-    sms-spec (0.1.10)
-      rspec (~> 2.11)
     spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -246,12 +237,10 @@ DEPENDENCIES
   omniauth-twitter
   pg
   poltergeist
-  rack_session_access
   rails (= 4.1.6)
   rspec-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
-  sms-spec
   spring
   turbolinks
   twilio-ruby
