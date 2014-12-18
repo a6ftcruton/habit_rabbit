@@ -2,6 +2,8 @@ Welcome to our home page where we will sell you on the idea get you addicted to 
 
 <% if current_user.nil? %>
   <%= link_to "Log in with Twitter", "/auth/twitter" %>
+  <%= link_to "Log in with Email", "#" %>
+  <%= link_to "Log in with Email", "#" %>
 <% else %>
   <%= link_to "Log Out", signout_path %>
 <% end %>
