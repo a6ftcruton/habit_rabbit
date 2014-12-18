@@ -1,5 +1,10 @@
+
+
+
 Rails.application.routes.draw do
   root to: 'home#index'
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
 
   get 'sessions/create'
   get 'sessions/destroy'
@@ -11,7 +16,6 @@ Rails.application.routes.draw do
   get '/dashboard', to: 'habits#index', as: 'dashboard'
 
   post 'twilio/voice' => 'twilio#voice'
-  # get 'twilio/text/:number', to: 'twilio#send_text', as: 'twilio_text'
 
   resources :habits
   resources :users, only: [:update]
