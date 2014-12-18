@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :user do
     name "Joe"
+    email_address "joe@example.com"
     uid "12345"
     provider "twitter"
     image 'http://example.com/image/12342345'

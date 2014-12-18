@@ -10,7 +10,7 @@ describe 'authenticated user', type: :feature do
 
   it 'can visit dashboard' do
     visit '/dashboard'
-    expect(page).to have_content "Welcome Yukon Cornelius"
+    expect(page).to have_content "Welcome, Yukon Cornelius"
   end
   # Habits:
   # ==================================
@@ -18,8 +18,8 @@ describe 'authenticated user', type: :feature do
     visit '/dashboard'
     expect(page).to_not have_content 'push ups'
     click_on('Create Custom Habit')
-    page.fill_in('Name', with: 'push ups')
-    click_on('Create')
+    page.fill_in('Habit', with: 'push ups')
+    click_on('Create Habit')
     expect(page).to have_content 'Your Habit was saved successfully.'
   end
   #
