@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   post 'twilio/voice' => 'twilio#voice'
   get 'sessions/signin', to: 'sessions#signin', as: 'signin'
   post 'sessions/login', to: 'sessions#login', as: 'login'
-  
+
   resources :habits
   resources :users
 
   post '/add_github', to: 'habits#add_github', as: 'add_github'
-  post '/add_notification', to: 'habits#add_notification', as: 'add_notification'
+  post '/dashboard', to: 'habits#update', as: 'habit_update'
 end

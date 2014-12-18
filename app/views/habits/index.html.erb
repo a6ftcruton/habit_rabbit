@@ -23,7 +23,7 @@
   <% unless current_user.habits.empty? %>
     <h2>Your Habits</h2>
     <div class="habit-list">
-    <%= form_tag(add_notification_path, method: :post) do %>
+    <%= form_tag(habit_update_path, method: :post, remote: true) do %>
       <% current_user.habits.each do |habit| %>
         <li>
           <%= habit.name %> |
