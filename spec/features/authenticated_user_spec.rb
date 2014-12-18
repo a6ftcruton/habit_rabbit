@@ -22,7 +22,9 @@ describe 'authenticated user', type: :feature do
   end
 
   describe 'creating an account' do
+
     it 'can create an account using email from home page' do
+      p User.all.inspect
       visit root_path
       click_link "Create Account with Email"
       fill_in 'user_name', with: 'Aaron'
