@@ -4,7 +4,7 @@ describe 'habits', type: :feature do
   include Capybara::DSL
 
   before do
-    @user = User.create(name: "Joe", email_address: "stuff@whatup.com", password: 'password', password_confirmation: 'password')
+    @user = create(:user)  
     @user.habits.create(name: 'pushups')
     page.set_rack_session(user_id: @user.id)
     visit dashboard_path
@@ -27,4 +27,13 @@ describe 'habits', type: :feature do
     click_link 'More Information'
     expect(page).to have_content('Super Details about your habitual habits')
   end
+
+  it 'saves habits for the user' do
+    expect(page).to have_content 'pushups'
+    visit signout_path
+    expect(current_path).to eq root_path
+    sign_in_with_twitter
+    expect(page).to have_content 'pushups'
+  end
+
 end

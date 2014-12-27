@@ -37,15 +37,16 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   def sign_in_with_twitter
+    user = attributes_for(:user)
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
       'provider' => 'twitter',
-      'uid' => "1580517942",
-      'info' => { "name" => "Yukon Cornelius",
-                  "image" => 'http://pbs.twimg.com/profile_images/37880000010996' },
+      'uid' => user[:uid], 
+      'info' => { "name" => user[:name], 
+                  "image" => user[:image] },
       'credentials' => {
-                  "token" => '1580517942-CyrOIdoU2cTwu4fQvclmRkM95OQUbCKbPnwUdLr',
-                  "secret" => '3BHUkZsVUZYn0c0J19mv0iuDghiCK55ZUGkDZTCpjPn9d' }
+                  "token" => user[:oauth_token], 
+                  "secret" => user[:oauth_secret] }
     })
     visit "/auth/twitter/callback"
   end
