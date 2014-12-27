@@ -45,7 +45,7 @@
     <%= form_tag(habits_path, method: :post, remote: true) do %>
       <%= label_tag :title, "Habit" %>
       <%= text_field_tag :title %><br />
-
+      <%= hidden_field_tag :start_date, Time.now %>
       <%= submit_tag "Create Habit" %>
     <% end %>
   </div>

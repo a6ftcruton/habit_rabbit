@@ -14,14 +14,12 @@ class HabitsController < ApplicationController
 
   def create
     respond_to do |format|
-      @habit = Habit.create(name: params[:title], user_id: current_user.id)
+      @habit = Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
       if @habit.save!
         # TextNotification.send_text(current_user)
         format.js {@habit}
 
-
         # send text. "congrats, good luck"
-
 
       else
         flash[:notice] = "Your habit must have a name"

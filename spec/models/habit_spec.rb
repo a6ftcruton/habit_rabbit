@@ -8,6 +8,7 @@ describe 'habit' do
 
   it 'is valid' do
     @habit.name = "Push ups"
+    @habit.start_date = Time.now
     @habit.save
     expect(@habit).to be_valid
   end
@@ -18,8 +19,14 @@ describe 'habit' do
     expect(@habit).to_not be_valid
   end
 
+  it 'is invalid without a start date' do
+    @habit.start_date = ""
+    expect(@habit).to_not be_valid
+  end
+
   it 'can find its own event streak' do
     @habit.name = "Meditation"
+    @habit.start_date = Time.now
     @habit.save
 
     @habit.events.create(completed: true)
