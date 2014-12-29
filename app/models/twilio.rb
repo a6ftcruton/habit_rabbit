@@ -1,6 +1,6 @@
 require 'twilio-ruby'
 
-class Twilio < ActiveRecord::Base
+class NotificationService < ActiveRecord::Base
   include Webhookable
   after_filter :set_header
   skip_before_action :verify_authenticity_token

@@ -13,6 +13,7 @@ gem 'figaro'
 gem 'omniauth-twitter'
 gem 'twitter'
 gem 'twilio-ruby'
+gem 'skylight'
 # Use jquery as the JavaScript library
 
 gem 'foundation-rails'
