@@ -43,9 +43,10 @@ ActiveRecord::Schema.define(version: 20141218170437) do
     t.string   "image"
     t.string   "oauth_token"
     t.string   "oauth_secret"
-    t.string   "github_name"
     t.string   "email_address"
+    t.string   "github_name"
     t.string   "phone"
+    t.string   "password_digest"
   end
 
 end

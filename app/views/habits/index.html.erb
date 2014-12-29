@@ -1,7 +1,5 @@
-<div class="page_header">
-  <h5>Welcome, <%= current_user.name %></h5>
-</div>
 <div class='large-12 columns'>
+  <h5>Welcome, <%= current_user.name %></h5>
   <% if !@github_user %>
     <h4>Add your Github Username to Track Your Github Stats</h4>
     <%= form_tag(add_github_path, method: :post) do %>
@@ -23,15 +21,18 @@
   <% unless current_user.habits.empty? %>
     <h2>Your Habits</h2>
     <div class="habit-list">
-    <%= form_tag(add_notification_path, method: :post) do %>
+    <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
       <% current_user.habits.each do |habit| %>
         <li>
           <%= habit.name %> |
+          <%= link_to "More Information", habit_path(habit) %>
+          <%= link_to "Edit Habit", edit_habit_path(habit) %>
+          <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %>
           Notifications:
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
         </li>
       <% end %>
-    <%= submit_tag "Update Notifications" %>
+    <%= submit_tag "Update Notifications", id: 'update-notifications' %>
     <% end %>
     </div>
   <% end %>
@@ -42,10 +43,10 @@
 
   <div style="display:none" id="create-habit-form">
     <%= form_tag(habits_path, method: :post, remote: true) do %>
-      <%= label_tag :name, "Habit:" %>
-      <%= text_field_tag :name %><br />
+      <%= label_tag :title, "Habit" %>
+      <%= text_field_tag :title %><br />
 
-      <%= submit_tag "Create" %>
+      <%= submit_tag "Create Habit" %>
     <% end %>
   </div>
 </div>
