@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141218170437) do
+ActiveRecord::Schema.define(version: 20141230165907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141218170437) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "notifications"
+    t.datetime "notification_time"
   end
 
   add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree

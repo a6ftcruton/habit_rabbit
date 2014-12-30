@@ -19,7 +19,8 @@ class Habit < ActiveRecord::Base
   end
 
   def self.notify?
-    habits = Habit.where(notifications: true)
+    t = Time.now
+    habits = Habit.where(notifications: true).where(notification_time: (t-t.sec-t.min%15*60).strftime("%Y-%m-%d %H:%M:%S"))
     habits.each do |habit|
       TextWorker.perform_async(habit.id)
     end

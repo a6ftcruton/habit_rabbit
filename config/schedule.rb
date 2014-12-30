@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, :at => '9:00 pm' do
+every 15.minutes do
   runner "Habit.notify?"
 end
