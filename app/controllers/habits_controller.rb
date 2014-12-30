@@ -4,6 +4,7 @@ class HabitsController < ApplicationController
   def index
     # raise HELL
     @habit = Habit.new
+    @event = Event.new
     if !current_user.github_name.nil? && !current_user.github_name.empty?
       @github_user = Octokit.user(current_user.github_name)
     end

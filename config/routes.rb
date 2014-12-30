@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :habits
   resources :users
+  resources :events, only: [:create]
 
   post '/add_github', to: 'habits#add_github', as: 'add_github'
   post '/dashboard', to: 'habits#update_notifications', as: 'habit_update_notification'
