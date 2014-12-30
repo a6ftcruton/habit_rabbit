@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 15.minutes do
+every "*/15 * * * *" do
   runner "Habit.notify?"
 end

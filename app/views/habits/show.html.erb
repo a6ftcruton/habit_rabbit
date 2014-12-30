@@ -1,10 +1,12 @@
-<h2>Super Details about your habitual habits</h2>
+<h2> Details about your <%= "#{@habit.name}" %> habit</h2>
 
 <div id="form">
   <%= form_for @habit do |f| %>
-  <%= f.label 'name' %>
-  <%= f.text_field :name %>
-  <%= f.submit 'Save' %>
+    <%= f.label 'Edit Habit Name' %>
+    <%= f.text_field :name %>
+    <%= f.label 'Edit Notification Time' %>
+    <%= f.time_select 'notification_time', {minute_step: 15} %>
+    <%= f.submit 'Save' %>
   <% end %>
 </div>
 

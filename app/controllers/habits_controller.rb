@@ -34,11 +34,11 @@ class HabitsController < ApplicationController
     @habit = Habit.find(params[:id])
   end
 
-  def edit
-    @habit = Habit.find(params[:id])
-  end
-
   def update
+    datetime = Time.new(params["habit"]["notification_time(1i)"].to_i, params["habit"]["notification_time(2i)"].to_i,
+    params["habit"]["notification_time(3i)"].to_i, params["habit"]["notification_time(4i)"].to_i,
+    params["habit"]["notification_time(5i)"].to_i)
+
     @habit = Habit.find(params[:id])
     @habit.update(name: params[:habit][:name])
     if @habit.save
