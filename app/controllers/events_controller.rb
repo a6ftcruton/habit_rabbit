@@ -1,9 +1,10 @@
 class EventsController < ApplicationController
   def create
-    @event = Event.new(event_params)
+    @habit = Habit.find(params["event"]["habit_id"])
+    @event = Event.new(event_params.merge(habit_id: @habit.id))
     if @event.save
       flash[:notice] = "Thanks! We've updated your streak."
-      render :back
+      redirect_to '/dashboard'
     else
       flash[:error] = "We weren't able to save your habit. Try again later."
       render :back
@@ -13,6 +14,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:completed, :repetitions, :habit_id, :created_at, :updated_at )
+    params.require(:event).permit(:completed, :repetitions, :created_at, :updated_at )
   end
 end

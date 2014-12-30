@@ -1,13 +1,13 @@
-<div class="confirm-event">
+<div>
   <h4>Did you complete this habit today?</h4>
-  <%= form_for @event, as: :event, url: events_path do |f| %>
+  <%= form_for [habit, Event.new(habit: habit)] do |f| %>
     <%= f.hidden_field :completed, value: true %>
     <%= f.hidden_field :created_at, value: Time.now %>
-    <%= f.hidden_field :habit_id, value: habit.id.to_i %>
+    <%= f.hidden_field :habit_id, value: habit.id %>
     <%= f.submit "YES" %>
   <% end %>
 
-  <%= form_for @event do |f| %>
+ <%= form_for [habit, Event.new(habit: habit)] do |f| %>
     <%= f.hidden_field :completed, value: false %>
     <%= f.hidden_field :created_at, value: Time.now %>
     <%= f.hidden_field :habit_id, value: habit.id %>

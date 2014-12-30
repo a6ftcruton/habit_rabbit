@@ -18,22 +18,22 @@
     </div>
   <% end %>
 
-  <% unless current_user.habits.empty? %>
+  <% unless @habits.empty? %>
     <h2>Your Habits</h2>
     <div class="habit-list">
-    <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
-      <% current_user.habits.each do |habit| %>
+      <% @habits.each do |habit| %>
         <li>
           <%= habit.name %> |
           <%= link_to "More Information", habit_path(habit) %>
           <%= link_to "Edit Habit", edit_habit_path(habit) %>
           <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %>
+        </li>
+        <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
           Notifications:
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
-        </li>
-        <%= render 'shared/event_confirmation', habit: habit %>
-      <% end %>
-    <%= submit_tag "Update Notifications", id: 'update-notifications' %>
+          <%= submit_tag "Update Notifications", id: 'update-notifications' %>
+        <% end %>
+    <%= render 'shared/event_confirmation', habit: habit %>
     <% end %>
     </div>
   <% end %>
@@ -55,7 +55,6 @@
 <%= form_tag(user_path(current_user), method: :patch) do %>
   <%= label_tag :phone, "Phone Number" %>:
   <%= text_field_tag :phone %><br />
-
   <%= submit_tag "Create" %>
 <% end %>
 

@@ -4,17 +4,17 @@ describe 'user event confirmation', type: :feature do
   include Capybara::DSL
 
   before do
-    sign_in_with_twitter
-    @habit = create(:habit)
+    @user = User.create(name: "Joe", email_address: "stuff@whatup.com", password: 'password', password_confirmation: 'password')
+    page.set_rack_session(user_id: @user.id)
+    @habit = Habit.create!(user_id: @user.id, name: "pushups", start_date: Time.now)
+#    @habit = create(:habit)
   end
 
   it 'has confirmation option for each habit' do
-    visit '/habits/1' 
+    visit '/dashboard' 
     expect(page).to have_content @habit.name
-    within('.confirm-event') do
-      click_on 'YES'
-    end
-    expect(current_path).to eq '/habits/1'
+    click_on 'YES'
+    expect(current_path).to eq dashboard_path 
     expect(page).to have_content "Thanks! We've updated your streak."      
   end
 

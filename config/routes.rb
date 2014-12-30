@@ -14,9 +14,11 @@ Rails.application.routes.draw do
   get 'sessions/signin', to: 'sessions#signin', as: 'signin'
   post 'sessions/login', to: 'sessions#login', as: 'login'
 
-  resources :habits
   resources :users
-  resources :events, only: [:create]
+  
+  resources :habits do
+    resources :events, only: [:create]
+  end
 
   post '/add_github', to: 'habits#add_github', as: 'add_github'
   post '/dashboard', to: 'habits#update_notifications', as: 'habit_update_notification'
