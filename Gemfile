@@ -26,7 +26,6 @@ gem 'bcrypt'
 gem 'octokit'
 gem 'sidekiq'
 gem 'whenever', :require => false
-
 gem 'sinatra', '>= 1.3.0', :require => nil
 
 group :test do
