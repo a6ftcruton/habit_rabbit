@@ -9,6 +9,7 @@ describe 'unauthenticated user', type: :feature do
                          password_confirmation: 'password'
                          )
       visit root_path
+      save_and_open_page
       click_link 'Log in with Email'
       fill_in 'user_email_address', with: 'stuff@yomama.com'
       fill_in 'user_password', with: 'password'

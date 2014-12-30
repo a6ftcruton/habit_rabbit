@@ -37,10 +37,9 @@ class HabitsController < ApplicationController
   def update
     datetime = Time.new(params["habit"]["notification_time(1i)"].to_i, params["habit"]["notification_time(2i)"].to_i,
     params["habit"]["notification_time(3i)"].to_i, params["habit"]["notification_time(4i)"].to_i,
-    params["habit"]["notification_time(5i)"].to_i)
-
+    params["habit"]["notification_time(5i)"].to_i).strftime("%Y-%m-%d %H:%M:%S")
     @habit = Habit.find(params[:id])
-    @habit.update(name: params[:habit][:name])
+    @habit.update(name: params[:habit][:name], notification_time: datetime)
     if @habit.save
       redirect_to dashboard_path
     else
