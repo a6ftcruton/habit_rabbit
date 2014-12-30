@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :environment, "development" # set this to production when on
+set :environment, "development" # set this to production for VPS
 set :output, "log/cron_log.log"
 
 every "*/15 * * * *" do
