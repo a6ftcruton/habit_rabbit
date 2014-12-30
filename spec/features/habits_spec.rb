@@ -17,7 +17,7 @@ describe 'habits', type: :feature do
   end
 
   it 'can edit a habit' do
-    click_link 'Edit Habit'
+    click_link 'More Information'
     fill_in 'habit_name', with: 'Pushups'
     click_link_or_button 'Save'
     expect(page).to have_content('Pushups')
@@ -25,6 +25,6 @@ describe 'habits', type: :feature do
 
   it 'can go to a show page for the habit' do
     click_link 'More Information'
-    expect(page).to have_content('Super Details about your habitual habits')
+    expect(page).to have_content('Details about your pushups habit')
   end
 end
