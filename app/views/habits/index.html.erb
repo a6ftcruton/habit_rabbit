@@ -26,7 +26,6 @@
         <li>
           <%= habit.name %> |
           <%= link_to "More Information", habit_path(habit) %>
-          <%= link_to "Edit Habit", edit_habit_path(habit) %>
           <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %>
           Notifications:
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>

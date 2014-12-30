@@ -1,3 +1,11 @@
 <h2>Super Details about your habitual habits</h2>
-<%= @habit.name %>
+
+<div id="form">
+  <%= form_for @habit do |f| %>
+  <%= f.label 'name' %>
+  <%= f.text_field :name %>
+  <%= f.submit 'Save' %>
+  <% end %>
+</div>
+
 <%= link_to "Back", dashboard_path %>
