@@ -5,9 +5,6 @@ class HabitsController < ApplicationController
     @habits = current_user.habits.all
     @habit = Habit.new
     @event = Event.new
-    if !current_user.github_name.nil? && !current_user.github_name.empty?
-      @github_user = Octokit.user(current_user.github_name)
-    end
   end
 
   def new
@@ -65,13 +62,6 @@ class HabitsController < ApplicationController
 
       format.js {}
     end
-  end
-
-  def add_github
-    user = User.find(current_user.id)
-    user.github_name = params[:name]
-    user.save
-    redirect_to dashboard_path
   end
 
   private

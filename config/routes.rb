@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   post 'sessions/login', to: 'sessions#login', as: 'login'
 
   resources :users
-  
+
   resources :habits do
     resources :events, only: [:create]
   end
 
-  post '/add_github', to: 'habits#add_github', as: 'add_github'
+  post '/add_github', to: 'users#add_github', as: 'add_github'
   post '/dashboard', to: 'habits#update_notifications', as: 'habit_update_notification'
 end

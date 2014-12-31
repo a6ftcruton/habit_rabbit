@@ -3,6 +3,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    if !current_user.github_name.nil? && !current_user.github_name.empty?
+      @github_user = Octokit.user(current_user.github_name)
+    end
+  end
+
   def create
     user = User.create(user_params)
     if user.valid?
@@ -22,6 +28,13 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+  end
+
+  def add_github
+    user = User.find(current_user.id)
+    user.github_name = params[:name]
+    user.save
+    redirect_to dashboard_path
   end
 
 end
