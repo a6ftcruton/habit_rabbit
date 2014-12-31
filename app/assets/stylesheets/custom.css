@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+#create-habit-form {
+  text-align: center;
+}
+
 .flash#error {
   background-color: #f2dede;
   border-color: #eed3d7;
@@ -25,15 +29,46 @@
 }
 
 #habit-welcome {
-  margin-top: 5px;
+  margin-top: 45px;
   text-align: center;
+  padding-bottom: 10px;
   border-bottom: 1px solid black;
 }
 
 #habit-header {
   margin: 5px;
   text-align: center;
+  padding-bottom: 10px;
   border-bottom: 1px solid black;
+}
+
+#habit-edit {
+  margin: 5px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+#habit-button {
+  text-align: center;
+}
+
+#back-button {
+  text-align: center;
+}
+
+#log-out-button {
+  text-align: center;
+}
+
+#submit-tag {
+  text-align: center;
+}
+
+#user-welcome {
+  margin-top: 45px;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 //masonry
@@ -50,7 +85,7 @@
 
 .habit-list {
   background: #FFF;
-  padding: 5px;
+  padding-top: 25px;
   margin-bottom: 20px;
   border-radius: 5px;
   clear: both;

@@ -22,7 +22,9 @@
       <% end %>
       </div>
     </div>
-    <%= submit_tag "Update Notifications", id: 'update-notifications' %>
+      <div id="submit-tag">
+        <%= submit_tag "Update Notifications", id: 'update-notifications' %>
+      </div>
     <% end %>
   <% end %>
 <br/>
@@ -33,11 +35,14 @@
   <div style="display:none" id="create-habit-form">
     <%= form_tag(habits_path, method: :post, remote: true) do %>
       <%= label_tag :title, "Habit" %>
-      <%= text_field_tag :title %><br />
-
+      <%= text_field_tag :title %><br/>
       <%= submit_tag "Create Habit" %>
-    <% end %>
+    <% end %><br/>
   </div>
+</div>
+
+<div id="log-out-button">
+  <%= link_to "Log Out", signout_path, class: 'button tiny' %><br/>
 </div>
 
 <script src="assets/habit_scripts.js"></script>
