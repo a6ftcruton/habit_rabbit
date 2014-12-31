@@ -17,10 +17,4 @@ describe 'event' do
     expect(event).to_not be_valid
   end
 
-  it 'is invalid without a date' do
-    event = create(:event)
-    event.created_at = ""
-    expect(event).to_not be_valid
-
-  end
 end

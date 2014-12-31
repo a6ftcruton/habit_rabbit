@@ -28,11 +28,12 @@ describe 'user event confirmation', type: :feature do
       expect(updated_events).to eq (events + 1)
     end
 
-    it 'user not re-prompted to confirm during same day' do
+    xit 'user not re-prompted to confirm during same day', js: true do
       visit '/dashboard'
       expect(page).to have_css('.event-form')
       click_on 'YES'
       expect(current_path).to eq dashboard_path 
+      save_and_open_page
       expect(page).to_not have_css('.event-form')
     end
   end
