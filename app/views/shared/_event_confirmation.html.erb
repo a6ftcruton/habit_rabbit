@@ -1,5 +1,5 @@
-<div>
-  <h4>Did you complete this habit today?</h4>
+<div class="event-form">
+  <h6>Did you complete this habit today?</h6>
   <%= form_for [habit, Event.new(habit: habit)] do |f| %>
     <%= f.hidden_field :completed, value: true %>
     <%= f.hidden_field :created_at, value: Time.now %>

@@ -33,6 +33,10 @@ class Habit < ActiveRecord::Base
     end
   end
 
+  def event_requires_update?(habit)
+    habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+  end
+
   private
   def last_24_hours?(habit)
     habit.events.last.created_at < Date.today - 1.day

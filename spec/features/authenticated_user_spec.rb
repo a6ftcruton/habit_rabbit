@@ -41,7 +41,7 @@ describe 'authenticated user', type: :feature do
   it 'can view habit details'
   it 'can edit a habit'
   it 'can delete a habit'
-  
+
   it 'can add notification to a habit', js: true do
     user = User.first
     visit '/dashboard'
@@ -57,8 +57,4 @@ describe 'authenticated user', type: :feature do
     expect(user.habits.first.notifications).to be_truthy
   end
 
-  # Notifications:
-  # ==================================
-  it 'can edit notifications'
-  it 'can stop notification'
 end
