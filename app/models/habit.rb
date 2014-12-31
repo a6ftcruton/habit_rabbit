@@ -4,6 +4,12 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   has_many :events
 
+  def user_response?
+    if last_24_hours?(self)
+      Event.create!(completed: false, habit_id: self.id, created_at: Time.now)
+    end
+  end
+
   def streak_days
     counter = 0
     events = self.events.sort_by {|event| event.created_at}.reverse
@@ -24,5 +30,10 @@ class Habit < ActiveRecord::Base
     habits.each do |habit|
       TextWorker.perform_async(habit.id)
     end
+  end
+
+  private
+  def last_24_hours?(habit)
+    habit.events.last.created_at < Date.today - 1.day
   end
 end

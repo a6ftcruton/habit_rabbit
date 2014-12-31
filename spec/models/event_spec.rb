@@ -6,6 +6,7 @@ describe 'event' do
     @user = create(:user)
     @habit = create(:habit)
     @habit.user_id = @user.id
+    @habit.save
     @event = Event.create(completed: true, habit_id: @habit.id, created_at: 1.hour.ago)
   end
 
@@ -24,12 +25,10 @@ describe 'event' do
   end
 
   it 'creates an event if user has not responded in 24 hours' do
-    event2 = Event.create(completed: true, habit_id: @habit.id, created_at: 48.hour.ago)
+    event2 = Event.create(completed: true, habit_id: @habit.id, created_at: Time.now - 48.hours)
     expect(Event.count).to eq(2)
 
-    @user.habits.each do |habit|
-      user_response?(habit)
-    end
+    @user.habits.first.user_response?
 
     expect(Event.count).to eq(3)
   end
