@@ -4,7 +4,7 @@ describe 'habits', type: :feature do
   include Capybara::DSL
 
   before do
-    @user = create(:user)  
+    @user = create(:user)
     @user.habits.create(name: 'pushups', start_date: Time.now)
     page.set_rack_session(user_id: @user.id)
     visit dashboard_path

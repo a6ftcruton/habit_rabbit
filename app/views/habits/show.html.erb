@@ -1,8 +1,10 @@
+
 <h2><%= current_user.name + "'s " %><%= "#{@habit.name} habit " %></h2>
 <svg class="habit-show-graph">
 </svg>
 
 <%= link_to "Back", dashboard_path %>
+
 <h2 id='habit-welcome'> Details about your <%= "#{@habit.name}" %> habit</h2>
 
 <div id="habit-edit">

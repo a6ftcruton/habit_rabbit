@@ -2,7 +2,7 @@ class HabitsController < ApplicationController
   before_action :verify_user
 
   def index
-    @habits = current_user.habits.all 
+    @habits = current_user.habits.all
     @habit = Habit.new
     @event = Event.new
     if !current_user.github_name.nil? && !current_user.github_name.empty?

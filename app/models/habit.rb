@@ -4,6 +4,12 @@ class Habit < ActiveRecord::Base
   belongs_to :user
   has_many :events
 
+  def user_response?
+    if self.events.empty? || last_24_hours?(self)
+      Event.create(completed: false, habit_id: self.id)
+    end
+  end
+
   def streak_days
     counter = 0
     events = self.events.sort_by {|event| event.created_at}.reverse
@@ -29,5 +35,10 @@ class Habit < ActiveRecord::Base
 
   def event_requires_update?(habit)
     habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+  end
+
+  private
+  def last_24_hours?(habit)
+    habit.events.last.created_at < Date.today - 1.day
   end
 end
