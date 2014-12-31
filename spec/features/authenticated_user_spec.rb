@@ -4,7 +4,6 @@ describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
   before do
-    # Habit.destroy_all
     sign_in_with_twitter
   end
 
@@ -13,8 +12,13 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content "Welcome, Yukon Cornelius"
   end
 
-  # Habits:
-  # ==================================
+  it 'can log out' do
+    visit '/dashboard'
+    click_on('Log Out')
+    expect(page).to_not have_content "Welcome, Yukon Cornelius"
+    expect(page).to have_content "Log in with Twitter"
+  end
+
   it 'can create a new habit', js: true do
     visit '/dashboard'
     expect(page).to_not have_content 'push ups'
