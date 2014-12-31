@@ -25,3 +25,7 @@ set :output, "log/cron_log.log"
 every "*/15 * * * *" do
   runner "Habit.notify?"
 end
+
+every "* 0 * * * " do
+runner 'Habit.all.each { |habit| habit.user_response? }'
+end
