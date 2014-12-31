@@ -1,61 +1,61 @@
 <div class='large-12 columns'>
-  <h5>Welcome, <%= current_user.name %></h5>
-  <% if !@github_user %>
-    <h4>Add your Github Username to Track Your Github Stats</h4>
-    <%= form_tag(add_github_path, method: :post) do %>
-      <%= label_tag "Github Username" %>
-      <%= text_field_tag :name %>
-      <%= submit_tag "Add Github Username" %>
-    <% end %>
-  <% else %>
-    <h2 id="github-stats-toggle">Github Stats</h2>
-    <div style="display:none" id="github-stats">
-    Name: <%= @github_user.name %><br/>
-    Username: <%= current_user.github_name %><br/>
-    Your Repos:<br/> <% @github_user.rels[:repos].get.data.each do |repo| %>
-                  <li><%= repo.name %></li>
-                <% end %>
-    </div>
-  <% end %>
+  <h3 id='habit-welcome'>Welcome, <%= current_user.name %> | <%= link_to "Settings", user_path(current_user.id) %></h3>
 
-  <% unless @habits.empty? %>
-    <h2>Your Habits</h2>
-    <div class="habit-list">
-      <% @habits.each do |habit| %>
-        <li>
-          <%= habit.name %> |
-          <%= link_to "More Information", habit_path(habit) %>
-          <%= link_to "Edit Habit", edit_habit_path(habit) %>
-          <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %>
-        </li>
-        <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
+  <% unless current_user.habits.empty? %>
+  <h2 id='habit-header'>Your Habits</h2>
+  <div class="habit-list">
+    <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
+    <div class="grid-sizer">
+      <% current_user.habits.each do |habit| %>
+      <div class='habit-wrapper'>
+        <div class="inpre"></div>
+        <div class="habit_content">
+          <%= habit.name %><br/>
+          <%= link_to "More Information", habit_path(habit) %><br/>
+          <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %><br/>
+          Current Streak: <%= habit.streak_days %><br/>
           Notifications:
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
-          <%= submit_tag "Update Notifications", id: 'update-notifications' %>
-        <% end %>
-    <%= render 'shared/event_confirmation', habit: habit %>
-    <% end %>
+        </div>
+        <div class="inpos"></div>
+      </div>
+      <% end %>
     </div>
+  </div>
+  <div id="submit-tag">
+    <%= submit_tag "Update Notifications", id: 'update-notifications' %>
+  </div>
   <% end %>
-
+  <% end %>
+  <br/>
   <div id="habit-button">
     <%= button_tag "Create Custom Habit", id: 'create-custom' %>
   </div>
 
   <div style="display:none" id="create-habit-form">
     <%= form_tag(habits_path, method: :post, remote: true) do %>
-      <%= label_tag :title, "Habit" %>
-      <%= text_field_tag :title %><br />
-      <%= hidden_field_tag :start_date, Time.now %>
-      <%= submit_tag "Create Habit" %>
-    <% end %>
+    <%= label_tag :title, "Habit" %>
+    <%= text_field_tag :title %><br/>
+    <%= submit_tag "Create Habit" %>
+    <% end %><br/>
   </div>
 </div>
 
-<%= form_tag(user_path(current_user), method: :patch) do %>
-  <%= label_tag :phone, "Phone Number" %>:
-  <%= text_field_tag :phone %><br />
-  <%= submit_tag "Create" %>
-<% end %>
+<div id="log-out-button">
+  <%= link_to "Log Out", signout_path, class: 'button tiny' %><br/>
+</div>
 
 <script src="assets/habit_scripts.js"></script>
+<script src="/assets/masonry.pkgd.min.js"></script>
+<script src="/assets/imagesloaded.pkgd.min.js"></script>
+
+<script>
+  var container = document.querySelector('.habit-list');
+  var msnry = new Masonry( container, {
+    columnWidth: ".grid-sizer",
+    itemSelector: '.habit-wrapper'
+  });
+  imagesLoaded( container, function() {
+    msnry.layout();
+  });
+</script>

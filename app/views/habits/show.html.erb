@@ -1,5 +1,16 @@
-<h2><%= current_user.name + "'s " %><%= "#{@habit.name} habit " %></h2>
-<svg class="habit-show-graph">
-</svg>
 
-<%= link_to "Back", dashboard_path %>
+<h2 id='habit-welcome'> Details about your <%= "#{@habit.name}" %> habit</h2>
+
+<div id="habit-edit">
+  <%= form_for @habit do |f| %>
+    <%= f.label "Edit this habit's name" %>
+    <%= f.text_field :name %>
+    <%= f.label "Edit this habit's notification time" %>
+    <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true} %>
+    <%= f.submit 'Save' %>
+    <% end %>
+</div>
+
+<div id="back-button">
+  <%= link_to "Back", dashboard_path %>
+</div>

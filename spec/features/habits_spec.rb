@@ -4,7 +4,7 @@ describe 'habits', type: :feature do
   include Capybara::DSL
 
   before do
-    @user = create(:user)  
+    @user = create(:user)
     @user.habits.create(name: 'pushups', start_date: Time.now)
     page.set_rack_session(user_id: @user.id)
     visit dashboard_path
@@ -17,7 +17,7 @@ describe 'habits', type: :feature do
   end
 
   it 'can edit a habit' do
-    click_link 'Edit Habit'
+    click_link 'More Information'
     fill_in 'habit_name', with: 'Pushups'
     click_link_or_button 'Save'
     expect(page).to have_content('Pushups')
@@ -25,7 +25,7 @@ describe 'habits', type: :feature do
 
   it 'can go to a show page for the habit' do
     click_link 'More Information'
-    expect(page).to have_content("Yukon Cornelius's pushups habit")
+    expect(page).to have_content('Details about your pushups habit')
   end
 
   it 'saves habits for the user' do
