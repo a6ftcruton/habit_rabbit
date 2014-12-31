@@ -4,9 +4,8 @@ class Event < ActiveRecord::Base
   validates :created_at, presence: true
 
   def user_response?(habit)
-      if last_24_hours?(habit)
-        Event.create(completed: false, habit_id: habit.id)
-      end
+    if last_24_hours?(habit)
+      Event.create(completed: false, habit_id: habit.id)
     end
   end
 
