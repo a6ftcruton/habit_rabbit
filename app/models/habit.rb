@@ -1,5 +1,6 @@
 class Habit < ActiveRecord::Base
   validates :name, presence: true
+  validates :start_date, presence: true
   belongs_to :user
   has_many :events
 
@@ -24,5 +25,9 @@ class Habit < ActiveRecord::Base
     habits.each do |habit|
       TextWorker.perform_async(habit.id)
     end
+  end
+
+  def event_requires_update?(habit)
+    habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
   end
 end

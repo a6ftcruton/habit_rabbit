@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141230165907) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "notifications"
+    t.datetime "start_date"
     t.datetime "notification_time"
   end
 

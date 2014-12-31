@@ -2,47 +2,56 @@
   <h3 id='habit-welcome'>Welcome, <%= current_user.name %> | <%= link_to "Settings", user_path(current_user.id) %></h3>
 
   <% unless current_user.habits.empty? %>
-    <h2 id='habit-header'>Your Habits</h2>
-    <div class="habit-list">
-    <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
-      <div class="grid-sizer">
-      <% current_user.habits.each do |habit| %>
-        <div class='habit-wrapper'>
-          <div class="inpre"></div>
-          <div class="habit_content">
-            <%= habit.name %><br/>
-            <%= link_to "More Information", habit_path(habit) %><br/>
-            <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %><br/>
-            Current Streak: <%= habit.streak_days %><br/>
-            Notifications:
-            <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
+      <h2 id='habit-header'>Your Habits</h2>
+      <div class="habit-list">
+      <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
+        <div class="grid-sizer">
+        <% current_user.habits.each do |habit| %>
+          <div class='habit-wrapper'>
+            <div class="inpre"></div>
+            <div class="habit_content">
+              <%= habit.name %><br/>
+              <%= link_to "More Information", habit_path(habit) %><br/>
+              <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %><br/>
+              Current Streak: <%= habit.streak_days %><br/>
+              Notifications:
+              <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
+
+              <div class="event-form">
+                <% if habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day %>
+                  <%# REFACTOR THIS TO MODEL METHOD: if event_requires_update?(habit) %>
+                  <%= render 'shared/event_confirmation', habit: habit %>
+                <% end %>
+              </div>
+              
+              <div id="submit-tag">
+                <%= submit_tag "Update Notifications", id: 'update-notifications' %>
+              </div>
+
+            </div>
+            <div class="inpos"></div>
+
           </div>
-          <div class="inpos"></div>
+        <% end %>
         </div>
+      </div>
+
       <% end %>
-      </div>
-    </div>
-      <div id="submit-tag">
-        <%= submit_tag "Update Notifications", id: 'update-notifications' %>
-      </div>
     <% end %>
-  <% end %>
-<br/>
-  <div id="habit-button">
-    <%= button_tag "Create Custom Habit", id: 'create-custom' %>
-  </div>
+    <br/>  
+    <div id="habit-button">
+      <%= button_tag "Create Custom Habit", id: 'create-custom' %>
+    </div>
 
   <div style="display:none" id="create-habit-form">
     <%= form_tag(habits_path, method: :post, remote: true) do %>
       <%= label_tag :title, "Habit" %>
-      <%= text_field_tag :title %><br/>
+      <%= text_field_tag :title %><br />
+      <%= hidden_field_tag :start_date, Time.now %>
+
       <%= submit_tag "Create Habit" %>
     <% end %><br/>
   </div>
-</div>
-
-<div id="log-out-button">
-  <%= link_to "Log Out", signout_path, class: 'button tiny' %><br/>
 </div>
 
 <script src="assets/habit_scripts.js"></script>

@@ -2,8 +2,9 @@ class HabitsController < ApplicationController
   before_action :verify_user
 
   def index
-    # raise HELL
+    @habits = current_user.habits.all 
     @habit = Habit.new
+    @event = Event.new
     if !current_user.github_name.nil? && !current_user.github_name.empty?
       @github_user = Octokit.user(current_user.github_name)
     end
@@ -14,7 +15,7 @@ class HabitsController < ApplicationController
 
   def create
     respond_to do |format|
-      @habit = Habit.create(name: params[:title], user_id: current_user.id)
+      @habit = Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
       if @habit.save!
         flash[:notice] = "Your Habit was saved successfully"
         # TextNotification.send_text(current_user)
