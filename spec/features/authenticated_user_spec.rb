@@ -21,7 +21,7 @@ describe 'authenticated user', type: :feature do
     click_on('Create Custom Habit')
     page.fill_in('Habit', with: 'push ups')
     click_on('Create Habit')
-    expect(page).to have_content 'Your Habit was saved successfully.'
+    expect(page).to have_content 'push ups'
   end
 
   #

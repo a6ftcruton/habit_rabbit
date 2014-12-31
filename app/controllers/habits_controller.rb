@@ -17,11 +17,9 @@ class HabitsController < ApplicationController
     respond_to do |format|
       @habit = Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
       if @habit.save!
+        flash[:notice] = "Your Habit was saved successfully"
         # TextNotification.send_text(current_user)
         format.js {@habit}
-
-        # send text. "congrats, good luck"
-
       else
         flash[:notice] = "Your habit must have a name"
         render :back
@@ -33,13 +31,12 @@ class HabitsController < ApplicationController
     @habit = Habit.find(params[:id])
   end
 
-  def edit
-    @habit = Habit.find(params[:id])
-  end
-
   def update
+    datetime = Time.new(params["habit"]["notification_time(1i)"].to_i, params["habit"]["notification_time(2i)"].to_i,
+    params["habit"]["notification_time(3i)"].to_i, params["habit"]["notification_time(4i)"].to_i,
+    params["habit"]["notification_time(5i)"].to_i).strftime("%Y-%m-%d %H:%M:%S")
     @habit = Habit.find(params[:id])
-    @habit.update(name: params[:habit][:name])
+    @habit.update(name: params[:habit][:name], notification_time: datetime)
     if @habit.save
       redirect_to dashboard_path
     else

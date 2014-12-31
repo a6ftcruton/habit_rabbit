@@ -1,0 +1,31 @@
+<div id="user-welcome">
+
+<% if !@github_user %>
+    <h4>Add your Github Username to Track Your Github Stats</h4>
+    <%= form_tag(add_github_path, method: :post) do %>
+      <%= label_tag :username, "Github Username:" %>
+      <%= text_field_tag :name %>
+      <%= submit_tag "Add Github Username" %>
+    <% end %>
+  <% else %>
+    <h2 id="github-stats-toggle">Github Stats</h2>
+    <div style="display:none" id="github-stats">
+    Name: <%= @github_user.name %><br/>
+    Username: <%= current_user.github_name %><br/>
+    Your Repos:<br/> <% @github_user.rels[:repos].get.data.each do |repo| %>
+                  <li><%= repo.name %></li>
+                <% end %>
+    </div>
+  <% end %>
+
+<%= form_tag(user_path(current_user), method: :patch) do %><br/>
+  <%= label_tag :phone, "Phone Number:" %><%= current_user.phone %>
+  <%= text_field_tag :phone %><br />
+
+  <%= submit_tag "Create" %>
+<% end %>
+</div>
+
+<div id="back-button">
+  <%= link_to "Back", dashboard_path %>
+</div>
