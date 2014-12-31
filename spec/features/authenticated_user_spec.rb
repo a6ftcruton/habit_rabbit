@@ -12,7 +12,7 @@ describe 'authenticated user', type: :feature do
     visit '/dashboard'
     expect(page).to have_content "Welcome, Yukon Cornelius"
   end
-  
+
   # Habits:
   # ==================================
   it 'can create a new habit', js: true do
@@ -41,6 +41,7 @@ describe 'authenticated user', type: :feature do
   it 'can view habit details'
   it 'can edit a habit'
   it 'can delete a habit'
+  
   it 'can add notification to a habit', js: true do
     user = User.first
     visit '/dashboard'
