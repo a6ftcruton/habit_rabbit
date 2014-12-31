@@ -25,4 +25,8 @@ class Habit < ActiveRecord::Base
       TextWorker.perform_async(habit.id)
     end
   end
+
+  def event_requires_update?(habit)
+    habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+  end
 end

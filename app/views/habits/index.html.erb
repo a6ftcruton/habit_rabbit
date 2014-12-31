@@ -33,7 +33,11 @@
           <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
           <%= submit_tag "Update Notifications", id: 'update-notifications' %>
         <% end %>
-    <%= render 'shared/event_confirmation', habit: habit %>
+
+        <% if habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day %>
+        <%# if event_requires_update?(habit) %>
+          <%= render 'shared/event_confirmation', habit: habit %>
+        <% end %>
     <% end %>
     </div>
   <% end %>

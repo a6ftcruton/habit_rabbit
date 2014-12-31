@@ -1,4 +1,4 @@
-<div>
+<div class="event-form">
   <h4>Did you complete this habit today?</h4>
   <%= form_for [habit, Event.new(habit: habit)] do |f| %>
     <%= f.hidden_field :completed, value: true %>
