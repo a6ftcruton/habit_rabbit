@@ -5,8 +5,8 @@ class Habit < ActiveRecord::Base
   has_many :events
 
   def user_response?
-    if last_24_hours?(self)
-      Event.create!(completed: false, habit_id: self.id, created_at: Time.now)
+    if self.events.empty? || last_24_hours?(self)
+      Event.create(completed: false, habit_id: self.id)
     end
   end
 

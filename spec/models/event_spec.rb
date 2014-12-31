@@ -19,11 +19,6 @@ describe 'event' do
     expect(@event).to_not be_valid
   end
 
-  it 'is invalid without a date' do
-    @event.created_at = ""
-    expect(@event).to_not be_valid
-  end
-
   it 'creates an event if user has not responded in 24 hours' do
     event2 = Event.create(completed: true, habit_id: @habit.id, created_at: Time.now - 48.hours)
     expect(Event.count).to eq(2)
@@ -31,5 +26,11 @@ describe 'event' do
     @user.habits.first.user_response?
 
     expect(Event.count).to eq(3)
+  end
+
+  it 'creates an event after 24 hours if there were no pre-existing event' do
+    habit = create(:habit)
+    habit.user_response?
+    expect(habit.events.count).to eq(1)
   end
 end
