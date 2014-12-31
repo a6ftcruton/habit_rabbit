@@ -25,15 +25,26 @@
 }
 
 #habit-welcome {
-  margin-top: 5px;
+  margin-top: 45px;
   text-align: center;
+  padding-bottom: 10px;
   border-bottom: 1px solid black;
 }
 
 #habit-header {
   margin: 5px;
   text-align: center;
+  padding-bottom: 10px;
   border-bottom: 1px solid black;
+}
+
+#habit-button {
+  text-align: center;
+}
+
+#submit-tag {
+  text-align: center;
+
 }
 
 //masonry
@@ -50,7 +61,7 @@
 
 .habit-list {
   background: #FFF;
-  padding: 5px;
+  padding-top: 25px;
   margin-bottom: 20px;
   border-radius: 5px;
   clear: both;
