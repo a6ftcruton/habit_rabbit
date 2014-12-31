@@ -38,13 +38,29 @@
   border-bottom: 1px solid black;
 }
 
+#habit-edit {
+  margin: 5px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
 #habit-button {
+  text-align: center;
+}
+
+#back-button {
   text-align: center;
 }
 
 #submit-tag {
   text-align: center;
+}
 
+#user-welcome {
+  margin-top: 45px;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 //masonry
