@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20141230165907) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "notifications"
-    t.datetime "start_date"
     t.datetime "notification_time"
+    t.datetime "start_date"
   end
 
   add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree

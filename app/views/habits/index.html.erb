@@ -41,9 +41,20 @@
     <br/>
     <div id="habit-button">
       <%= button_tag "Create Custom Habit", id: 'create-custom' %>
+      <%= button_tag "Track Github Repo", id: 'track-repo' %>
     </div>
 
-  <div style="display:none" id="create-habit-form">
+  <div style='display:none' id='track-repo-form'>
+    <%= form_tag(track_repo_path, method: :post, remote: true) do %>
+      <%= label_tag :repo, "Github Repo (i.e. username/reponame)" %>
+      <%= text_field_tag :repo %><br />
+      <%= hidden_field_tag :start_date, Time.now %>
+
+      <%= submit_tag "Track Repo" %>
+    <% end %><br/>
+  </div>
+
+  <div style="display:none" id='create-habit-form'>
     <%= form_tag(habits_path, method: :post, remote: true) do %>
       <%= label_tag :title, "Habit" %>
       <%= text_field_tag :title %><br />

@@ -24,6 +24,34 @@ class HabitsController < ApplicationController
     end
   end
 
+  def track_repo
+    #move almost all of this shit out of the controller, for realsies.
+    respond_to do |format|
+      conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
+        faraday.request  :url_encoded
+        faraday.response :logger
+        faraday.adapter  Faraday.default_adapter
+      end
+
+      @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date])
+      if @habit.save!
+        flash[:notice] = "Your Repo is being tracked"
+        #create events with dates
+        @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}").body)
+        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}
+
+        @commit_dates.each do |date|
+          @habit.events.create(completed: true, created_at: date)
+        end
+
+        format.js {@habit}
+      else
+        flash[:notice] = "You must enter a repo"
+        render :back
+      end
+    end
+  end
+
   def show
     @habit = Habit.find(params[:id])
   end
