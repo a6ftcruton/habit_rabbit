@@ -3,6 +3,10 @@
   width: 100%;
 }
 
+#button {
+  text-align: center;
+}
+
 #create-habit-form {
   text-align: center;
 }
@@ -49,9 +53,6 @@
   padding-bottom: 10px;
 }
 
-#button {
-  text-align: center;
-}
 
 #submit-tag {
   text-align: center;
