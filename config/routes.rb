@@ -15,9 +15,16 @@ Rails.application.routes.draw do
   post 'sessions/login', to: 'sessions#login', as: 'login'
 
   resources :users
-  
+
   resources :habits do
     resources :events, only: [:create]
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :habits, only: [:index, :show] 
+      resources :events, only: [:index, :show] 
+    end
   end
 
   post '/add_github', to: 'habits#add_github', as: 'add_github'
