@@ -1,4 +1,3 @@
-
 Rails.application.routes.draw do
   root to: 'home#index'
   require 'sidekiq/web'
@@ -23,5 +22,13 @@ Rails.application.routes.draw do
   post '/track_repo', to: 'habits#track_repo', as: 'track_repo'
 
   post '/add_github', to: 'users#add_github', as: 'add_github'
+
+  namespace :api do
+    namespace :v1 do
+      resources :habits, only: [:index, :show]
+      resources :events, only: [:index, :show]
+    end
+  end
+
   post '/dashboard', to: 'habits#update_notifications', as: 'habit_update_notification'
 end
