@@ -3,6 +3,10 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+
+  end
+
   def create
     user = User.create(user_params)
     if user.valid?
@@ -17,6 +21,13 @@ class UsersController < ApplicationController
     current_user.phone = params[:phone]
     current_user.save
     redirect_to '/dashboard'
+  end
+
+  def add_github
+    user = User.find(current_user.id)
+    user.github_name = params[:name]
+    user.save
+    redirect_to dashboard_path
   end
 
   private

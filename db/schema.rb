@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141230165907) do
+ActiveRecord::Schema.define(version: 20150102184055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20141230165907) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "notifications"
-    t.datetime "start_date"
     t.datetime "notification_time"
+    t.datetime "start_date"
+    t.boolean  "github_repo",       default: false
   end
 
   add_index "habits", ["user_id"], name: "index_habits_on_user_id", using: :btree

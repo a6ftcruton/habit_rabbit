@@ -1,6 +1,6 @@
 <div id="user-welcome">
 
-<% if !@github_user %>
+<% if !current_user.github_name %>
     <h4>Add your Github Username to Track Your Github Stats</h4>
     <%= form_tag(add_github_path, method: :post) do %>
       <%= label_tag :username, "Github Username:" %>
@@ -10,11 +10,8 @@
   <% else %>
     <h2 id="github-stats-toggle">Github Stats</h2>
     <div style="display:none" id="github-stats">
-    Name: <%= @github_user.name %><br/>
-    Username: <%= current_user.github_name %><br/>
-    Your Repos:<br/> <% @github_user.rels[:repos].get.data.each do |repo| %>
-                  <li><%= repo.name %></li>
-                <% end %>
+      Name: <%= current_user.name %><br/>
+      Username: <%= current_user.github_name %><br/>
     </div>
   <% end %>
 

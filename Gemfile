@@ -24,7 +24,7 @@ gem 'spring',        group: :development
 gem 'better_errors'
 gem 'binding_of_caller'
 gem 'bcrypt'
-gem 'octokit'
+gem 'faraday'
 gem 'sidekiq'
 gem 'whenever', :require => false
 gem 'sinatra', '>= 1.3.0', :require => nil
