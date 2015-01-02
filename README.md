@@ -6,3 +6,4 @@
 [![Code Climate](https://codeclimate.com/github/ianderse/feed_engine/badges/gpa.svg)](https://codeclimate.com/github/ianderse/feed_engine)
 [![Test Coverage](https://codeclimate.com/github/ianderse/feed_engine/badges/coverage.svg)](https://codeclimate.com/github/ianderse/feed_engine)
 
+test commit
