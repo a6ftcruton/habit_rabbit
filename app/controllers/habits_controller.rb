@@ -33,7 +33,7 @@ class HabitsController < ApplicationController
         faraday.adapter  Faraday.default_adapter
       end
 
-      @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date])
+      @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
       if @habit.save!
         flash[:notice] = "Your Repo is being tracked"
         #create events with dates

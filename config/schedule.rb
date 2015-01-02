@@ -25,3 +25,7 @@ set :output, "log/cron_log.log"
 every "*/15 * * * *" do
   runner "Habit.notify?"
 end
+
+every "0 0 20 1/1 * ? *" do
+  runner "Habity.github_check"
+end
