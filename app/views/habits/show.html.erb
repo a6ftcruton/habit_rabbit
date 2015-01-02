@@ -10,12 +10,14 @@
     <%= f.text_field :name %>
     <%= f.label "Edit this habit's notification time" %>
     <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true} %>
-    <%= f.submit 'Save' %>
+    <%= f.submit 'Save' %><br/>
     <% end %>
-    <br/><%= render "shared/tweet" %>
 </div>
 
+<div id="button">
+  <%= render "shared/tweet" %>
+</div>
 
-<div id="back-button">
+<div id="button">
   <%= link_to "Back", dashboard_path %>
 </div>
