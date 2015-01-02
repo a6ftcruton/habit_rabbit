@@ -10,21 +10,6 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def self.github_check
-    habits = Habit.where(github_repo: true)
-    conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
-        faraday.request  :url_encoded
-        faraday.response :logger
-        faraday.adapter  Faraday.default_adapter
-      end
-
-    habits.each do |habit|
-      commits = JSON.parse(conn.get("/repos/#{habit.name}/commits?author=#{habit.user.github_name}").body)
-      last_commit_date = commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.last
-      habit.events.create(completed: true, created_at: last_commit_date)
-    end
-  end
-
   def streak_days
     counter = 0
     events = self.events.sort_by {|event| event.created_at}.reverse
@@ -45,6 +30,21 @@ class Habit < ActiveRecord::Base
     habits = Habit.where(notifications: true).where(notification_time: (t-t.sec-t.min%15*60).strftime("%Y-%m-%d %H:%M:%S"))
     habits.each do |habit|
       TextWorker.perform_async(habit.id)
+    end
+  end
+
+  def self.github_check
+    habits = Habit.where(github_repo: true)
+    conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
+        faraday.request  :url_encoded
+        faraday.response :logger
+        faraday.adapter  Faraday.default_adapter
+      end
+
+    habits.each do |habit|
+      commits = JSON.parse(conn.get("/repos/#{habit.name}/commits?author=#{habit.user.github_name}").body)
+      last_commit_date = commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.last
+      habit.events.create(completed: true, created_at: last_commit_date)
     end
   end
 
