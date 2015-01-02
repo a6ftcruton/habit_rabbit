@@ -36,4 +36,10 @@ describe 'habits', type: :feature do
     expect(page).to have_content 'pushups'
   end
 
+  it 'can tweet a habit' do
+    expect(page).to have_content('pushups')
+    click_link 'More Information'
+    expect(page).to have_content('Tweet My Streak')
+  end
+
 end
