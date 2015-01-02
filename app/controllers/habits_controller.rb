@@ -5,9 +5,6 @@ class HabitsController < ApplicationController
     @habits = current_user.habits.all
     @habit = Habit.new
     @event = Event.new
-    if !current_user.github_name.nil? && !current_user.github_name.empty?
-      @github_user = Octokit.user(current_user.github_name)
-    end
   end
 
   def new
@@ -22,6 +19,34 @@ class HabitsController < ApplicationController
         format.js {@habit}
       else
         flash[:notice] = "Your habit must have a name"
+        render :back
+      end
+    end
+  end
+
+  def track_repo
+    #move almost all of this shit out of the controller, for realsies.
+    respond_to do |format|
+      conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
+        faraday.request  :url_encoded
+        faraday.response :logger
+        faraday.adapter  Faraday.default_adapter
+      end
+
+      @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
+      if @habit.save!
+        flash[:notice] = "Your Repo is being tracked"
+        #create events with dates
+        @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}").body)
+        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}
+
+        @commit_dates.each do |date|
+          @habit.events.create(completed: true, created_at: date)
+        end
+
+        format.js {@habit}
+      else
+        flash[:notice] = "You must enter a repo"
         render :back
       end
     end
@@ -65,13 +90,6 @@ class HabitsController < ApplicationController
 
       format.js {}
     end
-  end
-
-  def add_github
-    user = User.find(current_user.id)
-    user.github_name = params[:name]
-    user.save
-    redirect_to dashboard_path
   end
 
   private
