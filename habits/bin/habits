@@ -3,7 +3,31 @@
 module Habits
   class Streak
     #list of users habits
+    def habits
+      User.all.each do |user|
+        p user.habits
+      end
+    end
+
     #see status of each habit
+    def event_requires_update?(habit)
+      habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+    end
+    
     #streak information
+    def streak_days
+      counter = 0
+      events = self.events.sort_by {|event| event.created_at}.reverse
+
+      while !events.empty?
+        if events[0].completed == true
+          counter += 1
+        elsif events[0].completed == false
+          events = []
+        end
+        events.shift
+      end
+      counter
+    end
   end
 end
