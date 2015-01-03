@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+module Habits
+  class Streak
+    #list of users habits
+    #see status of each habit
+    #streak information
+  end
+end
