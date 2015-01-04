@@ -32,8 +32,8 @@
     <%# end %>
     <br/>
     <div id="button">
-      <%= button_tag "Create Custom Habit", id: 'create-custom' %>
-      <%= button_tag "Track Github Repo", id: 'track-repo' %>
+      <%= button_tag "Create Custom Habit", id: 'create-custom', class: 'left-radius' %>
+      <%= button_tag "Track Github Repo", id: 'track-repo', class: 'right-radius' %>
     </div>
 
   <div style='display:none' id='track-repo-form'>
@@ -52,13 +52,13 @@
       <%= text_field_tag :title %><br />
       <%= hidden_field_tag :start_date, Time.now %>
 
-      <%= submit_tag "Create Habit" %>
+      <%= submit_tag "Create Habit", class: "custom-button left-radius" %>
     <% end %><br/>
   </div>
 </div>
 
 <div id="button">
-  <%= link_to "Log Out", signout_path, class: 'button tiny' %><br/>
+  <%= link_to "Log Out", signout_path, class: 'button round tiny homepage' %><br/>
 </div>
 
 <script src="assets/habit_scripts.js"></script>

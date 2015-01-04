@@ -5,7 +5,7 @@
     </div>
   
     <% if current_user.nil? %>
-        <%= link_to "Log in with Twitter", "/auth/twitter", class: 'button tiny homepage homepage left-radius' %>
+        <%= link_to "Log in with Twitter", "/auth/twitter", class: 'button tiny homepage  left-radius' %>
         <%= link_to "Log in with Email", signin_path, class: 'button tiny homepage'%>
         <%= link_to "Create Account", new_user_path, class: 'button tiny homepage right-radius' %>
     <% else %>

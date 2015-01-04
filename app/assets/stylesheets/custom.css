@@ -1,3 +1,11 @@
+h1,
+h2,
+h3,
+h4, 
+h5, 
+h6 {
+  color: #353b79 !important;
+}
 .title-group {
   position:relative;
 }
@@ -19,14 +27,18 @@
   height: 100%;
   background-color: #353b79 !important;
 }
-.homepage.left-radius {
+.left-radius,
+a.left-radius {
   border-bottom-left-radius: 1000px;
   border-top-left-radius: 1000px;
+  background-color: #353b79 !important;
 }
 
-.homepage.right-radius {
+.right-radius,
+a.right-radius {
   border-bottom-right-radius: 1000px;
   border-top-right-radius: 1000px;
+  background-color: #353b79 !important;
 }
 .ajax_flash_messages {
   position: fixed;
