@@ -14,7 +14,18 @@ h6 {
   width: 200px;
   padding-bottom: 5%; 
 }
-
+.options {
+  //color: #daa96f !important;
+  //background-color: #353b79;
+  display: block;
+}
+.options-logo {
+  width: 100px;
+  position: absolute;
+  top: 0;
+  left: 50px;
+  display: inline-block;
+}
 .title-group > h1 {
   display:inline-block;
   color: #353b79;
@@ -39,6 +50,10 @@ a.right-radius {
   border-bottom-right-radius: 1000px;
   border-top-right-radius: 1000px;
   background-color: #353b79 !important;
+}
+.tan {
+  color: #353b79 !important;
+  background-color: #daa96f !important;
 }
 .ajax_flash_messages {
   position: fixed;
