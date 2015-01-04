@@ -36,6 +36,7 @@ describe 'authenticated user', type: :feature do
   end
 
   it 'can add notification to a habit', js: true do
+    Habit.destroy_all
     user = User.first
     visit '/dashboard'
     click_on('Create Custom Habit')
@@ -47,7 +48,7 @@ describe 'authenticated user', type: :feature do
     within('.habit_content') do
       click_on "More Information" 
     end
-    expect(current_path).to eq '/habits/1'
+    expect(current_path).to eq '/habits/1' 
     page.find('#habit_notifications').click
     click_on "Save"
     expect(current_path).to eq dashboard_path 

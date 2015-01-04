@@ -1,11 +1,16 @@
 <div class="main_header">
-  <h2>Habit Rabbit</h2>
+    <div class="title-group">
+      <h1>Habit Rabbit</h1>
+      <%= image_tag("rabbit-logo.png", class: "home-logo", alt: "Habit Rabbit Logo") %>
+    </div>
+  
+    <% if current_user.nil? %>
+        <%= link_to "Log in with Twitter", "/auth/twitter", class: 'button tiny homepage homepage left-radius' %>
+        <%= link_to "Log in with Email", signin_path, class: 'button tiny homepage'%>
+        <%= link_to "Create Account", new_user_path, class: 'button tiny homepage right-radius' %>
+    <% else %>
+        <%= link_to "Log Out", signout_path, class: 'button tiny homepage left-radius' %>
+        <%= link_to 'My Dashboard', dashboard_path, class: 'button tiny homepage right-radius' %>
+    <% end %>
 
-<% if current_user.nil? %>
-  <%= link_to "Log in with Twitter", "/auth/twitter", class: 'button tiny' %>
-  <%= link_to "Log in with Email", signin_path, class: 'button tiny'%>
-  <%= link_to "Create Account with Email", new_user_path, class: 'button tiny' %>
-<% else %>
-  <%= link_to "Log Out", signout_path, class: 'button tiny' %>
-  <%= link_to 'My Dashboard', dashboard_path, class: 'button tiny' %>
-<% end %>
+</div>

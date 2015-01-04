@@ -15,16 +15,11 @@
               Current Streak: <%= habit.streak_days %><br/>
 
               <div class="event-form">
-                <% if habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day %>
-                  <%# REFACTOR THIS TO MODEL METHOD: if event_requires_update?(habit) %>
+                <% if habit.event_requires_update?(habit) && !habit.github_repo %>
                   <%= render 'shared/event_confirmation', habit: habit %>
                 <% end %>
               </div>
 
-              <div class="notifications-form">
-                <%= render 'shared/update_notification', habit: habit %>
-              </div> 
-              
             </div>
             <div class="inpos"></div>
 

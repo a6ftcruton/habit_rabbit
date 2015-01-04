@@ -1,3 +1,33 @@
+.title-group {
+  position:relative;
+}
+
+.home-logo {
+  width: 200px;
+  padding-bottom: 5%; 
+}
+
+.title-group > h1 {
+  display:inline-block;
+  color: #353b79;
+}
+
+.homepage {
+  min-width: 140px;
+  width: 15%;
+  min-height: 30px;
+  height: 100%;
+  background-color: #353b79 !important;
+}
+.homepage.left-radius {
+  border-bottom-left-radius: 1000px;
+  border-top-left-radius: 1000px;
+}
+
+.homepage.right-radius {
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+}
 .ajax_flash_messages {
   position: fixed;
   width: 100%;
