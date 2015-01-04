@@ -38,10 +38,19 @@ class HabitsController < ApplicationController
         flash[:notice] = "Your Repo is being tracked"
         #create events with dates
         @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}").body)
-        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}
+        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.reverse
+        #create an event for each day, if it matches commit date, completed true, else false
+        check_date = @commit_dates[0].to_time
 
-        @commit_dates.each do |date|
-          @habit.events.create(completed: true, created_at: date)
+        while (check_date.day != Time.now.day && check_date.month != Time.now.month)
+          @commit_dates.each do |date|
+            if (date.to_time.day == check_date.day && date.to_time.month == check_date.month)
+              @habit.events.create(completed: true, created_at: date.to_time)
+            else
+              @habit.events.create(completed: false, created_at: date.to_time)
+            end
+          end
+          check_date += 1.day
         end
 
         format.js {@habit}
