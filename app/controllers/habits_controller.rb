@@ -40,6 +40,7 @@ class HabitsController < ApplicationController
         @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}").body)
         @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.reverse
         #create an event for each day, if it matches commit date, completed true, else false
+        # other possibility is creating an event for each commit and THEN going back and filling in missing days with completed: false events
         check_date = @commit_dates[0].to_time
 
         while (check_date.day != Time.now.day && check_date.month != Time.now.month)
