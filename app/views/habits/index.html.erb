@@ -4,7 +4,6 @@
   <% unless current_user.habits.empty? %>
       <h2 id='habit-header'>Your Habits</h2>
       <div class="habit-list">
-      <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
         <div class="grid-sizer">
         <% current_user.habits.each do |habit| %>
           <div class='habit-wrapper'>
@@ -12,10 +11,8 @@
             <div class="habit_content">
               <%= habit.name %><br/>
               <%= link_to "More Information", habit_path(habit) %><br/>
-              <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %><br/>
+              <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
               Current Streak: <%= habit.streak_days %><br/>
-              Notifications:
-              <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
 
               <div class="event-form">
                 <% if habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day %>
@@ -24,10 +21,10 @@
                 <% end %>
               </div>
 
-              <div id="submit-tag">
-                <%= submit_tag "Update Notifications", id: 'update-notifications' %>
-              </div>
-
+              <div class="notifications-form">
+                <%= render 'shared/update_notification', habit: habit %>
+              </div> 
+              
             </div>
             <div class="inpos"></div>
 
@@ -37,7 +34,7 @@
       </div>
 
       <% end %>
-    <% end %>
+    <%# end %>
     <br/>
     <div id="button">
       <%= button_tag "Create Custom Habit", id: 'create-custom' %>

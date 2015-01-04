@@ -30,8 +30,8 @@ ActiveRecord::Schema.define(version: 20150102184055) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.boolean  "notifications"
-    t.datetime "notification_time"
     t.datetime "start_date"
+    t.datetime "notification_time"
     t.boolean  "github_repo",       default: false
   end
 

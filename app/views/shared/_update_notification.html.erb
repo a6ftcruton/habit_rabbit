@@ -1,0 +1,11 @@
+<%= form_for @habit, url: habit_path(habit), method: :patch, remote: true do |f| %>
+  <%= f.label :notifications %>
+  <%= f.check_box :notifications, {class: 'notifications_check', checked: habit.notifications} %>
+<% end %>
+
+
+<%#= link_to habit_path(habit), method: :patch, remote: true do |f| %>
+  <%#= label_tag :notifications %>
+  <%#= check_box_tag :notifications, {class: 'notifications_check', checked: habit.notifications} %>
+<%# end %>
+
