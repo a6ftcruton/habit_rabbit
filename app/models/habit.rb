@@ -25,6 +25,20 @@ class Habit < ActiveRecord::Base
     counter
   end
 
+  def longest_streak
+    counters = []
+    events = self.events.sort_by { |event| event.created_at }.reverse
+
+    
+
+    #begin with events[0]
+    #run through each one until you find an events.completed = false
+    #return counter
+    #then begin with the next event and do the same thing
+    #after having gone through all of them you should have a list of numbers in counter
+    #return highest number from counter
+  end
+
   def self.notify?
     t = Time.now
     habits = Habit.where(notifications: true).where(notification_time: (t-t.sec-t.min%15*60).strftime("%Y-%m-%d %H:%M:%S"))
