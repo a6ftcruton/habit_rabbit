@@ -1,0 +1,2 @@
+
+Habits Gem has been developed to do three things. It can find a streak of updated habits and display how many days in a row the streak has been updated. It can check the status of each habit in the database. And it can display a list of all the users habits.
