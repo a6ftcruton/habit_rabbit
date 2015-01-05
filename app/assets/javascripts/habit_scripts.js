@@ -13,3 +13,7 @@ $('#github-stats-toggle').click(function() {
 $('.new_event > input').click(function() {
   $('.event-form').fadeOut();
 });
+
+$('.notifications_check').on('change', function() {
+  $(this).parents('form:first').submit();
+});
