@@ -39,6 +39,8 @@
 <div class="chart"></div>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+var events = <%= @events %>
+
 var margin = {top: 20, right: 20, bottom: 30, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
@@ -69,10 +71,11 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
-events.forEach(function(d) {
-  d.date = parseDate(d.date);
-  d.close = +d.close;
+d3.tsv("data.tsv", function(error, data) {
+  data.forEach(function(d) {
+    d.date = parseDate(d.date);
+    d.close = +d.close;
+  });
 
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain(d3.extent(data, function(d) { return d.close; }));
@@ -96,6 +99,6 @@ events.forEach(function(d) {
       .datum(data)
       .attr("class", "line")
       .attr("d", line);
-  });
 });
+
 </script>
