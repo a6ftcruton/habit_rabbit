@@ -48,7 +48,6 @@ describe 'authenticated user', type: :feature do
     within('.habit_content') do
       click_on "More Information" 
     end
-    expect(current_path).to eq '/habits/1' 
     page.find('#habit_notifications').click
     click_on "Save"
     expect(current_path).to eq dashboard_path 
