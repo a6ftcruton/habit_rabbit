@@ -1,3 +1,4 @@
+// Home / Login page
 h1,
 h2,
 h3,
@@ -55,6 +56,18 @@ a.right-radius {
   color: #353b79 !important;
   background-color: #daa96f !important;
 }
+
+div.home-info {
+  text-align: center !important; 
+  margin-top: 20%;
+  margin-bottom: 20%;
+  padding: 0 5%;
+}
+
+h3.home-info-header {
+  color: #353b79 !important;
+}
+//
 .ajax_flash_messages {
   position: fixed;
   width: 100%;

@@ -1,4 +1,5 @@
 <div class='large-12 columns'>
+
   <%= render '/shared/options' %>
   
   <% unless current_user.habits.empty? %>
@@ -57,6 +58,7 @@
   </div>
 </div>
 
+  <%= render '/shared/info' %>
 
 <script src="assets/habit_scripts.js"></script>
 <script src="/assets/masonry.pkgd.min.js"></script>
