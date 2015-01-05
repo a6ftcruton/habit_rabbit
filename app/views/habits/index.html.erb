@@ -1,10 +1,10 @@
 <div class='large-12 columns'>
-  <h3 id='habit-welcome'>Welcome, <%= current_user.name %> | <%= link_to "Settings", user_path(current_user.id) %></h3>
 
+  <%= render '/shared/options' %>
+  
   <% unless current_user.habits.empty? %>
       <h2 id='habit-header'>Your Habits</h2>
       <div class="habit-list">
-      <%= form_tag(habit_update_notification_path, method: :post, remote: true) do %>
         <div class="grid-sizer">
         <% current_user.habits.each do |habit| %>
           <div class='habit-wrapper'>
@@ -12,20 +12,13 @@
             <div class="habit_content">
               <%= habit.name %><br/>
               <%= link_to "More Information", habit_path(habit) %><br/>
-              <%= link_to "Delete Habit", habit_path(habit), confirm: "Are you sure?", method: 'delete' %><br/>
+              <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
               Current Streak: <%= habit.streak_days %><br/>
-              Notifications:
-              <%= check_box_tag "notification_ids[]", habit.id, habit.notifications, class: 'notifications_check' %>
 
               <div class="event-form">
-                <% if habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day %>
-                  <%# REFACTOR THIS TO MODEL METHOD: if event_requires_update?(habit) %>
+                <% if habit.event_requires_update?(habit) && !habit.github_repo %>
                   <%= render 'shared/event_confirmation', habit: habit %>
                 <% end %>
-              </div>
-
-              <div id="submit-tag">
-                <%= submit_tag "Update Notifications", id: 'update-notifications' %>
               </div>
 
             </div>
@@ -37,11 +30,11 @@
       </div>
 
       <% end %>
-    <% end %>
+    <%# end %>
     <br/>
     <div id="button">
-      <%= button_tag "Create Custom Habit", id: 'create-custom' %>
-      <%= button_tag "Track Github Repo", id: 'track-repo' %>
+      <%= button_tag "Create Custom Habit", id: 'create-custom', class: 'left-radius' %>
+      <%= button_tag "Track Github Repo", id: 'track-repo', class: 'right-radius' %>
     </div>
 
   <div style='display:none' id='track-repo-form'>
@@ -60,14 +53,12 @@
       <%= text_field_tag :title %><br />
       <%= hidden_field_tag :start_date, Time.now %>
 
-      <%= submit_tag "Create Habit" %>
+      <%= submit_tag "Create Habit", class: "custom-button left-radius" %>
     <% end %><br/>
   </div>
 </div>
 
-<div id="button">
-  <%= link_to "Log Out", signout_path, class: 'button tiny' %><br/>
-</div>
+  <%= render '/shared/info' %>
 
 <script src="assets/habit_scripts.js"></script>
 <script src="/assets/masonry.pkgd.min.js"></script>

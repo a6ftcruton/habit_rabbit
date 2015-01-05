@@ -20,7 +20,7 @@ describe 'unauthenticated user', type: :feature do
   describe 'creating an account with email' do
     it 'can create an account using email from home page' do
       visit root_path
-      click_link "Create Account with Email"
+      click_link "Create Account"
       fill_in 'user_name', with: 'Aaron'
       fill_in 'user_email_address', with: 'jokes@laugh.com'
       fill_in 'user_password', with: 'password'

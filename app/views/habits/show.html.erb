@@ -1,4 +1,3 @@
-
 <svg class="habit-show-graph">
 </svg>
 
@@ -10,8 +9,11 @@
     <%= f.text_field :name %>
     <%= f.label "Edit this habit's notification time" %>
     <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true} %>
+    <%= f.label :notifications %>
+    <%= f.check_box :notifications, {checked: @habit.notifications} %>
+
     <%= f.submit 'Save' %><br/>
-    <% end %>
+  <% end %>
 </div>
 
 <div id="button">

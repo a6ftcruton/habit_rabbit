@@ -28,13 +28,6 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content 'push ups'
   end
 
-  #
-  # it 'can receive a tweet', js: true do
-  #   visit '/dashboard'
-  #   click_on('Create Custom Habit')
-  #   expect(page).to have_css('#manage-habit-form')
-  # end
-
   it 'can receive a tweet', js: true do
     skip
     visit '/dashboard'
@@ -42,11 +35,8 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_css('#manage-habit-form')
   end
 
-  it 'can view habit details'
-  it 'can edit a habit'
-  it 'can delete a habit'
-
   it 'can add notification to a habit', js: true do
+    Habit.destroy_all
     user = User.first
     visit '/dashboard'
     click_on('Create Custom Habit')
@@ -55,9 +45,12 @@ describe 'authenticated user', type: :feature do
     visit '/dashboard'
     expect(page).to have_content('push ups')
     expect(user.habits.first.notifications).to be_falsey
-    check('notification_ids[]')
-    page.find('#update-notifications').click
-    visit '/dashboard'
+    within('.habit_content') do
+      click_on "More Information" 
+    end
+    page.find('#habit_notifications').click
+    click_on "Save"
+    expect(current_path).to eq dashboard_path 
     expect(user.habits.first.notifications).to be_truthy
   end
 

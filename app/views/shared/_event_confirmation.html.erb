@@ -4,13 +4,13 @@
     <%= f.hidden_field :completed, value: true %>
     <%= f.hidden_field :created_at, value: Time.now %>
     <%= f.hidden_field :habit_id, value: habit.id %>
-    <%= f.submit "YES" %>
+    <%= f.submit "YES", class: "button round tiny tan" %>
   <% end %>
 
  <%= form_for [habit, Event.new(habit: habit)] do |f| %>
     <%= f.hidden_field :completed, value: false %>
     <%= f.hidden_field :created_at, value: Time.now %>
     <%= f.hidden_field :habit_id, value: habit.id %>
-    <%= f.submit "NO" %>
+    <%= f.submit "NO", class: "button round tiny tan" %>
   <% end %>
 </div>
