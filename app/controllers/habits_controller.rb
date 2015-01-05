@@ -3,8 +3,6 @@ class HabitsController < ApplicationController
 
   def index
     @habits = current_user.habits.all
-    @habit = Habit.new
-    @event = Event.new
   end
 
   def new
@@ -60,12 +58,24 @@ class HabitsController < ApplicationController
       @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
       if @habit.save!
         flash[:notice] = "Your Repo is being tracked"
-        #create events with dates
-        @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}").body)
-        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}
+
+        @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000").body)
+        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.reverse
 
         @commit_dates.each do |date|
           @habit.events.create(completed: true, created_at: date)
+        end
+
+        @events = @habit.events.map {|d| d.created_at.to_date }.uniq
+
+        total = @events.count
+        counter = 0
+
+        until counter == total - 1 do
+          if !(@events[counter] + 1.day < @events[counter + 1])
+            @habit.events.create(completed: false, created_at: @events[counter])
+          end
+          counter += 1
         end
 
         format.js {@habit}
