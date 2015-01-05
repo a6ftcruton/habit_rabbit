@@ -20,4 +20,16 @@ class TwilioText
       body: "Did you do your #{habit.name} today?"
     )
   end
+
+  def self.accept_user_response
+    twilio_sid = ENV["TWILIO_SID"]
+    twilio_token = ENV["TWILIO_TOKEN"]
+    twilio_phone_number = ENV["TWILIO_PHONE_NUMBER"]
+
+    twilio_client = Twilio::REST::Client.new(twilio_sid, twilio_token)
+
+    message = twilio_client.account.messages.get('SMefd7aebbfc6cf4ed97a33edd5b61656e')
+    puts message.body
+  end
+
 end
