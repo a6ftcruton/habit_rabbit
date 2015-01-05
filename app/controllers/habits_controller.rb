@@ -43,7 +43,7 @@ class HabitsController < ApplicationController
         # other possibility is creating an event for each commit and THEN going back and filling in missing days with completed: false events
         check_date = @commit_dates[0].to_time
 
-        while (check_date.day != Time.now.day && check_date.month != Time.now.month)
+        while (check_date.day != Time.now.utc.day && check_date.month != Time.now.utc.month)
           @commit_dates.each do |date|
             if (date.to_time.day == check_date.day && date.to_time.month == check_date.month)
               @habit.events.create(completed: true, created_at: date.to_time)
