@@ -24,6 +24,7 @@ class HabitsController < ApplicationController
 
   def show
     @habit = Habit.find(params[:id])
+    @events = @habit.events.pluck(:created_at, :completed).to_json.html_safe
   end
 
   def update
