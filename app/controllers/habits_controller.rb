@@ -3,8 +3,6 @@ class HabitsController < ApplicationController
 
   def index
     @habits = current_user.habits.all
-    @habit = Habit.new
-    @event = Event.new
   end
 
   def new
@@ -36,22 +34,24 @@ class HabitsController < ApplicationController
       @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
       if @habit.save!
         flash[:notice] = "Your Repo is being tracked"
-        #create events with dates
-        @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}").body)
-        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.reverse
-        #create an event for each day, if it matches commit date, completed true, else false
-        # other possibility is creating an event for each commit and THEN going back and filling in missing days with completed: false events
-        check_date = @commit_dates[0].to_time
 
-        while (check_date.day != Time.now.utc.day && check_date.month != Time.now.utc.month)
-          @commit_dates.each do |date|
-            if (date.to_time.day == check_date.day && date.to_time.month == check_date.month)
-              @habit.events.create(completed: true, created_at: date.to_time)
-            else
-              @habit.events.create(completed: false, created_at: date.to_time)
-            end
+        @commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000").body)
+        @commit_dates = @commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.reverse
+
+        @commit_dates.each do |date|
+          @habit.events.create(completed: true, created_at: date)
+        end
+
+        @events = @habit.events.map {|d| d.created_at.to_date }.uniq
+
+        total = @events.count
+        counter = 0
+
+        until counter == total - 1 do
+          if !(@events[counter] + 1.day < @events[counter + 1])
+            @habit.events.create(completed: false, created_at: @events[counter])
           end
-          check_date += 1.day
+          counter += 1
         end
 
         format.js {@habit}
