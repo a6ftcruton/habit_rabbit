@@ -10,6 +10,10 @@ class Habit < ActiveRecord::Base
     end
   end
 
+  def self.git?
+    
+  end
+
   def streak_days
     counter = 0
     events = self.events.sort_by {|event| event.created_at}.reverse

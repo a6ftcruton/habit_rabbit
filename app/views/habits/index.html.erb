@@ -1,7 +1,7 @@
 <div class='large-12 columns'>
 
   <%= render '/shared/options' %>
-  
+
   <% unless current_user.habits.empty? %>
       <h2 id='habit-header'>Your Habits</h2>
       <div class="habit-list">
@@ -10,6 +10,11 @@
           <div class='habit-wrapper'>
             <div class="inpre"></div>
             <div class="habit_content">
+
+              <% if habit.github_repo %>
+                <%= "GitHub:" %><br>
+              <% end %>
+              
               <%= habit.name %><br/>
               <%= link_to "More Information", habit_path(habit) %><br/>
               <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
