@@ -10,33 +10,58 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def streak_days
-    counter = 0
+  def current_streak_days
+    streak = Streak.new
     events = self.events.sort_by {|event| event.created_at}.reverse
 
     while !events.empty?
       if events[0].completed == true
-        counter += 1
+        streak.increment
       elsif events[0].completed == false
         events = []
       end
       events.shift
     end
-    counter
+    streak.days
+
+    # looping over all events,
+      # start recording a new streak when completed is true,
+      # streak = Streak.new(0)
+      # streak.increment
+      # stop when its false,
+
+    # repeat
   end
 
-  def longest_streak
-    counters = []
-    events = self.events.sort_by { |event| event.created_at }.reverse
+  def streaks
+    streaks = []
+    events = self.events.order('created_at DESC')
+    current_streak = nil
+    total_events = events.count
 
-    
+    events.each_with_index do |event, index|
+      if event.completed
+        current_streak ||= Streak.new
+        current_streak.increment
+        if index == total_events -  1
+          streaks << current_streak
+        end
+      else
+        streaks << current_streak if current_streak
+        current_streak = nil
+      end
+    end
 
-    #begin with events[0]
-    #run through each one until you find an events.completed = false
-    #return counter
-    #then begin with the next event and do the same thing
-    #after having gone through all of them you should have a list of numbers in counter
-    #return highest number from counter
+    streaks
+  end
+
+  def longest_streak_days
+    longest_streak = streaks.max_by { |streak| streak.days }
+    if longest_streak
+      longest_streak.days
+    else
+      0
+    end
   end
 
   def self.notify?
