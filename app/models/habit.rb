@@ -10,6 +10,11 @@ class Habit < ActiveRecord::Base
     end
   end
 
+  def streak_days
+    # TODO fix me
+    current_streak_days
+  end
+
   def current_streak_days
     streak = Streak.new
     events = self.events.sort_by {|event| event.created_at}.reverse
@@ -23,23 +28,15 @@ class Habit < ActiveRecord::Base
       events.shift
     end
     streak.days
-
-    # looping over all events,
-      # start recording a new streak when completed is true,
-      # streak = Streak.new(0)
-      # streak.increment
-      # stop when its false,
-
-    # repeat
   end
 
   def streaks
     streaks = []
-    events = self.events.order('created_at DESC')
+    xevents = self.events.by_most_recent
     current_streak = nil
-    total_events = events.count
+    total_events = xevents.count
 
-    events.each_with_index do |event, index|
+    xevents.each_with_index do |event, index|
       if event.completed
         current_streak ||= Streak.new
         current_streak.increment
