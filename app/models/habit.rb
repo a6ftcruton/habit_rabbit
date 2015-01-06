@@ -5,13 +5,13 @@ class Habit < ActiveRecord::Base
   has_many :events
 
   def user_response?
-    if self.events.empty? || last_24_hours?(self)
+    if self.events.empty? || self.last_24_hours?
       Event.create(completed: false, habit_id: self.id)
     end
   end
 
   def current_streak_days
-    unless streaks.empty? || !events.last.completed
+    unless streaks.empty? || !sorted_events_for_habit.reverse.last.completed
       streaks.first.days
     else
       0
@@ -75,12 +75,30 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def event_requires_update?(habit)
-    habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+  def event_requires_update?
+    self.events.empty? || self.events.last.created_at.day < Date.yesterday.day
   end
 
-  private
-  def last_24_hours?(habit)
-    habit.events.last.created_at < Date.today - 1.day
+  def create_events(commit_dates)
+    commit_dates.each do |date|
+      self.events.create(completed: true, created_at: date)
+    end
   end
+
+  def create_false_events(events)
+    total = events.count
+    counter = 0
+
+    until counter == total - 1 do
+      if (events[counter] + 1.day != events[counter + 1])
+        self.events.create(completed: false, created_at: events[counter])
+      end
+      counter += 1
+    end
+  end
+
+  def last_24_hours?
+    self.events.last.created_at < Date.today - 1.day
+  end
+
 end
