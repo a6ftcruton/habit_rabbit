@@ -1,7 +1,6 @@
-<div class='large-12 columns'>
+<div class='large-12 columns index-container'>
 
-  <%= render '/shared/options' %>
-  
+  <%#= render '/shared/options' %>
   <% unless current_user.habits.empty? %>
       <h2 id='habit-header'>Your Habits</h2>
       <div class="habit-list">
@@ -56,9 +55,9 @@
       <%= submit_tag "Create Habit", class: "custom-button left-radius" %>
     <% end %><br/>
   </div>
+    <%= image_tag("rabbit-logo.png", class: "options-logo left", alt: "Habit Rabbit Logo") %>
+    <%= image_tag("rabbit-logo.png", class: "options-logo right", alt: "Habit Rabbit Logo") %>
 </div>
-
-  <%= render '/shared/info' %>
 
 <script src="assets/habit_scripts.js"></script>
 <script src="/assets/masonry.pkgd.min.js"></script>
