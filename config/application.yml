@@ -10,6 +10,8 @@ TWILIO_PHONE_NUMBER: +1 501-251-6213
 SKYLIGHT_ID: 9Xrscu64FLRd
 SKYLIGHT_AUTH: JkDdLapEMkFAiDQsdIOxCdGyNtxnH-VFMFd-hrNeMu4
 
+FEED_ENGINE_DATABASE_PASSWORD: jisahabitnunrabbit
+
 # Add configuration values here, as shown below.
 #
 # pusher_app_id: "2954"
