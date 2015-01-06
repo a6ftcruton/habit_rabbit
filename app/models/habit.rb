@@ -10,11 +10,6 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  # def current_streak_days
-  #   # TODO fix me
-  #   current_current_streak_days
-  # end
-
   def current_streak_days
     streak = Streak.new
     events = self.events.sort_by {|event| event.created_at}.reverse
