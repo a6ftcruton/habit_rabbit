@@ -17,7 +17,7 @@ class TwilioText
     @twilio_client.account.sms.messages.create(
       from: twilio_phone_number,
       to: user_phone_number,
-      body: "Did you do your #{habit.name} today?"
+      body: "Did you do your #{habit.name} today? Log it here: www.habitrabbit.org/dashboard"
     )
   end
 end

@@ -5,24 +5,51 @@ class Habit < ActiveRecord::Base
   has_many :events
 
   def user_response?
-    if self.events.empty? || last_24_hours?(self)
+    if self.events.empty? || self.last_24_hours?
       Event.create(completed: false, habit_id: self.id)
     end
   end
 
-  def streak_days
-    counter = 0
-    events = self.events.sort_by {|event| event.created_at}.reverse
-
-    while !events.empty?
-      if events[0].completed == true
-        counter += 1
-      elsif events[0].completed == false
-        events = []
-      end
-      events.shift
+  def current_streak_days
+    unless streaks.empty? || !sorted_events_for_habit.reverse.last.completed
+      streaks.first.days
+    else
+      0
     end
-    counter
+  end
+
+  def streaks
+    events = sorted_events_for_habit
+    current_streak = nil
+    total_events = events.count
+
+    streaks = []
+    events.each_with_index do |event, index|
+      if event.completed
+        current_streak ||= Streak.new
+        current_streak.increment
+        if index == total_events - 1
+          streaks << current_streak
+        end
+      else
+        streaks << current_streak if current_streak
+        current_streak = nil
+      end
+    end
+    streaks
+  end
+
+  def sorted_events_for_habit
+    events.by_most_recent
+  end
+
+  def longest_current_streak_days
+    longest_streak = streaks.max_by { |streak| streak.days }
+    if longest_streak
+      longest_streak.days
+    else
+      0
+    end
   end
 
   def self.notify?
@@ -48,12 +75,30 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def event_requires_update?(habit)
-    habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+  def event_requires_update?
+    self.events.empty? || self.events.last.created_at.day < Date.yesterday.day
   end
 
-  private
-  def last_24_hours?(habit)
-    habit.events.last.created_at < Date.today - 1.day
+  def create_events(commit_dates)
+    commit_dates.each do |date|
+      self.events.create(completed: true, created_at: date)
+    end
   end
+
+  def create_false_events(events)
+    total = events.count
+    counter = 0
+
+    until counter == total - 1 do
+      if (events[counter] + 1.day != events[counter + 1])
+        self.events.create(completed: false, created_at: events[counter])
+      end
+      counter += 1
+    end
+  end
+
+  def last_24_hours?
+    self.events.last.created_at < Date.today - 1.day
+  end
+
 end
