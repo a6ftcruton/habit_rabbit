@@ -19,16 +19,16 @@ class Habit < ActiveRecord::Base
   end
 
   def streaks
-    streaks = []
-    events = self.events.by_most_recent
+    events = sorted_events_for_habit
     current_streak = nil
     total_events = events.count
 
+    streaks = []
     events.each_with_index do |event, index|
       if event.completed
         current_streak ||= Streak.new
         current_streak.increment
-        if index == total_events -  1
+        if index == total_events - 1
           streaks << current_streak
         end
       else
@@ -37,6 +37,10 @@ class Habit < ActiveRecord::Base
       end
     end
     streaks
+  end
+
+  def sorted_events_for_habit
+    events.by_most_recent
   end
 
   def longest_current_streak_days
