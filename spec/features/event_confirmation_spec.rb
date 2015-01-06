@@ -6,7 +6,7 @@ describe 'user event confirmation', type: :feature do
   before do
     @user = create(:user)
     page.set_rack_session(user_id: @user.id)
-    @habit = Habit.create(user_id: @user.id, name: "pushups", start_date: DateTime.now)
+    @habit = create(:habit, user_id: @user.id)
   end
 
   it 'has confirmation option for each habit' do
