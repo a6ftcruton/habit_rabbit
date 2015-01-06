@@ -68,8 +68,8 @@ describe 'habit' do
     end
 
     it 'returns zero if most recent event is false' do
-      @habit.events.create(completed: true)
-      @habit.events.create(completed: false)
+      @habit.events.create(completed: true, created_at: '2015-01-02 19:49:16Z')
+      @habit.events.create(completed: false, created_at: '2015-01-05 19:49:16Z')
       expect(@habit.current_streak_days).to eq(0)
     end
   end
