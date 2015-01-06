@@ -10,19 +10,54 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def streak_days
-    counter = 0
+  # def current_streak_days
+  #   # TODO fix me
+  #   current_current_streak_days
+  # end
+
+  def current_streak_days
+    streak = Streak.new
     events = self.events.sort_by {|event| event.created_at}.reverse
 
     while !events.empty?
       if events[0].completed == true
-        counter += 1
+        streak.increment
       elsif events[0].completed == false
         events = []
       end
       events.shift
     end
-    counter
+    streak.days
+  end
+
+  def streaks
+    streaks = []
+    events = self.events.by_most_recent
+    current_streak = nil
+    total_events = events.count
+
+    events.each_with_index do |event, index|
+      if event.completed
+        current_streak ||= Streak.new
+        current_streak.increment
+        if index == total_events -  1
+          streaks << current_streak
+        end
+      else
+        streaks << current_streak if current_streak
+        current_streak = nil
+      end
+    end
+    streaks
+  end
+
+  def longest_current_streak_days
+    longest_streak = streaks.max_by { |streak| streak.days }
+    if longest_streak
+      longest_streak.days
+    else
+      0
+    end
   end
 
   def self.notify?

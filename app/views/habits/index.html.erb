@@ -18,7 +18,7 @@
               <%= habit.name %><br/>
               <%= link_to "More Information", habit_path(habit) %><br/>
               <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
-              Current Streak: <%= habit.streak_days %><br/>
+              Current Streak: <%= habit.current_streak_days %><br/>
 
               <div class="event-form">
                 <% if habit.event_requires_update?(habit) && !habit.github_repo %>

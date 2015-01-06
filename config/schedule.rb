@@ -28,8 +28,8 @@ end
 
 every "0 0 20 1/1 * ? *" do
   runner "Habity.github_check"
+end
 
 every "* 0 * * * " do
-runner 'Habit.all.each { |habit| habit.user_response? }'
-
+  runner 'Habit.all.each { |habit| habit.user_response? }'
 end
