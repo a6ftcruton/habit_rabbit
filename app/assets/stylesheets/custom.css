@@ -190,8 +190,4 @@ h3.home-info-header {
 }
 
 // end masonry
-svg {
-  position: absolute;
-  bottom: 0;
-  left: 100px;
-}
+
