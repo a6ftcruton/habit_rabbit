@@ -14,7 +14,7 @@
             <div class="habit_content">
               <h4 class="habit-title"><%= habit.name %></h4>
               <div class="event-form">
-                <% if habit.event_requires_update?(habit) && !habit.github_repo %>
+                <% if habit.event_requires_update? && !habit.github_repo %>
                   <%= render 'shared/event_confirmation', habit: habit %>
                 <% elsif habit.github_repo %>
                   <%= image_tag("Octocat.png", class: "octocat-image") %>
@@ -24,7 +24,7 @@
               </div>
               <%= link_to "More Information", habit_path(habit) %><br/>
               <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
-              Current Streak: <%= habit.streak_days %><br/>
+              Current Streak: <%= habit.current_streak_days %><br/>
             </div>
             <div class="inpos"></div>
           </div>
