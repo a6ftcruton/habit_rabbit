@@ -14,14 +14,14 @@
               <% if habit.github_repo %>
                 <%= "GitHub:" %><br>
               <% end %>
-              
+
               <%= habit.name %><br/>
               <%= link_to "More Information", habit_path(habit) %><br/>
               <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
               Current Streak: <%= habit.current_streak_days %><br/>
 
               <div class="event-form">
-                <% if habit.event_requires_update?(habit) && !habit.github_repo %>
+                <% if habit.event_requires_update? && !habit.github_repo %>
                   <%= render 'shared/event_confirmation', habit: habit %>
                 <% end %>
               </div>
@@ -43,7 +43,7 @@
     </div>
 
   <div style='display:none' id='track-repo-form'>
-    <%= form_tag(track_repo_path, method: :post, remote: true) do %>
+    <%= form_tag(track_repo_path, method: :post) do %>
       <%= label_tag :repo, "Github Repo (i.e. username/reponame)" %>
       <%= text_field_tag :repo %><br />
       <%= hidden_field_tag :start_date, Time.now %>

@@ -10,11 +10,6 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  # def current_streak_days
-  #   # TODO fix me
-  #   current_current_streak_days
-  # end
-
   def current_streak_days
     streak = Streak.new
     events = self.events.sort_by {|event| event.created_at}.reverse
@@ -83,8 +78,26 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def event_requires_update?(habit)
-    habit.events.empty? || habit.events.last.created_at.day < Date.yesterday.day
+  def event_requires_update?
+    self.events.empty? || self.events.last.created_at.day < Date.yesterday.day
+  end
+
+  def create_events(commit_dates)
+    commit_dates.each do |date|
+      self.events.create(completed: true, created_at: date)
+    end
+  end
+
+  def create_false_events(events)
+    total = events.count
+    counter = 0
+
+    until counter == total - 1 do
+      if !(events[counter] + 1.day < events[counter + 1])
+        self.events.create(completed: false, created_at: events[counter])
+      end
+      counter += 1
+    end
   end
 
   private
