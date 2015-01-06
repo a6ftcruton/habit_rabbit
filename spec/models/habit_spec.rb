@@ -74,6 +74,26 @@ describe 'habit' do
     end
   end
 
+  describe '#create_events' do
+    it 'can create events based on dates passed in' do
+      dates = ['2015-01-01 19:49:16Z', '2015-01-02 19:49:16Z', '2015-01-04 19:49:16Z', '2015-01-05 19:49:16Z', '2015-01-06 19:49:16Z']
+      @habit.create_events(dates)
+
+      expect(@habit.events.size).to eq(5)
+    end
+  end
+
+  describe '#create_false_events' do
+    it 'can create events set to completed false based on events passed in' do
+      dates = ['2015-01-01 19:49:16Z', '2015-01-02 19:49:16Z', '2015-01-04 19:49:16Z', '2015-01-06 19:49:16Z', '2015-01-08 19:49:16Z']
+      @habit.create_events(dates)
+      events = @habit.events.map {|d| d.created_at.to_date }.uniq
+      @habit.create_false_events(events)
+
+      expect(@habit.events.size).to eq(8)
+    end
+  end
+
   def build_streak(length)
     length.times do
       @habit.events.create(completed: true)
