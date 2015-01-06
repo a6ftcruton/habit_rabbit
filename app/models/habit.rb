@@ -100,8 +100,8 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  private
   def last_24_hours?
     self.events.last.created_at < Date.today - 1.day
   end
+
 end
