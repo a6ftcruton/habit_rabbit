@@ -7,7 +7,7 @@ describe 'authenticated user', type: :feature do
     sign_in_with_twitter
   end
 
-  it 'can visit dashboard' do
+  it 'can visit dashboard', js: true do
     visit '/dashboard'
     expect(page).to have_content "Welcome, Yukon Cornelius"
   end
