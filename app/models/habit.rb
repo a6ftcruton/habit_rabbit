@@ -11,18 +11,11 @@ class Habit < ActiveRecord::Base
   end
 
   def current_streak_days
-    streak = Streak.new
-    events = self.events.sort_by {|event| event.created_at}.reverse
-
-    while !events.empty?
-      if events[0].completed == true
-        streak.increment
-      elsif events[0].completed == false
-        events = []
-      end
-      events.shift
+    unless streaks.empty? || !events.last.completed
+      streaks.first.days
+    else
+      0
     end
-    streak.days
   end
 
   def streaks
