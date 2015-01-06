@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="104px" height="46px" viewBox="0 0 104 46" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.1.1 (8761) - http://www.bohemiancoding.com/sketch -->
+    <title>Artboard 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Artboard-1" sketch:type="MSArtboardGroup">
+            <path d="M29.9822371,42.0118268 L10.5776165,34.5630909 C8.49862333,33.7650402 7.47713252,31.4546548 8.26881714,29.3922459 C9.05889083,27.3340335 11.3777608,26.3010775 13.4445601,27.0944474 L28.0892677,32.716024 L28.0892677,-3.37937242 C28.0892677,-5.59229387 29.8801287,-7.38656214 32.0892677,-7.38656214 C34.2939115,-7.38656214 36.0892677,-5.59248219 36.0892677,-3.37937242 L36.0892677,38.6062481 C36.0892677,40.8191696 34.2984067,42.6134379 32.0892677,42.6134379 C31.3168034,42.6134379 30.594586,42.3931849 29.9822371,42.0118268 Z" id="Rectangle-2" stroke="#353B79" stroke-width="2" fill="#DAA96F" sketch:type="MSShapeGroup" transform="translate(22.045188, 17.613438) rotate(-326.000000) translate(-22.045188, -17.613438) "></path>
+            <text id="Complete!" fill="#FFFFFF" sketch:type="MSTextLayer" font-family="Helvetica" font-size="12" font-weight="bold" sketch:alignment="middle">
+                <tspan x="41.6650391" y="31" fill="#353B79">Complete!</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

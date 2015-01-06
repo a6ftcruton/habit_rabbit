@@ -25,7 +25,7 @@ describe 'habits', type: :feature do
 
   it 'can go to a show page for the habit' do
     click_link 'More Information'
-    expect(page).to have_content('Details about your pushups habit')
+    expect(page).to have_content('pushups habit')
   end
 
   it 'saves habits for the user' do

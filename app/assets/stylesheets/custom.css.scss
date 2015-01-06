@@ -65,7 +65,9 @@ a.right-radius {
   color: #353b79 !important;
   background-color: #daa96f !important;
 }
-
+input.tan {
+  margin-bottom: 8px;
+}
 div.home-info {
   text-align: center !important; 
   margin-top: 20%;
@@ -84,6 +86,7 @@ h3.home-info-header {
 
 #button {
   text-align: center;
+  margin-bottom: 5vh; 
 }
 
 #create-habit-form {
@@ -110,27 +113,56 @@ h3.home-info-header {
   color: #468847;
   text-align: left;
 }
-
-#habit-welcome {
-  margin-top: 45px;
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid black;
-}
-
+#habit-welcome,
 #habit-header {
-  margin: 5px;
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
   font-size: 4rem;
+  font-weight: 200;
   font-family: 'Montserrat', sans-serif;
   color: white !important;
-  background-color: #353b79; 
-  //background-color: rgba(#daa96f, 0.4);
-  margin-bottom: 50px;
+  background-color: #353b79;
+  border-bottom: 3px solid #daa96f;
+  margin-top: 0;
 }
-
+#habit-header > h2 {
+  color: white; 
+}
+.nav-links {
+  display: block;
+  position: absolute;
+  right:5%;
+  top:30px;
+}
+.welcome {
+  position: absolute;
+  top:38px;
+  left: 5%;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.logout-link,
+.settings-link {
+  display: inline-block;
+  margin-right: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #daa96f;
+}
+.logout-link > a,
+.settings-link > a, 
+h5.welcome {
+  margin: 0 10px;
+  color: #daa96f !important;
+  font-family: 'Montserrat', sans-serif;
+}
+.custom-button {
+  border-bottom-left-radius: 1000px;
+  border-top-left-radius: 1000px;
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+  background-color: #353b79 !important;
+}
 #habit-edit {
   margin: 5px;
   text-align: center;
@@ -138,10 +170,10 @@ h3.home-info-header {
   padding-bottom: 10px;
 }
 div.habit-list {
-  padding: 3% 5%;
+  padding: 0 2%;
 }
 div.habit-wrapper {
-
+  margin-top: 5%;
 }
 
 #submit-tag {
@@ -176,21 +208,23 @@ div.habit-wrapper {
      -moz-border-radius: 5px;
           border-radius: 5px;
 }
-
 .habit-wrapper {
   text-align:center;
   position:relative;
-
 }
-
+.octocat-image {
+  width: 40px;
+}
+.checkmark-image {
+  width: 80px;
+}
 .inpre, .inpos{
   background-color:#fff;
-  height:150px;
+  height:160px;
   width:20px;
   border-bottom:4px solid rgba(0, 0, 0, 0.7);
   border-top:4px solid rgba(0, 0, 0, 0.7);
   float:left;
-
 }
 .inpre{
   border-left:4px solid rgba(0, 0, 0, 0.7);
@@ -210,13 +244,21 @@ div.habit-wrapper {
 }
 .habit_content{
   font-family:"Arial",sans-serif;
-  margin: 30px 10px;
+  margin: 0 30px 10px;
   padding:5px;
   background-color:#fff;
   float:left;
 }
-
+input.custom-button {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  padding: 10px;
+}
 // end masonry
+#track-repo-form,
+#create-habit-form {
+  text-align: center;
+}
 input.button,
 button#create-custom,
 button#track-repo {

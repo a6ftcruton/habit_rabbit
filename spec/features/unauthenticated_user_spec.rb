@@ -2,7 +2,7 @@ describe 'unauthenticated user', type: :feature do
   include Capybara::DSL
 
   describe 'logging in' do
-    it 'can log in using email from home page' do
+    it 'can log in using email from home page', js:true do
       user = User.create(name: 'Aaron',
                          email_address: 'stuff@yomama.com',
                          password: 'password',

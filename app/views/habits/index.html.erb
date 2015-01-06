@@ -1,30 +1,36 @@
 <div class='large-12 columns index-container'>
 
   <%#= render '/shared/options' %>
-  <% unless current_user.habits.empty? %>
       <h2 id='habit-header'>Your Habits</h2>
+      <h5 class='welcome'>Welcome, <%= current_user.name %></h5>
+      <div class="nav-links">
+        <h5 class="settings-link"><%= link_to "Settings", user_path(current_user.id) %></h5>
+        <h5 class="logout-link"><%= link_to "Log Out", signout_path %></h5>
+      </div>
+  <% unless current_user.habits.empty? %>
       <div class="habit-list">
         <div class="grid-sizer">
-        <% current_user.habits.each do |habit| %>
-          <div class='habit-wrapper'>
-            <div class="inpre"></div>
-            <div class="habit_content">
-              <%= habit.name %><br/>
-              <%= link_to "More Information", habit_path(habit) %><br/>
-              <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
-              Current Streak: <%= habit.streak_days %><br/>
-
-              <div class="event-form">
-                <% if habit.event_requires_update?(habit) && !habit.github_repo %>
-                  <%= render 'shared/event_confirmation', habit: habit %>
-                <% end %>
+          <% current_user.habits.each do |habit| %>
+            <div class='habit-wrapper'>
+              <div class="inpre"></div>
+              <div class="habit_content">
+                <h4 class="habit-title"><%= habit.name %></h4>
+                <div class="event-form">
+                  <% if habit.event_requires_update?(habit) && !habit.github_repo %>
+                    <%= render 'shared/event_confirmation', habit: habit %>
+                  <% elsif habit.github_repo %>
+                    <%= image_tag("Octocat.png", class: "octocat-image") %>
+                  <% else %>
+                    <%= image_tag("checkmark-image.svg", class: "checkmark-image") %>
+                  <% end %>
+                </div>
+                <%= link_to "More Information", habit_path(habit) %><br/>
+                <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
+                Current Streak: <%= habit.streak_days %><br/>
               </div>
-
+              <div class="inpos"></div>
             </div>
-            <div class="inpos"></div>
-
-          </div>
-        <% end %>
+          <% end %>
         </div>
       </div>
 
@@ -36,28 +42,34 @@
       <%= button_tag "Track Github Repo", id: 'track-repo', class: 'right-radius' %>
     </div>
 
-  <div style='display:none' id='track-repo-form'>
-    <%= form_tag(track_repo_path, method: :post, remote: true) do %>
-      <%= label_tag :repo, "Github Repo (i.e. username/reponame)" %>
-      <%= text_field_tag :repo %><br />
-      <%= hidden_field_tag :start_date, Time.now %>
+    <div class="row">
+      <div class="large-4 large-centered columns">
+        <div style='display:none' id='track-repo-form' >
+          <%= form_tag(track_repo_path, method: :post, remote: true) do %>
+            <%= label_tag :repo, "Github Repo (i.e. username/reponame)" %>
+            <%= text_field_tag :repo %><br />
+            <%= hidden_field_tag :start_date, Time.now %>
 
-      <%= submit_tag "Track Repo" %>
-    <% end %><br/>
+            <%= submit_tag "Track Repo", class: "button round custom-button left-radius"  %>
+          <% end %><br/>
+        </div>
+      </div>
+   </div>
+
+    <div class="row">
+      <div class="large-4 large-centered columns">
+        <div style="display:none" id='create-habit-form'>
+          <%= form_tag(habits_path, method: :post, remote: true) do %>
+            <%= label_tag :title, "Habit" %>
+            <%= text_field_tag :title %><br />
+            <%= hidden_field_tag :start_date, Time.now %>
+
+            <%= submit_tag "Create Habit", class: "button round custom-button left-radius" %>
+          <% end %><br/>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div style="display:none" id='create-habit-form'>
-    <%= form_tag(habits_path, method: :post, remote: true) do %>
-      <%= label_tag :title, "Habit" %>
-      <%= text_field_tag :title %><br />
-      <%= hidden_field_tag :start_date, Time.now %>
-
-      <%= submit_tag "Create Habit", class: "custom-button left-radius" %>
-    <% end %><br/>
-  </div>
-    <%= image_tag("rabbit-logo.png", class: "options-logo left", alt: "Habit Rabbit Logo") %>
-    <%= image_tag("rabbit-logo.png", class: "options-logo right", alt: "Habit Rabbit Logo") %>
-</div>
 
 <script src="assets/habit_scripts.js"></script>
 <script src="/assets/masonry.pkgd.min.js"></script>

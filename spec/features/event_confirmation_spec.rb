@@ -17,12 +17,12 @@ describe 'user event confirmation', type: :feature do
     expect(page).to have_content "Thanks! We've updated your streak."      
   end
 
-  context 'clicking yes or no' do
+  context 'clicking yes' do
 
     it 'creates a new habit' do
       events = Habit.last.events.count
       visit '/dashboard' 
-      click_on 'NO'
+      click_on 'YES'
       expect(current_path).to eq dashboard_path 
       updated_events = Habit.last.events.count
       expect(updated_events).to eq (events + 1)
@@ -33,7 +33,6 @@ describe 'user event confirmation', type: :feature do
       expect(page).to have_css('.event-form')
       click_on 'YES'
       expect(current_path).to eq dashboard_path 
-      save_and_open_page
       expect(page).to_not have_css('.event-form')
     end
   end
