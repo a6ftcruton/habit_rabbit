@@ -8,7 +8,7 @@ class HabitsController < ApplicationController
   def create
     respond_to do |format|
       @habit = Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
-      if @habit.save!
+      if @habit.save
         flash[:notice] = "Your Habit was saved successfully"
         format.js {@habit}
       else
