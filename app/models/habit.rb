@@ -10,10 +10,10 @@ class Habit < ActiveRecord::Base
     end
   end
 
-  def streak_days
-    # TODO fix me
-    current_streak_days
-  end
+  # def current_streak_days
+  #   # TODO fix me
+  #   current_current_streak_days
+  # end
 
   def current_streak_days
     streak = Streak.new
@@ -32,11 +32,11 @@ class Habit < ActiveRecord::Base
 
   def streaks
     streaks = []
-    xevents = self.events.by_most_recent
+    events = self.events.by_most_recent
     current_streak = nil
-    total_events = xevents.count
+    total_events = events.count
 
-    xevents.each_with_index do |event, index|
+    events.each_with_index do |event, index|
       if event.completed
         current_streak ||= Streak.new
         current_streak.increment
@@ -48,11 +48,10 @@ class Habit < ActiveRecord::Base
         current_streak = nil
       end
     end
-
     streaks
   end
 
-  def longest_streak_days
+  def longest_current_streak_days
     longest_streak = streaks.max_by { |streak| streak.days }
     if longest_streak
       longest_streak.days

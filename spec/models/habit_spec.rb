@@ -81,12 +81,12 @@ describe 'habit' do
       @habit.events.create(completed: true)
     end
 
-    expect(@habit.longest_streak_days).to eq(5)
+    expect(@habit.longest_current_streak_days).to eq(5)
   end
 
-  describe '#longest_streak_days' do
+  describe '#longest_current_streak_days' do
     it 'returns zero if no events' do
-      expect(@habit.longest_streak_days).to eq(0)
+      expect(@habit.longest_current_streak_days).to eq(0)
     end
   end
 
