@@ -59,10 +59,10 @@ class HabitsController < ApplicationController
     else
       flash[:notice] = "Your Repo is being tracked"
       @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
-      commit_dates = get_commit_dates(params)
-      @habit.create_events(commit_dates.sort)
-      events = @habit.events.map {|d| d.created_at.to_date }.uniq
-      @habit.create_false_events(events.sort)
+      commit_dates = get_commit_dates(params).sort
+      @habit.create_events(commit_dates)
+      events = @habit.events.map {|d| d.created_at.to_date }.uniq.sort
+      @habit.create_false_events(events)
 
       redirect_to dashboard_path
     end
