@@ -17,3 +17,12 @@ $('.new_event > input').click(function() {
 $('.notifications_check').on('change', function() {
   $(this).parents('form:first').submit();
 });
+
+var container = document.querySelector('.habit-list');
+var msnry = new Masonry( container, {
+  columnWidth: ".grid-sizer",
+  itemSelector: '.habit-wrapper'
+});
+imagesLoaded( container, function() {
+  msnry.layout();
+});

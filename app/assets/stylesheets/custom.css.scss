@@ -81,7 +81,9 @@ h3.home-info-header {
 //
 .ajax_flash_messages {
   position: fixed;
-  width: 100%;
+  width: 95%;
+  margin-top:102px;
+  z-index:99999;
 }
 
 #button {
@@ -267,4 +269,31 @@ button#track-repo {
 body > div.large-12.columns.index-container {
   padding:0;
   margin:0;
+}
+// Breakpoint
+@media only screen and (max-width : 960px) {
+  #habit-header {
+    height: 100px;
+    padding-top: 20px;
+    font-size: 2em;
+  } 
+  h2#habit-header {
+  }
+  
+}
+
+@media only screen and (max-width : 700px) {
+  #habit-header {
+    height: 100px;
+    padding-top: 20px;
+    font-size: 0px;
+  } 
+  body > div.large-12.columns.index-container > h5,
+  body > div.large-12.columns.index-container > div.nav-links > h5 {
+    font-size: 0.8em;
+  }
+  .habit-list {
+    margin-left: 10%;
+  }
+  
 }

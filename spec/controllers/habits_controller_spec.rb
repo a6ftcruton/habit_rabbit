@@ -2,13 +2,10 @@ require 'rails_helper'
 
 RSpec.describe HabitsController, :type => :controller do
   describe 'current_user' do
-    before(:each) do
-      @user = User.create(name:'joe', email_address: 'joe@yomama.com', password: 'password', password_confirmation: 'password')
-    end
-
     it 'finds a user when user_id is set' do
-      session[:user_id] = @user.id
-      expect(controller.current_user).to eq(@user)
+      user = create(:user)
+      session[:user_id] = user.id
+      expect(controller.current_user).to eq(user)
     end
 
     it 'returns nil when user_id not present' do

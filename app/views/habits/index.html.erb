@@ -54,7 +54,7 @@
     <div class="row">
       <div class="large-4 large-centered columns">
         <div style="display:none" id='create-habit-form'>
-          <%= form_tag(habits_path, method: :post, remote: true) do %>
+          <%= form_tag(habits_path, method: :post) do %>
             <%= label_tag :title, "Habit" %>
             <%= text_field_tag :title %><br />
             <%= hidden_field_tag :start_date, Time.now %>
@@ -65,18 +65,3 @@
       </div>
     </div>
   </div>
-
-<script src="assets/habit_scripts.js"></script>
-<script src="/assets/masonry.pkgd.min.js"></script>
-<script src="/assets/imagesloaded.pkgd.min.js"></script>
-
-<script>
-  var container = document.querySelector('.habit-list');
-  var msnry = new Masonry( container, {
-    columnWidth: ".grid-sizer",
-    itemSelector: '.habit-wrapper'
-  });
-  imagesLoaded( container, function() {
-    msnry.layout();
-  });
-</script>

@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -34,5 +33,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
   end
-
 end
