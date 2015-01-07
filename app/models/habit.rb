@@ -1,4 +1,4 @@
-class Habit < ActiveRecord::Base
+class Habit < ActiveRecord::Base         # ~> NameError: uninitialized constant ActiveRecord
   validates :name, presence: true
   validates :start_date, presence: true
   belongs_to :user
@@ -102,3 +102,8 @@ class Habit < ActiveRecord::Base
   end
 
 end
+
+# ~> NameError
+# ~> uninitialized constant ActiveRecord
+# ~>
+# ~> /Users/aaronwortham/Documents/Turing/projects/feed_engine/app/models/habit.rb:1:in `<main>'

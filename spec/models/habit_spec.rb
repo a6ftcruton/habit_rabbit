@@ -63,7 +63,7 @@ describe 'habit' do
   end
 
   describe '#current_streak_days' do
-    it 'return zero of no events' do
+    it 'return zero if no events' do
       expect(@habit.current_streak_days).to eq(0)
     end
 
@@ -91,6 +91,14 @@ describe 'habit' do
       @habit.create_false_events(events)
 
       expect(@habit.events.size).to eq(8)
+    end
+  end
+
+  describe '#streaks can have multiple events per day and still only count one towards the streak' do
+    it 'has two events today' do
+      dates = [Time.now, Time.now - 1.hour]
+      @habit.create_events(dates)
+      expect(@habit.streaks.first.days).to eq(1)
     end
   end
 
