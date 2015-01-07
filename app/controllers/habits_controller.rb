@@ -6,15 +6,12 @@ class HabitsController < ApplicationController
   end
 
   def create
-    respond_to do |format|
-      @habit = Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
-      if @habit.save
-        flash[:notice] = "Your Habit was saved successfully"
-        format.js {@habit}
-      else
-        flash[:notice] = "Your habit must have a name"
-        render :create
-      end
+    if Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
+      flash[:notice] = "Your Habit was saved successfully"
+      redirect_to dashboard_path
+    else
+      flash[:notice] = "Your habit must have a name"
+      redirect_to dashboard_path
     end
   end
 
