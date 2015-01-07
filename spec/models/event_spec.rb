@@ -3,10 +3,8 @@ require 'rails_helper'
 describe 'event' do
   before do
     @user = create(:user)
-    @habit = create(:habit)
-    @habit.user_id = @user.id
-    @habit.save
-    @event = Event.create(completed: true, habit_id: @habit.id, created_at: 1.hour.ago)
+    @habit = create(:habit, user_id: @user.id)
+    @event = create(:event, habit_id: @habit.id, created_at: 1.hour.ago, completed: true)
   end
 
   it 'is valid' do
