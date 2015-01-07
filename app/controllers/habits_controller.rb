@@ -47,10 +47,12 @@ class HabitsController < ApplicationController
   end
 
   def track_repo
-    @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
-    if @habit.save
+    if current_user.github_name.nil?
+      flash[:error] = "You must first enter your Github Name on the Settings Page."
+      redirect_to user_path(current_user)
+    elsif @habit.save
       flash[:notice] = "Your Repo is being tracked"
-
+      @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
       commit_dates = get_commit_dates(params)
       @habit.create_events(commit_dates)
       events = @habit.events.map {|d| d.created_at.to_date }.uniq
@@ -58,7 +60,7 @@ class HabitsController < ApplicationController
 
       redirect_to dashboard_path
     else
-      flash[:notice] = "You must enter a repo"
+      flash[:error] = "You must enter a repo"
       render :back
     end
   end

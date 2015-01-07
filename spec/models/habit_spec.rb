@@ -63,7 +63,7 @@ describe 'habit' do
   end
 
   describe '#current_streak_days' do
-    it 'return zero of no events' do
+    it 'return zero if no events' do
       expect(@habit.current_streak_days).to eq(0)
     end
 
