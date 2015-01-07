@@ -3,10 +3,10 @@ require 'twilio-ruby'
 class TwilioText
   include Webhookable
 
-  def self.send_text(habit_id)
-    habit = Habit.find(habit_id)
-    user = User.find(habit.user_id)
-    user_phone_number = user.phone
+  def self.send_text(habit_name, phone)
+    # habit = Habit.find(habit_id)
+    # user = User.find(habit.user_id)
+    # user_phone_number = user.phone
 
     twilio_sid = ENV["TWILIO_SID"]
     twilio_token = ENV["TWILIO_TOKEN"]
@@ -16,8 +16,8 @@ class TwilioText
 
     @twilio_client.account.sms.messages.create(
       from: twilio_phone_number,
-      to: user_phone_number,
-      body: "Did you do your #{habit.name} today? Log it here: www.habitrabbit.org/dashboard"
+      to: phone,
+      body: "Did you do your #{habit_name} today? Log it here: www.habitrabbit.org/dashboard"
     )
   end
 end

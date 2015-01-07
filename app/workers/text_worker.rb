@@ -1,6 +1,6 @@
 class TextWorker
   include Sidekiq::Worker
-  def perform(habit_id)
-    TwilioText.send_text(habit_id)
+  def perform(habit_name, phone)
+    TwilioText.send_text(habit_name, phone)
   end
 end
