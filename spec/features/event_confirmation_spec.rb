@@ -17,8 +17,7 @@ describe 'user event confirmation', type: :feature do
     expect(page).to have_content "Thanks! We've updated your streak."
   end
 
-  context 'clicking yes' do
-
+  describe 'clicking yes' do
     it 'creates a new habit' do
       events = Habit.last.events.count
       visit '/dashboard'
@@ -27,15 +26,5 @@ describe 'user event confirmation', type: :feature do
       updated_events = Habit.last.events.count
       expect(updated_events).to eq (events + 1)
     end
-
-    xit 'user not re-prompted to confirm during same day', js: true do
-      visit '/dashboard'
-      expect(page).to have_css('.event-form')
-      click_on 'YES'
-      expect(current_path).to eq dashboard_path
-      save_and_open_page
-      expect(page).to_not have_css('.event-form')
-    end
   end
-
 end

@@ -11,7 +11,6 @@ class EventsController < ApplicationController
   end
 
   private
-
   def event_params
     params.require(:event).permit(:habit_id, :completed, :repetitions, :created_at, :updated_at )
   end

@@ -26,9 +26,9 @@ class HabitsController < ApplicationController
 
   def update
     datetime = get_datetime(params)
-
     @habit = Habit.find(params[:id])
     @habit.update(notifications: params[:habit][:notifications], name: params[:habit][:name], notification_time: datetime)
+
     if @habit.save
       redirect_to dashboard_path
     else
@@ -63,7 +63,6 @@ class HabitsController < ApplicationController
   end
 
   private
-
   def verify_user
     redirect_to root_path unless current_user
   end
@@ -85,5 +84,4 @@ class HabitsController < ApplicationController
     commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000").body)
     commits.map {|commit| commit['commit']['author']['date'][0..9]}.reverse
   end
-
 end
