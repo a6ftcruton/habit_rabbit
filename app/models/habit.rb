@@ -19,24 +19,28 @@ class Habit < ActiveRecord::Base         # ~> NameError: uninitialized constant 
   end
 
   def streaks
-    events = sorted_events_for_habit
     current_streak = nil
-    total_events = events.count
+    events = sorted_events_for_habit
 
-    streaks = []
-    events.each_with_index do |event, index|
-      if event.completed
-        current_streak ||= Streak.new
-        current_streak.increment
-        if index == total_events - 1
-          streaks << current_streak
-        end
-      else
-        streaks << current_streak if current_streak
-        current_streak = nil
-      end
-    end
-    streaks
+    # events.reduce(Streak.new) do |acc, event|
+    #   until !event.completed
+    #
+    #   end
+
+    #   if event.completed
+    #     current_streak ||= Streak.new
+    #     current_streak.increment
+    #     events.shift
+    #     # if index == total_events - 1
+    #     #   streaks << current_streak
+    #     # end
+    #   else
+    #     acc << current_streak if current_streak
+    #     current_streak = nil
+    #   end
+    #   acc << current_streak if current_streak
+    #   acc
+    # end
   end
 
   def sorted_events_for_habit
