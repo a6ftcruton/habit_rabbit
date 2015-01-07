@@ -44,9 +44,15 @@ class HabitsController < ApplicationController
   end
 
   def track_repo
+    conn = new_faraday_connection
+    test_connection = conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000")
+
     if current_user.github_name.nil?
       flash[:error] = "You must first enter your Github Name on the Settings Page."
       redirect_to user_path(current_user)
+    elsif test_connection.status != 200
+      flash[:error] = "Invalid github repo"
+      redirect_to dashboard_path
     elsif params[:repo].empty?
       flash[:error] = "You must enter a repo"
       redirect_to dashboard_path
@@ -76,12 +82,16 @@ class HabitsController < ApplicationController
   end
 
   def get_commit_dates(params)
-    conn = Faraday.new(:url => 'https://api.github.com') do |faraday|
+    conn = new_faraday_connection
+    commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000").body)
+    commits.map {|commit| commit['commit']['author']['date'][0..9]}.reverse
+  end
+
+  def new_faraday_connection
+    Faraday.new(:url => 'https://api.github.com') do |faraday|
       faraday.request  :url_encoded
       faraday.response :logger
       faraday.adapter  Faraday.default_adapter
     end
-    commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000").body)
-    commits.map {|commit| commit['commit']['author']['date'][0..9]}.reverse
   end
 end
