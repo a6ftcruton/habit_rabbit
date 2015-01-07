@@ -94,14 +94,6 @@ describe 'habit' do
     end
   end
 
-  describe '#streaks can have multiple events per day and still only count one towards the streak' do
-    it 'has two events today' do
-      dates = [Time.now, Time.now - 1.hour]
-      @habit.create_events(dates)
-      expect(@habit.streaks.first.days).to eq(1)
-    end
-  end
-
   def build_streak(length)
     length.times do
       @habit.events.create(completed: true)
