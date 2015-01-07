@@ -10,10 +10,4 @@ class Api::V1::EventsController < ApplicationController
   def show
     respond_with Event.find(params[:id])
   end
-
-  def authenticate
-    authenticate_or_request_with_http_token do |token, options|
-      ApiKey.exists?(token: token)
-    end
-  end
 end
