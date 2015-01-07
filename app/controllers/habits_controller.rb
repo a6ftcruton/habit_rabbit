@@ -50,7 +50,10 @@ class HabitsController < ApplicationController
     if current_user.github_name.nil?
       flash[:error] = "You must first enter your Github Name on the Settings Page."
       redirect_to user_path(current_user)
-    elsif @habit.save
+    elsif params[:repo].empty?
+      flash[:error] = "You must enter a repo"
+      redirect_to dashboard_path
+    else
       flash[:notice] = "Your Repo is being tracked"
       @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
       commit_dates = get_commit_dates(params)
@@ -59,9 +62,6 @@ class HabitsController < ApplicationController
       @habit.create_false_events(events)
 
       redirect_to dashboard_path
-    else
-      flash[:error] = "You must enter a repo"
-      render :back
     end
   end
 
