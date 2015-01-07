@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'event' do
-
   before do
     @user = create(:user)
     @habit = create(:habit)

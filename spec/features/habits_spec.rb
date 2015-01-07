@@ -41,5 +41,4 @@ describe 'habits', type: :feature do
     click_link 'More Information'
     expect(page).to have_content('Tweet My Streak')
   end
-
 end

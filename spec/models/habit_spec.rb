@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'habit' do
-
   before do
     @habit = create(:habit)
   end
@@ -46,7 +45,6 @@ describe 'habit' do
     build_streak(5)
     @habit.events.create(completed: false)
     build_streak(2)
-
     expect(@habit.longest_current_streak_days).to eq(5)
   end
 
