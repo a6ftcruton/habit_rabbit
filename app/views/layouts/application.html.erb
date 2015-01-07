@@ -23,5 +23,6 @@
     </div>
     <%= yield %>
     <%= javascript_include_tag "application" %>
+    <script>$('.flash').delay(1500).fadeOut(800);</script>
   </body>
 </html>
