@@ -70,7 +70,7 @@ class Habit < ActiveRecord::Base
 
     habits.each do |habit|
       commits = JSON.parse(conn.get("/repos/#{habit.name}/commits?author=#{habit.user.github_name}").body)
-      last_commit_date = commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.last
+      last_commit_date = commits.map {|commit| commit['commit']['author']['date'][0..9]}.last
       habit.events.create(completed: true, created_at: last_commit_date)
     end
   end
@@ -81,7 +81,13 @@ class Habit < ActiveRecord::Base
 
   def create_events(commit_dates)
     commit_dates.each do |date|
-      self.events.create(completed: true, created_at: date)
+      existing_event = self.events.where(created_at: date)
+      if !existing_event.empty?
+        existing_event.first.repetitions += 1
+        existing_event.first.save
+      else
+        self.events.create(completed: true, created_at: date)
+      end
     end
   end
 

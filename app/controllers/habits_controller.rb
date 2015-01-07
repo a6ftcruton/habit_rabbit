@@ -23,7 +23,7 @@ class HabitsController < ApplicationController
     @events = @habit.events.pluck(:created_at, :completed)
     @events = @events.each do |event|
       event[0] = event[0].to_i
-      event[1] == true ? event[1] = 1 : event[1] = 0 
+      event[1] == true ? event[1] = 1 : event[1] = 0
     end.to_json.html_safe
   end
 
@@ -84,7 +84,7 @@ class HabitsController < ApplicationController
       faraday.adapter  Faraday.default_adapter
     end
     commits = JSON.parse(conn.get("/repos/#{params[:repo]}/commits?author=#{current_user.github_name}&per_page=100000").body)
-    commits.map {|commit| commit['commit']['author']['date'].gsub('T',' ')}.reverse
+    commits.map {|commit| commit['commit']['author']['date'][0..9]}.reverse
   end
 
 end
