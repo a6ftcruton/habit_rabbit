@@ -17,8 +17,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.phone = params[:phone]
-    current_user.save
+    current_user.update(phone: params[:phone])
     redirect_to '/dashboard'
   end
 
