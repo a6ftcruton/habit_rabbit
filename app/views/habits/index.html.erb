@@ -25,6 +25,7 @@
               <%= link_to "More Information", habit_path(habit) %><br/>
               <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
               Current Streak: <%= habit.current_streak_days %><br/>
+              Longest Streak: <%= habit.longest_current_streak_days %><br/>
             </div>
             <div class="inpos"></div>
           </div>
@@ -40,7 +41,7 @@
     <div class="row">
       <div class="large-4 large-centered columns">
         <div style='display:none' id='track-repo-form' >
-          <%= form_tag(track_repo_path, method: :post, remote: true) do %>
+          <%= form_tag(track_repo_path, method: :post) do %>
             <%= label_tag :repo, "Github Repo (i.e. username/reponame)" %>
             <%= text_field_tag :repo %><br />
             <%= hidden_field_tag :start_date, Time.now %>
