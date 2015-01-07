@@ -13,9 +13,15 @@
       <%= f.label :notifications %>
       <%= f.check_box :notifications, {checked: @habit.notifications} %>
 
-      <%= f.submit 'Save' %><br/>
+      <%= f.submit 'Save', class: "custom-button button round" %><br/>
     <% end %>
-  </div>
+
+    <%= form_tag(user_path(current_user), method: :patch) do %><br/>
+      <%= label_tag :phone, "Phone Number:" %><%= current_user.phone %>
+      <%= text_field_tag :phone %><br />
+
+      <%= submit_tag "Update Phone Number", class: "custom-button button round" %>
+    <% end %>
 
   <div id="button">
     <%= render "shared/tweet" %>

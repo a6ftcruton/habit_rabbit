@@ -16,6 +16,7 @@ class HabitsController < ApplicationController
   end
 
   def show
+    @user = current_user
     @habit = Habit.find(params[:id])
     @events = @habit.events.pluck(:created_at, :completed)
     @events = @events.each do |event|
