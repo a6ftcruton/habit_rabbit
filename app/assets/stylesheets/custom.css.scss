@@ -9,11 +9,13 @@ h6 {
 }
 .title-group {
   position:relative;
+  border-top: 4px solid rgba(53, 59, 121, .05);
+  border-bottom: 4px solid rgba(53, 59, 121, .05);
+  margin: 5%;
 }
-
 .home-logo {
   width: 200px;
-  padding-bottom: 5%; 
+  padding-bottom: 9%; 
 }
 .options {
   //color: #daa96f !important;
@@ -23,15 +25,22 @@ h6 {
 .options-logo {
   width: 100px;
   position: absolute;
-  top: 0;
-  left: 50px;
   display: inline-block;
+}
+.options-logo.left {
+  bottom: 0;
+  left: 50px;
+}
+.options-logo.right {
+  bottom: 0;
+  right: 50px;
 }
 .title-group > h1 {
   display:inline-block;
   color: #353b79;
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 4em;
 }
-
 .homepage {
   min-width: 140px;
   width: 15%;
@@ -56,7 +65,9 @@ a.right-radius {
   color: #353b79 !important;
   background-color: #daa96f !important;
 }
-
+input.tan {
+  margin-bottom: 8px;
+}
 div.home-info {
   text-align: center !important; 
   margin-top: 20%;
@@ -75,6 +86,7 @@ h3.home-info-header {
 
 #button {
   text-align: center;
+  margin-bottom: 5vh; 
 }
 
 #create-habit-form {
@@ -101,28 +113,68 @@ h3.home-info-header {
   color: #468847;
   text-align: left;
 }
-
-#habit-welcome {
-  margin-top: 45px;
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid black;
-}
-
+#habit-welcome,
 #habit-header {
-  margin: 5px;
   text-align: center;
   padding-bottom: 10px;
   border-bottom: 1px solid black;
+  font-size: 4rem;
+  font-weight: 200;
+  font-family: 'Montserrat', sans-serif;
+  color: white !important;
+  background-color: #353b79;
+  border-bottom: 3px solid #daa96f;
+  margin-top: 0;
 }
-
+#habit-header > h2 {
+  color: white; 
+}
+.nav-links {
+  display: block;
+  position: absolute;
+  right:5%;
+  top:30px;
+}
+.welcome {
+  position: absolute;
+  top:38px;
+  left: 5%;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+.logout-link,
+.settings-link {
+  display: inline-block;
+  margin-right: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #daa96f;
+}
+.logout-link > a,
+.settings-link > a, 
+h5.welcome {
+  margin: 0 10px;
+  color: #daa96f !important;
+  font-family: 'Montserrat', sans-serif;
+}
+.custom-button {
+  border-bottom-left-radius: 1000px;
+  border-top-left-radius: 1000px;
+  border-bottom-right-radius: 1000px;
+  border-top-right-radius: 1000px;
+  background-color: #353b79 !important;
+}
 #habit-edit {
   margin: 5px;
   text-align: center;
   padding-top: 20px;
   padding-bottom: 10px;
 }
-
+div.habit-list {
+  padding: 0 2%;
+}
+div.habit-wrapper {
+  margin-top: 5%;
+}
 
 #submit-tag {
   text-align: center;
@@ -156,37 +208,63 @@ h3.home-info-header {
      -moz-border-radius: 5px;
           border-radius: 5px;
 }
-
 .habit-wrapper {
   text-align:center;
   position:relative;
-
 }
-
+.octocat-image {
+  width: 40px;
+}
+.checkmark-image {
+  width: 80px;
+}
 .inpre, .inpos{
   background-color:#fff;
-  height:125px;
+  height:160px;
   width:20px;
-  border-bottom:2px solid black;
-  border-top:2px solid black;
+  border-bottom:4px solid rgba(0, 0, 0, 0.7);
+  border-top:4px solid rgba(0, 0, 0, 0.7);
   float:left;
-
 }
 .inpre{
-  border-left:2px solid black;
+  border-left:4px solid rgba(0, 0, 0, 0.7);
   margin-left:5px;
   margin-right:5px;
   margin-bottom:5px;
+  -webkit-box-shadow: -4px 0px 3px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: -4px 0px 3px 0px rgba(0,0,0,0.75);
+  box-shadow: -4px 0px 3px 0px rgba(0,0,0,0.75);
 }
 .inpos{
-  border-right:2px solid black;
+  border-right:4px solid rgba(0, 0, 0, 0.7);
+  -webkit-box-shadow: 4px 0px 5px -1px rgba(0,0,0,0.75);
+  -moz-box-shadow: 4px 0px 5px -1px rgba(0,0,0,0.75);
+  box-shadow: 4px 0px 5px -1px rgba(0,0,0,0.75);
   clear:right;
 }
 .habit_content{
   font-family:"Arial",sans-serif;
+  margin: 0 30px 10px;
   padding:5px;
   background-color:#fff;
   float:left;
 }
-
+input.custom-button {
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  padding: 10px;
+}
 // end masonry
+#track-repo-form,
+#create-habit-form {
+  text-align: center;
+}
+input.button,
+button#create-custom,
+button#track-repo {
+  font-family: 'Montserrat', sans-serif;
+}
+body > div.large-12.columns.index-container {
+  padding:0;
+  margin:0;
+}

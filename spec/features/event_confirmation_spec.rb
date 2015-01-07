@@ -17,13 +17,13 @@ describe 'user event confirmation', type: :feature do
     expect(page).to have_content "Thanks! We've updated your streak."
   end
 
-  context 'clicking yes or no' do
+  context 'clicking yes' do
 
     it 'creates a new habit' do
       events = Habit.last.events.count
       visit '/dashboard'
-      click_on 'NO'
       expect(current_path).to eq dashboard_path
+      click_link_or_button 'YES'
       updated_events = Habit.last.events.count
       expect(updated_events).to eq (events + 1)
     end

@@ -1,25 +1,49 @@
-<svg class="habit-show-graph">
-</svg>
+<h2 id='habit-welcome'><%= @habit.name %> habit</h2>
 
-<h2 id='habit-welcome'> Details about your <%= "#{@habit.name}" %> habit</h2>
+<div class="row">
+  <div id="habit-edit">
+    <%= form_for @habit do |f| %>
+      <%= f.label "Edit this habit's name" %>
+      <%= f.text_field :name %>
+      <%= f.label "Edit this habit's notification time" %>
+      <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true} %>
+      <%= f.label :notifications %>
+      <%= f.check_box :notifications, {checked: @habit.notifications} %>
 
-<div id="habit-edit">
-  <%= form_for @habit do |f| %>
-    <%= f.label "Edit this habit's name" %>
-    <%= f.text_field :name %>
-    <%= f.label "Edit this habit's notification time" %>
-    <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true} %>
-    <%= f.label :notifications %>
-    <%= f.check_box :notifications, {checked: @habit.notifications} %>
+      <%= f.submit 'Save' %><br/>
+    <% end %>
+  </div>
 
-    <%= f.submit 'Save' %><br/>
-  <% end %>
+  <div id="button">
+    <%= render "shared/tweet" %>
+  </div>
+
+  <div id="button">
+    <%= link_to "Back", dashboard_path %>
+  </div>
+  <div>
+    <div class="chart large-8 large-centered colummns"></div>
+  </div>
 </div>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="/assets/d3.min.js"></script>
+<script src="/assets/d3.layout.min.js"></script>
+<script src="/assets/rickshaw.min.js"></script><script>
 
-<div id="button">
-  <%= render "shared/tweet" %>
-</div>
+var events = <%= @events %>
 
-<div id="button">
-  <%= link_to "Back", dashboard_path %>
-</div>
+var data = events.map(function (pt) { return { x: pt[0], y: pt[1] }; });
+
+var graph = new Rickshaw.Graph( {
+        element: document.querySelector(".chart"),
+        width: 580,
+        height: 300,
+        renderer: 'line',
+        series: [ {
+                color: 'steelblue',
+                data: data
+        } ]
+} );
+
+graph.render();
+</script>

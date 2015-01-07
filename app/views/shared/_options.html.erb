@@ -1,8 +1,5 @@
 <div class="options">
-  <h3 id='habit-welcome'>Welcome, 
-    <%= current_user.name %> | 
+  <h3 id='habit-welcome'>Welcome,<%= current_user.name %><%= image_tag("rabbit-logo.png", class: "options-logo", alt: "Habit Rabbit Logo") %></h3>
     <%= link_to "Settings", user_path(current_user.id) %> |
     <%= link_to "Log Out", signout_path %><br/>
-    <%= image_tag("rabbit-logo.png", class: "options-logo", alt: "Habit Rabbit Logo") %>
-  </h3>
 </div>
