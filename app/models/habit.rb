@@ -56,8 +56,7 @@ class Habit < ActiveRecord::Base
     t = Time.now
     habits = Habit.where(notifications: true).where(notification_time: (t-t.sec-t.min%15*60).strftime("%Y-%m-%d %H:%M:%S"))
     habits.each do |habit|
-      user = User.find(habit.user_id)
-      TextWorker.perform_async(habit.name, user.phone)
+      TextWorker.perform_async(habit.name, habit.user.phone)
     end
   end
 
