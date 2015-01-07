@@ -81,7 +81,9 @@ h3.home-info-header {
 //
 .ajax_flash_messages {
   position: fixed;
-  width: 100%;
+  padding-top:102px;
+  width: 95%;
+  z-index:99999;
 }
 
 #button {

@@ -12,17 +12,18 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <div class='ajax_flash_messages'>
-    <% flash.each do |type, message| %>
-    <div class="flash" id="<%= type %>">
-      <%= message %>
-    </div>
-    <% end %>
-  </div>
-  <body>
 
+  <body>
+    <div class='ajax_flash_messages'>
+      <% flash.each do |type, message| %>
+      <div class="flash" id="<%= type %>">
+        <%= message %>
+      </div>
+      <% end %>
+    </div>
     <%= yield %>
     <%= javascript_include_tag "application" %>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script>$('.flash').delay(2000).fadeOut(800);</script>
   </body>
 </html>
