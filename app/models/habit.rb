@@ -11,7 +11,7 @@ class Habit < ActiveRecord::Base
   end
 
   def current_streak_days
-    unless streaks.empty? || !sorted_events_for_habit.last.completed
+    unless streaks.empty? || !events.by_most_recent.first.completed
       streaks.first.days
     else
       0
