@@ -1,4 +1,4 @@
-class Habit < ActiveRecord::Base         
+class Habit < ActiveRecord::Base
   validates :name, presence: true
   validates :start_date, presence: true
   belongs_to :user
@@ -81,7 +81,7 @@ class Habit < ActiveRecord::Base
   end
 
   def create_events(commit_dates)
-    commit_dates.each do |date|
+    commit_dates.sort.each do |date|
       existing_event = self.events.where(created_at: date)
       if !existing_event.empty? && !existing_event.nil?
         existing_event.first.repetitions += 1
