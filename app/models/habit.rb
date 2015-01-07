@@ -1,4 +1,4 @@
-class Habit < ActiveRecord::Base         # ~> NameError: uninitialized constant ActiveRecord
+class Habit < ActiveRecord::Base         
   validates :name, presence: true
   validates :start_date, presence: true
   belongs_to :user
@@ -107,5 +107,4 @@ class Habit < ActiveRecord::Base         # ~> NameError: uninitialized constant 
   def last_24_hours?
     self.events.last.created_at < Date.today - 1.day
   end
-
 end

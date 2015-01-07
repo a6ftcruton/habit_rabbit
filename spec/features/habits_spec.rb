@@ -5,13 +5,13 @@ describe 'habits', type: :feature do
 
   before do
     @user = create(:user)
-    @user.habits.create(name: 'pushups', start_date: Time.now)
+    @habit = create(:habit, user_id: @user.id)
     page.set_rack_session(user_id: @user.id)
     visit dashboard_path
   end
 
   it 'can delete a habit' do
-    expect(page).to have_content('pushups')
+    expect(page).to have_content(@habit.name)
     click_link 'Delete Habit'
     expect(page).to_not have_content('pushups')
   end
@@ -25,21 +25,20 @@ describe 'habits', type: :feature do
 
   it 'can go to a show page for the habit' do
     click_link 'More Information'
-    expect(page).to have_content('pushups habit')
+    expect(page).to have_content("#{@habit.name} habit")
   end
 
   it 'saves habits for the user' do
-    expect(page).to have_content 'pushups'
+    expect(page).to have_content @habit.name
     visit signout_path
     expect(current_path).to eq root_path
     sign_in_with_twitter
-    expect(page).to have_content 'pushups'
+    expect(page).to have_content @habit.name
   end
 
   it 'can tweet a habit' do
-    expect(page).to have_content('pushups')
+    expect(page).to have_content(@habit.name)
     click_link 'More Information'
     expect(page).to have_content('Tweet My Streak')
   end
-
 end

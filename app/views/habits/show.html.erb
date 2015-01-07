@@ -1,5 +1,8 @@
-<h2 id='habit-welcome'><%= @habit.name %> habit</h2>
-
+<h2 id='habit-welcome'><%= @habit.name %> habit
+<% if @habit.github_repo %>
+  <%= image_tag("Octocat.png", class: "octocat-image") %>
+<% end %>
+</h2>
 <div class="row">
   <div id="habit-edit">
     <%= form_for @habit do |f| %>
