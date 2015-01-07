@@ -82,7 +82,7 @@ class Habit < ActiveRecord::Base         # ~> NameError: uninitialized constant 
   def create_events(commit_dates)
     commit_dates.each do |date|
       existing_event = self.events.where(created_at: date)
-      if !existing_event.empty?
+      if !existing_event.empty? && !existing_event.nil?
         existing_event.first.repetitions += 1
         existing_event.first.save
       else
