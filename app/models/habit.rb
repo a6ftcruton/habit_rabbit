@@ -1,50 +1,25 @@
-class Habit < ActiveRecord::Base         
+class Habit < ActiveRecord::Base
   validates :name, presence: true
   validates :start_date, presence: true
   belongs_to :user
   has_many :events
 
-  def user_response?
-    if self.events.empty? || self.last_24_hours?
-      Event.create(completed: false, habit_id: self.id)
-    end
-  end
-
-  def current_streak_days
-    unless streaks.empty? || !events.by_most_recent.first.completed
-      streaks.first.days
-    else
-      0
-    end
-  end
-
   def streaks
-    current_streak = nil
-    events = sorted_events_for_habit
-
-    # events.reduce(Streak.new) do |acc, event|
-    #   until !event.completed
-    #
-    #   end
-
-    #   if event.completed
-    #     current_streak ||= Streak.new
-    #     current_streak.increment
-    #     events.shift
-    #     # if index == total_events - 1
-    #     #   streaks << current_streak
-    #     # end
-    #   else
-    #     acc << current_streak if current_streak
-    #     current_streak = nil
-    #   end
-    #   acc << current_streak if current_streak
-    #   acc
-    # end
+    if streaks_collection.empty? && !events.empty?
+      create_streaks_from_events
+    end
+    streaks_collection
   end
 
-  def sorted_events_for_habit
-    events.by_most_recent
+  def create_streaks_from_events
+    events.each do |event|
+      if event.completed?
+        last_streak.add_event(event)
+      else
+        add_new_streak
+      end
+    end
+    reject_empty_streaks
   end
 
   def longest_current_streak_days
@@ -54,6 +29,43 @@ class Habit < ActiveRecord::Base
     else
       0
     end
+  end
+
+  def add_new_streak
+    streaks_collection << Streak.new
+  end
+
+  def streaks_collection
+    @streaks_collection ||= []
+  end
+
+  def reject_empty_streaks
+    streaks_collection.reject!(&:empty?)
+  end
+
+  def last_streak
+    if streaks_collection.empty?
+      streaks_collection << Streak.new
+    end
+    streaks_collection.last
+  end
+
+  def user_response?
+    if self.events.empty? || self.last_24_hours?
+      Event.create(completed: false, habit_id: self.id)
+    end
+  end
+
+  def current_streak_days
+    unless streaks.empty? || !events.by_most_recent.first.completed
+      streaks.first.days.count
+    else
+      0
+    end
+  end
+
+  def sorted_events_for_habit
+    events.by_most_recent
   end
 
   def self.notify?
