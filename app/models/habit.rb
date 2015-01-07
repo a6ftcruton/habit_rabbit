@@ -108,8 +108,3 @@ class Habit < ActiveRecord::Base         # ~> NameError: uninitialized constant 
   end
 
 end
-
-# ~> NameError
-# ~> uninitialized constant ActiveRecord
-# ~>
-# ~> /Users/aaronwortham/Documents/Turing/projects/feed_engine/app/models/habit.rb:1:in `<main>'
