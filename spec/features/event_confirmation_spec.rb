@@ -12,7 +12,7 @@ describe 'user event confirmation', type: :feature do
   it 'has confirmation option for each habit' do
     visit '/dashboard'
     expect(page).to have_content @habit.name
-    click_on 'YES'
+    click_on 'Mark As Completed'
     expect(current_path).to eq dashboard_path
     expect(page).to have_content "Thanks! We've updated your streak."
   end
@@ -22,7 +22,7 @@ describe 'user event confirmation', type: :feature do
       events = Habit.last.events.count
       visit '/dashboard'
       expect(current_path).to eq dashboard_path
-      click_link_or_button 'YES'
+      click_link_or_button 'Mark As Completed'
       updated_events = Habit.last.events.count
       expect(updated_events).to eq (events + 1)
     end

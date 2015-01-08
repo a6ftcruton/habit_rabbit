@@ -1,8 +1,8 @@
 #  HABIT SEEDS
 #-----------------------
-Habit.create!(name: "first exercise", user_id: "1", start_date: "2014-12-1 22:40:48")
-Habit.create!(name: "second exercise", user_id: "1", start_date: "2014-11-1 22:40:48")
-Habit.create!(name: "I will read things", user_id: "1", start_date: "2014-10-1 22:40:48")
+Habit.create!(name: "Exercise So Hard", user_id: "1", start_date: "2014-12-1 22:40:48")
+Habit.create!(name: "Dance Pants", user_id: "1", start_date: "2014-11-1 22:40:48")
+Habit.create!(name: "Read Every Book", user_id: "1", start_date: "2014-10-1 22:40:48")
 
 puts "Planted Habit seeds"
 
