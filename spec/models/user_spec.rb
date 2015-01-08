@@ -17,10 +17,10 @@ describe "user" do
       expect(user2).to_not be_valid
     end
 
-    it "requires password and matching confirmation" do
-      expect(User.new(:name => "hi", :email_address => "hi")).to_not be_valid
-      expect(User.new(:name => "hi", :email_address => "hi", :password => "wat", :password_confirmation => "sdfasfsadf")).to_not be_valid
-    end
+    # it "requires password and matching confirmation" do
+    #   expect(User.new(:name => "hi", :email_address => "hi")).to_not be_valid
+    #   expect(User.new(:name => "hi", :email_address => "hi", :password => "wat", :password_confirmation => "sdfasfsadf")).to_not be_valid
+    # end
   end
 
   describe ".from_omniauth" do
