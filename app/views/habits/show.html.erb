@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h2 id='habit-welcome'> Details about your <%= "#{@habit.name}" %> habit</h2>
 
 <div id="habit-edit" class="large-12 columns">
@@ -13,13 +12,16 @@
     <%= f.check_box :notifications, {checked: @habit.notifications} %><br/>
   <% end %>
 
+</div>
+
+  <div class="phone-form large-2 large-centered columns">
     <%= form_tag(user_path(current_user), method: :patch) do %><br/>
       <%= label_tag :phone, "Phone Number:" %><%= current_user.phone %>
       <%= text_field_tag :phone %><br />
 
       <%= submit_tag "Update Phone Number", class: "custom-button button round" %>
     <% end %>
-</div>
+  </div>
 
 <div id="button">
   <%= link_to "Delete Habit", habit_path(@habit), method: 'delete', class: "custom-button button round",  data: {confirm: "Are you sure?"} %><br/>

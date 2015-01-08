@@ -305,6 +305,18 @@ div.rickshaw_container > div {
   margin: 0 auto;
   padding: 5% 0;
 }
+.habit-edit {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.phone-form {
+  text-align: center;
+}
+div#habit-edit {
+
+}
+label[for=habit_notifications] {
+  display: inline;
+}
 // Breakpoint
 @media only screen and (max-width : 960px) {
   #habit-header {
