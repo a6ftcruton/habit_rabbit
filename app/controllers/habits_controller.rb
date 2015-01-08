@@ -60,7 +60,7 @@ class HabitsController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:notice] = "Your Repo is being tracked"
-      create_github_habit(params)
+      create_github_  habit(params)
 
       redirect_to dashboard_path
     end
