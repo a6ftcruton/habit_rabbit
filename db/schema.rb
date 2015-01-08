@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102184055) do
+ActiveRecord::Schema.define(version: 20150108004817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150102184055) do
     t.string   "github_name"
     t.string   "phone"
     t.string   "password_digest"
+    t.string   "time_zone",       default: "UTC"
   end
 
 end
