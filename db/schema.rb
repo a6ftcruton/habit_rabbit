@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150102184055) do
 
   create_table "events", force: true do |t|
     t.boolean  "completed"
-    t.integer  "repetitions"
+    t.integer  "repetitions", default: 1
     t.integer  "habit_id"
     t.datetime "created_at"
     t.datetime "updated_at"

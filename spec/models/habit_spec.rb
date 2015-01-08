@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe 'habit' do
-
   before do
     @habit = create(:habit)
   end
@@ -46,7 +45,6 @@ describe 'habit' do
     build_streak(5)
     @habit.events.create(completed: false)
     build_streak(2)
-
     expect(@habit.longest_current_streak_days).to eq(5)
   end
 
@@ -63,13 +61,13 @@ describe 'habit' do
   end
 
   describe '#current_streak_days' do
-    it 'return zero of no events' do
+    it 'return zero if no events' do
       expect(@habit.current_streak_days).to eq(0)
     end
 
     it 'returns zero if most recent event is false' do
-      @habit.events.create(completed: true, created_at: '2015-01-02 19:49:16Z')
-      @habit.events.create(completed: false, created_at: '2015-01-05 19:49:16Z')
+      @habit.events.create(completed: true, created_at: '2015-01-02 00:00:00')
+      @habit.events.create(completed: false, created_at: '2015-01-05 00:00:00')
       expect(@habit.current_streak_days).to eq(0)
     end
   end
@@ -80,6 +78,13 @@ describe 'habit' do
       @habit.create_events(dates)
 
       expect(@habit.events.size).to eq(5)
+    end
+
+    it 'can adds repetitions if already has an event for that date' do
+      dates = ['2015-01-01 00:00:00Z', '2015-01-01 00:00:00Z', '2015-01-04 00:00:00Z', '2015-01-05 00:00:00Z', '2015-01-01 00:00:00Z']
+      @habit.create_events(dates)
+
+      expect(@habit.events.first.repetitions).to eq(3)
     end
   end
 

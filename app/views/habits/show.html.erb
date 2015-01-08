@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h2 id='habit-welcome'> Details about your <%= "#{@habit.name}" %> habit</h2>
 
 <div id="habit-edit" class="large-12 columns">
@@ -11,6 +12,13 @@
     <%= f.label :notifications %>
     <%= f.check_box :notifications, {checked: @habit.notifications} %><br/>
   <% end %>
+
+    <%= form_tag(user_path(current_user), method: :patch) do %><br/>
+      <%= label_tag :phone, "Phone Number:" %><%= current_user.phone %>
+      <%= text_field_tag :phone %><br />
+
+      <%= submit_tag "Update Phone Number", class: "custom-button button round" %>
+    <% end %>
 </div>
 
 <div id="button">
@@ -19,8 +27,9 @@
 
 <div id="button">
   <%= link_to "Back", dashboard_path %>
-</div><div class="rickshaw_container">
-  <h3><%= "#{@habit.name.capitalize}" + " Progress" %></h3>
+</div>
+  <div class="rickshaw_container">
+    <h3><%= "#{@habit.name.capitalize}" + " Progress" %></h3>
   <div class="chart large-8 large-centered colummns"></div>
 </div>
 

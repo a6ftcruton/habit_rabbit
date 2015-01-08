@@ -19,8 +19,6 @@ Habit.create!(name: "first exercise", user_id: "1", start_date: "2014-12-1 22:40
 Habit.create!(name: "second exercise", user_id: "1", start_date: "2014-11-1 22:40:48") 
 Habit.create!(name: "I will read things", user_id: "1", start_date: "2014-10-1 22:40:48") 
 
-#Habit.create!(name: "Do Some Push Ups", user_id: "2", start_date: "2014-12-1 22:40:48")  # Habit 4 matches auth user: testing
-
 puts "Planted Habit seeds"
 
 

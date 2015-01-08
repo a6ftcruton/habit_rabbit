@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe "user" do
-
   describe "non-twitter user creation" do
     it 'can create a user with a name and email and password and confirmation' do
       user = User.new(name: 'joe',
@@ -24,7 +23,6 @@ describe "user" do
     end
   end
 
-
   describe ".from_omniauth" do
     it "creates a user from an omniauth auth hash" do
       auth = OmniAuth::AuthHash.new(
@@ -46,10 +44,5 @@ describe "user" do
       u.uid = nil
       expect(u.is_twitter?).to eq(false)
     end
-  end
-
-  it 'can have a phone number' do
-    user = User.new(name: 'joe')
-    # expect
   end
 end

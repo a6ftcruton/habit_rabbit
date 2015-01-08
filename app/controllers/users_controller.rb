@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
   end
 
   def create
@@ -18,8 +17,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.phone = params[:phone]
-    current_user.save
+    current_user.update(phone: params[:phone])
     redirect_to '/dashboard'
   end
 
@@ -34,5 +32,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
   end
-
 end

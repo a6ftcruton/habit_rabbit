@@ -14,6 +14,10 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
+//= require masonry.pkgd.min
+//= require imagesloaded.pkgd.min
+//= require d3.min
+//= require rickshaw.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

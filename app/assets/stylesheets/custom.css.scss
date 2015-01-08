@@ -2,8 +2,8 @@
 h1,
 h2,
 h3,
-h4, 
-h5, 
+h4,
+h5,
 h6 {
   color: #353b79 !important;
 }
@@ -15,7 +15,7 @@ h6 {
 }
 .home-logo {
   width: 200px;
-  padding-bottom: 9%; 
+  padding-bottom: 9%;
 }
 .options {
   //color: #daa96f !important;
@@ -72,7 +72,7 @@ input.tan {
   margin-bottom: 8px;
 }
 div.home-info {
-  text-align: center !important; 
+  text-align: center !important;
   margin-top: 20%;
   margin-bottom: 20%;
   padding: 0 5%;
@@ -98,12 +98,14 @@ input#habit_name {
 //
 .ajax_flash_messages {
   position: fixed;
-  width: 100%;
+  width: 95%;
+  margin-top:102px;
+  z-index:99999;
 }
 
 #button {
   text-align: center;
-  margin-bottom: 5vh; 
+  margin-bottom: 5vh;
 }
 
 #create-habit-form {
@@ -144,7 +146,7 @@ input#habit_name {
   margin-top: 0;
 }
 #habit-header > h2 {
-  color: white; 
+  color: white;
 }
 .nav-links {
   display: block;
@@ -167,7 +169,7 @@ input#habit_name {
   border-bottom: 1px solid #daa96f;
 }
 .logout-link > a,
-.settings-link > a, 
+.settings-link > a,
 h5.welcome {
   margin: 0 10px;
   color: #daa96f !important;
@@ -240,7 +242,7 @@ div.habit-wrapper {
 }
 .inpre, .inpos{
   background-color:#fff;
-  height:160px;
+  height:190px;
   width:20px;
   border-bottom:4px solid rgba(0, 0, 0, 0.7);
   border-top:4px solid rgba(0, 0, 0, 0.7);

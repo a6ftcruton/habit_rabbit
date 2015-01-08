@@ -28,11 +28,13 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content 'push ups'
   end
 
-  it 'can receive a tweet', js: true do
-    skip
+  it 'cannot create a habit without a name', js: true do
     visit '/dashboard'
+    expect(page).to_not have_content 'push ups'
     click_on('Create Custom Habit')
-    expect(page).to have_css('#manage-habit-form')
+    page.fill_in('Habit', with: '')
+    click_on('Create Habit')
+    expect(page).to have_content "Your habit must have a name"
   end
 
   it 'can add notification to a habit', js: true do
@@ -46,12 +48,12 @@ describe 'authenticated user', type: :feature do
     expect(page).to have_content('push ups')
     expect(user.habits.first.notifications).to be_falsey
     within('.habit_content') do
-      click_on "More Information" 
+      click_on "More Information"
     end
+
     page.find('#habit_notifications').click
     click_on "Save"
-    expect(current_path).to eq dashboard_path 
+    expect(current_path).to eq dashboard_path
     expect(user.habits.first.notifications).to be_truthy
   end
-
 end
