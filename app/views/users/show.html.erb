@@ -20,8 +20,8 @@
       <%= form_tag(user_path(current_user), method: :patch) do %><br/>
         <%= label_tag :phone, "Phone Number:" %><%= current_user.phone %>
         <%= text_field_tag :phone %><br />
-        <%= label_tag :time_zone, "Time Zone" %>
-        <%= time_zone_select(:time_zone, ActiveSupport::TimeZone.us_zones) %>
+        <%= label_tag :time_zone, "Time Zone (example MST): " %><%= current_user.time_zone %>
+        <%= text_field_tag :time_zone %>
 
         <%= submit_tag "Create", class: "custom-button button round" %>
       <% end %>

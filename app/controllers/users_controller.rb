@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update(phone: params[:phone])
-    redirect_to '/dashboard'
+    current_user.update(phone: params[:phone], time_zone: params[:time_zone])
+    redirect_to dashboard_path
   end
 
   def add_github
