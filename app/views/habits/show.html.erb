@@ -1,40 +1,40 @@
-<h2 id='habit-welcome'><%= @habit.name %> habit
-<% if @habit.github_repo %>
-  <%= image_tag("Octocat.png", class: "octocat-image") %>
-<% end %>
-</h2>
-<div class="row">
-  <div id="habit-edit">
-    <%= form_for @habit do |f| %>
-      <%= f.label "Edit this habit's name" %>
-      <%= f.text_field :name %>
-      <%= f.label "Edit this habit's notification time" %>
-      <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true} %>
-      <%= f.label :notifications %>
-      <%= f.check_box :notifications, {checked: @habit.notifications} %>
+<h2 id='habit-welcome'> Details about your <%= "#{@habit.name}" %> habit</h2>
 
-      <%= f.submit 'Save', class: "custom-button button round" %><br/>
-    <% end %>
+<div id="habit-edit" class="large-12 columns">
+  <%= form_for @habit do |f| %>
+    <%= f.label "Edit this habit's name" %>
+    <%= f.text_field :name %>
+    <%= f.label "Edit this habit's notification time" %>
+    <%= f.time_select 'notification_time', {minute_step: 15, :ampm => true }, class: "small-3 columns" %>
+    <%= f.submit 'Save', class: "custom-button button round large-5 columns right" %><br/>
+    <div></div>
+    <%= f.label :notifications %>
+    <%= f.check_box :notifications, {checked: @habit.notifications} %><br/>
+  <% end %>
 
+</div>
+
+  <div class="phone-form large-2 large-centered columns">
     <%= form_tag(user_path(current_user), method: :patch) do %><br/>
       <%= label_tag :phone, "Phone Number:" %><%= current_user.phone %>
       <%= text_field_tag :phone %><br />
 
       <%= submit_tag "Update Phone Number", class: "custom-button button round" %>
     <% end %>
-
-  <div id="button">
-    <%= render "shared/tweet" %>
   </div>
 
-  <div id="button">
-    <%= link_to "Back", dashboard_path %>
-  </div>
-  <div>
-    <div class="chart large-8 large-centered colummns"></div>
-  </div>
+<div id="button">
+  <%= link_to "Delete Habit", habit_path(@habit), method: 'delete', class: "custom-button button round",  data: {confirm: "Are you sure?"} %><br/>
 </div>
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<div id="button">
+  <%= link_to "Back", dashboard_path %>
+</div>
+  <div class="rickshaw_container">
+    <h3><%= "#{@habit.name.capitalize}" + " Progress" %></h3>
+  <div class="chart large-8 large-centered colummns"></div>
+</div>
+
 <script src="/assets/d3.min.js"></script>
 <script src="/assets/d3.layout.min.js"></script>
 <script src="/assets/rickshaw.min.js"></script><script>
@@ -47,12 +47,26 @@ var graph = new Rickshaw.Graph( {
         element: document.querySelector(".chart"),
         width: 580,
         height: 300,
-        renderer: 'line',
+        min: -0.2,
+        interpolation: 'linear',
         series: [ {
-                color: 'steelblue',
-                data: data
+                name: "habit",
+                data: data,
+                color: '#daa96f'
         } ]
-} );
+});
 
+var xAxis = new Rickshaw.Graph.Axis.Time({
+    graph: graph,
+});
+
+var yAxis = new Rickshaw.Graph.Axis.Y({
+    graph: graph,
+    element: document.getElementById('y_axis')
+});
+
+xAxis.render();
+yAxis.render();
 graph.render();
+
 </script>

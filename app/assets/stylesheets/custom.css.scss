@@ -48,6 +48,9 @@ h6 {
   height: 100%;
   background-color: #353b79 !important;
 }
+body > div.main_header {
+  padding-top: 0;  
+}
 .left-radius,
 a.left-radius {
   border-bottom-left-radius: 1000px;
@@ -77,6 +80,20 @@ div.home-info {
 
 h3.home-info-header {
   color: #353b79 !important;
+}
+.edit_habit > label {
+  font-size: 1.3em;
+  padding-top: 40px;
+}
+input#habit_notifications {
+  font-size: 100em; 
+}
+input#habit_name {
+  margin-bottom:0;
+}
+.edit_habit > label:nth-child(12) {
+  padding-top: 40px;
+  display: inline;
 }
 //
 .ajax_flash_messages {
@@ -158,6 +175,8 @@ h5.welcome {
   color: #daa96f !important;
   font-family: 'Montserrat', sans-serif;
 }
+.twitter {
+}
 .custom-button {
   border-bottom-left-radius: 1000px;
   border-top-left-radius: 1000px;
@@ -167,8 +186,9 @@ h5.welcome {
 }
 #habit-edit {
   margin: 5px;
-  text-align: center;
+  text-align: left;
   padding-top: 20px;
+  padding: 20px 30% 10px;
   padding-bottom: 10px;
 }
 div.habit-list {
@@ -270,6 +290,33 @@ body > div.large-12.columns.index-container {
   padding:0;
   margin:0;
 }
+// Rickshaw
+div.rickshaw_container {
+  padding: 0 20% 5%;
+}
+div.rickshaw_container > div {
+  width: 100%;
+  padding: 5% 10%;
+  border: 5px solid rgba(53, 59, 121, 0.3);
+  border-radius: 10px;
+}
+.rickshaw_graph > svg {
+  display: block; 
+  margin: 0 auto;
+  padding: 5% 0;
+}
+.habit-edit {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.phone-form {
+  text-align: center;
+}
+div#habit-edit {
+
+}
+label[for=habit_notifications] {
+  display: inline;
+}
 // Breakpoint
 @media only screen and (max-width : 960px) {
   #habit-header {
@@ -297,3 +344,4 @@ body > div.large-12.columns.index-container {
   }
   
 }
+
