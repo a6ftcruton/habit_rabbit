@@ -1,11 +1,19 @@
 class Streak
-  attr_accessor :days
+  attr_reader :days
 
   def initialize
-    @days = 0
+    @days = []
   end
 
-  def increment
-    @days += 1
+  def add_event(event)
+    @days << event
+  end
+
+  def count
+    @days.count
+  end
+
+  def empty?
+    count == 0
   end
 end

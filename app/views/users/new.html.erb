@@ -1,19 +1,24 @@
 <h3 id='habit-welcome'>Create an Account to Start Tracking Your Habits</h3>
 
-<div id="user-welcome">
-  <%= form_for @user do |f| %>
-  <%= f.label 'Name' %>
-  <%= f.text_field :name %>
-  <%= f.label 'Email' %>
-  <%= f.text_field :email_address %>
-  <%= f.label 'Password' %>
-  <%= f.password_field :password %>
-  <%= f.label 'Password Confirmation' %>
-  <%= f.password_field :password_confirmation %>
-  <%= f.submit value: 'Create My Account'%>
-  <% end %>
+<div class="row">
+  <div class="large-4 large-centered columns">
+    <div id="user-welcome">
+      <%= form_for @user do |f| %>
+      <%= f.label 'Name' %>
+      <%= f.text_field :name %>
+      <%= f.label 'Email' %>
+      <%= f.text_field :email_address %>
+      <%= f.label 'Password' %>
+      <%= f.password_field :password %>
+      <%= f.label 'Password Confirmation' %>
+      <%= f.password_field :password_confirmation %>
+      <%= f.submit value: 'Create My Account', class: "custom-button button round"%>
+      <% end %>
+      <div id="back-button large-4 large-centered columns">
+        <%= link_to "Back", dashboard_path %>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div id="back-button">
-  <%= link_to "Back", dashboard_path %>
-</div>
+

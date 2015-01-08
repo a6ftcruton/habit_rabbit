@@ -1,23 +1,26 @@
-<%= @tweet %>
+<div>
+  <%= @tweet %>
 
-<a class="btn btn-lg btn-default twitter popup" href="http://twitter.com/share?text=">Tweet My Streak</a>
+  <a class="twitter popup" href="http://twitter.com/share?text=">Tweet My Streak</a>
 
-<script>
-$('.popup').click(function(event) {
-  var width  = 575,
-  height = 400,
-  left   = ($(window).width()  - width)  / 2,
-  top    = ($(window).height() - height) / 2,
-  url    = "https://twitter.com/intent/tweet?text=Check out my <%= @habit.name %> streak. I have been at it for <%= @habit.current_streak_days %> <%= 'day'.pluralize(@habit.current_streak_days) %>. // brought to you by Habit Rabbit from @turingschool "
-  opts   = 'status=1' +
-  ',width='  + width  +
-  ',height=' + height +
-  ',top='    + top    +
-  ',left='   + left;
+  <script>
+  $('.popup').click(function(event) {
+    var width  = 575,
+    height = 400,
+    left   = ($(window).width()  - width)  / 2,
+    top    = ($(window).height() - height) / 2,
 
-  window.open(url ,'twitter', opts);
+    url    = "https://twitter.com/intent/tweet?text=Check out my <%= habit.name %> streak. I have been at it for <%= habit.current_streak_days %> <%= 'day'.pluralize(habit.current_streak_days) %>. // brought to you by Habit Rabbit from @turingschool "
 
-  return false;
-});
-</script>
+    opts   = 'status=1' +
+    ',width='  + width  +
+    ',height=' + height +
+    ',top='    + top    +
+    ',left='   + left;
+
+    window.open(url ,'twitter', opts);
+
+    return false;
+  });
+  </script>
 </div>
