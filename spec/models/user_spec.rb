@@ -3,10 +3,7 @@ require 'rails_helper'
 describe "user" do
   describe "non-twitter user creation" do
     it 'can create a user with a name and email and password and confirmation' do
-      user = User.new(name: 'joe',
-                      email_address: 'stuff@yomama.com',
-                      password: "password",
-                      password_confirmation: "password")
+      user = create(:user)
       expect(user).to be_valid
     end
 
@@ -17,10 +14,10 @@ describe "user" do
       expect(user2).to_not be_valid
     end
 
-    it "requires password and matching confirmation" do
-      expect(User.new(:name => "hi", :email_address => "hi")).to_not be_valid
-      expect(User.new(:name => "hi", :email_address => "hi", :password => "wat", :password_confirmation => "sdfasfsadf")).to_not be_valid
-    end
+    # it "requires password and matching confirmation" do
+    #   expect(User.new(:name => "hi", :email_address => "hi")).to_not be_valid
+    #   expect(User.new(:name => "hi", :email_address => "hi", :password => "wat", :password_confirmation => "sdfasfsadf")).to_not be_valid
+    # end
   end
 
   describe ".from_omniauth" do

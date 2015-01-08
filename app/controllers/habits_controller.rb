@@ -1,5 +1,7 @@
 class HabitsController < ApplicationController
   before_action :verify_user
+  before_filter :check_ownership, only: [:show]
+  before_action :verify_phone_number
 
   def index
     @habits = current_user.habits.all
@@ -74,8 +76,21 @@ class HabitsController < ApplicationController
   end
 
   private
+
   def verify_user
     redirect_to root_path unless current_user
+  end
+
+  def check_ownership
+    @habit = Habit.find(params[:id])
+    redirect_to dashboard_path unless @habit.user == current_user
+  end
+
+  def verify_phone_number
+    if !current_user.phone || current_user.phone.empty?
+      flash[:error] = "Please Update Your Information"
+      redirect_to user_path(current_user)
+    end
   end
 
   def create_github_habit(params)
@@ -87,11 +102,13 @@ class HabitsController < ApplicationController
   end
 
   def get_datetime(params)
-    Time.new(params["habit"]["notification_time(1i)"].to_i,
+    time = Time.new(params["habit"]["notification_time(1i)"].to_i,
              params["habit"]["notification_time(2i)"].to_i,
              params["habit"]["notification_time(3i)"].to_i,
              params["habit"]["notification_time(4i)"].to_i,
-             params["habit"]["notification_time(5i)"].to_i).strftime("%Y-%m-%d %H:%M:%S")
+             params["habit"]["notification_time(5i)"].to_i).utc
+
+    (time - 27.hours).strftime("%Y-%m-%d %H:%M:%S")
   end
 
   def get_commit_dates(params)

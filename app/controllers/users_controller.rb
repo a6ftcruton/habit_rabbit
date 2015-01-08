@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update(phone: params[:phone])
-    redirect_to '/dashboard'
+    current_user.update(phone: params[:phone], time_zone: params[:time_zone])
+    redirect_to dashboard_path
   end
 
   def add_github
@@ -30,6 +30,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email_address, :password, :password_confirmation, :phone, :github_name)
   end
 end

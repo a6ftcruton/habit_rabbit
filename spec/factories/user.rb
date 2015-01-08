@@ -7,5 +7,6 @@ FactoryGirl.define do
     image 'http://example.com/image/12342345'
     oauth_token "fjdkslfaPOI"
     oauth_secret "abc123"
+    phone "501-499-3998"
   end
 end

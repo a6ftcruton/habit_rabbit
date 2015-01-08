@@ -92,7 +92,7 @@ class Habit < ActiveRecord::Base
   end
 
   def event_requires_update?
-    self.events.empty? || self.events.last.created_at.day < Date.yesterday.day
+    self.events.empty? || self.events.last.created_at < Date.yesterday
   end
 
   def create_events(commit_dates)
@@ -112,7 +112,9 @@ class Habit < ActiveRecord::Base
     counter = 0
 
     until counter == total - 1 do
-      if (events[counter] + 1.day != events[counter + 1])
+      if events[counter].nil?
+        break
+      elsif (events[counter] + 1.day != events[counter + 1])
         self.events.create(completed: false, created_at: events[counter])
       end
       counter += 1
