@@ -1,5 +1,6 @@
 class HabitsController < ApplicationController
   before_action :verify_user
+  before_action :verify_phone_number
 
   def index
     @habits = current_user.habits.all
@@ -69,6 +70,13 @@ class HabitsController < ApplicationController
   private
   def verify_user
     redirect_to root_path unless current_user
+  end
+
+  def verify_phone_number
+    if current_user.phone.empty?
+      flash[:error] = "Please Update Your Information"
+      redirect_to user_path(current_user)
+    end
   end
 
   def create_github_habit(params)
