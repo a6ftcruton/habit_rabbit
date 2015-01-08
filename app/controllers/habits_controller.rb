@@ -75,7 +75,6 @@ class HabitsController < ApplicationController
 
   def check_ownership
     @habit = Habit.find(params[:id])
-    flash[:error] = ""
     redirect_to dashboard_path unless @habit.user == current_user
   end
 
