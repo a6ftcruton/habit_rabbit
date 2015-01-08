@@ -79,6 +79,13 @@ describe 'habit' do
 
       expect(@habit.events.size).to eq(5)
     end
+
+    it 'can adds repetitions if already has an event for that date' do
+      dates = ['2015-01-01 00:00:00Z', '2015-01-01 00:00:00Z', '2015-01-04 00:00:00Z', '2015-01-05 00:00:00Z', '2015-01-01 00:00:00Z']
+      @habit.create_events(dates)
+
+      expect(@habit.events.first.repetitions).to eq(3)
+    end
   end
 
   describe '#create_false_events' do

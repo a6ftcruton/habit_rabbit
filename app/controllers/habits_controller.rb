@@ -6,16 +6,18 @@ class HabitsController < ApplicationController
   end
 
   def create
-    if Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
-      flash[:notice] = "Your Habit was saved successfully"
+    if params[:title].empty?
+      flash[:error] = "Your habit must have a name"
       redirect_to dashboard_path
     else
-      flash[:notice] = "Your habit must have a name"
+      Habit.create(name: params[:title], user_id: current_user.id, start_date: params[:start_date])
+      flash[:notice] = "Your Habit was saved successfully"
       redirect_to dashboard_path
     end
   end
 
   def show
+    @user = current_user
     @habit = Habit.find(params[:id])
     @events = @habit.events.pluck(:created_at, :completed)
     @events = @events.each do |event|
@@ -59,9 +61,9 @@ class HabitsController < ApplicationController
     else
       flash[:notice] = "Your Repo is being tracked"
       @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
-      commit_dates = get_commit_dates(params)
+      commit_dates = get_commit_dates(params).sort
       @habit.create_events(commit_dates)
-      events = @habit.events.map {|d| d.created_at.to_date }.uniq
+      events = @habit.events.map {|d| d.created_at.to_date }.uniq.sort
       @habit.create_false_events(events)
 
       redirect_to dashboard_path
