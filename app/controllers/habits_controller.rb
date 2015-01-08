@@ -77,6 +77,7 @@ class HabitsController < ApplicationController
   def check_ownership
     @habit = Habit.find(params[:id])
     redirect_to dashboard_path unless @habit.user == current_user
+  end
 
   def verify_phone_number
     if current_user.phone.empty?
