@@ -19,11 +19,18 @@ class HabitsController < ApplicationController
   def show
     @user = current_user
     @habit = Habit.find(params[:id])
-    @events = @habit.events.pluck(:created_at, :completed)
-    @events = @events.each do |event|
-      event[0] = event[0].to_i
-      event[1] == true ? event[1] = 1 : event[1] = 0
-    end.to_json.html_safe
+    if @habit.github_repo
+      @events = @habit.events.pluck(:created_at, :repetitions)
+      @events.each do |event|
+        event[0] = event[0].to_i
+      end
+    else
+      @events = @habit.events.pluck(:created_at, :completed)
+      @events = @events.each do |event|
+        event[0] = event[0].to_i
+        event[1] == true ? event[1] = 1 : event[1] = 0
+      end.to_json.html_safe
+    end
   end
 
   def update

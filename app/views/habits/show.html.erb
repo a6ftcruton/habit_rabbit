@@ -27,31 +27,32 @@
   <%= link_to "Delete Habit", habit_path(@habit), method: 'delete', class: "custom-button button round",  data: {confirm: "Are you sure?"} %><br/>
 </div>
 
-<div id="button">
-  <%= link_to "Back", dashboard_path %>
-</div>
+  <div id="button">
+    <%= link_to "Back", dashboard_path %>
+  </div>
+
   <div class="rickshaw_container">
     <h3><%= "#{@habit.name.capitalize}" + " Progress" %></h3>
-  <div class="chart large-8 large-centered colummns"></div>
+  <div class="chart"></div>
 </div>
 
 <script src="/assets/d3.min.js"></script>
 <script src="/assets/d3.layout.min.js"></script>
-<script src="/assets/rickshaw.min.js"></script><script>
+<script src="/assets/rickshaw.min.js"></script>
+<script>
 
 var events = <%= @events %>
 
-var data = events.map(function (pt) { return { x: pt[0], y: pt[1] }; });
+var habitData = events.map(function (pt) { return { x: pt[0], y: pt[1] }; });
 
 var graph = new Rickshaw.Graph( {
         element: document.querySelector(".chart"),
         width: 580,
         height: 300,
-        min: -0.2,
-        interpolation: 'linear',
+        renderer: 'bar',
         series: [ {
                 name: "habit",
-                data: data,
+                data: habitData,
                 color: '#daa96f'
         } ]
 });
