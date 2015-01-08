@@ -86,7 +86,7 @@ class HabitsController < ApplicationController
              params["habit"]["notification_time(4i)"].to_i,
              params["habit"]["notification_time(5i)"].to_i).utc
 
-    (time - 3.hours).strftime("%Y-%m-%d %H:%M:%S")
+    (time - 27.hours).strftime("%Y-%m-%d %H:%M:%S")
   end
 
   def get_commit_dates(params)

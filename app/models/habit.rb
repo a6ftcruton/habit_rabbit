@@ -92,7 +92,7 @@ class Habit < ActiveRecord::Base
   end
 
   def event_requires_update?
-    self.events.empty? || self.events.last.created_at.day < Date.yesterday.day
+    self.events.empty? || self.events.last.created_at < Date.yesterday
   end
 
   def create_events(commit_dates)
