@@ -23,7 +23,7 @@
                 <% end %>
               </div>
               <%= link_to "More Information", habit_path(habit) %><br/>
-              <%= link_to "Delete Habit", habit_path(habit), method: 'delete', data: {confirm: "Are you sure?"} %><br/>
+              <%= render "shared/tweet", habit: habit %>
               Current Streak: <%= habit.current_streak_days %><br/>
             </div>
             <div class="inpos"></div>

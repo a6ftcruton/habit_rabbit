@@ -1,15 +1,20 @@
 <h3 id='habit-welcome'>Log in to Track Your Habits</h3>
 
-<div id="user-welcome">
-  <%= form_for @user, url: login_path do |f| %>
-  <%= f.label 'Email' %>
-  <%= f.text_field :email_address %>
-  <%= f.label 'Password' %>
-  <%= f.text_field :password %>
-  <%= f.submit value: 'Login'%>
-  <% end %>
+<div class="row">
+  <div class="large-4 large-centered columns">
+    <div id="user-welcome">
+      <%= form_for @user, url: login_path do |f| %>
+      <%= f.label 'Email' %>
+      <%= f.text_field :email_address %>
+      <%= f.label 'Password' %>
+      <%= f.text_field :password %>
+      <%= f.submit value: 'Login', class: "custom-button button round"%>
+      <% end %>
+  <div id="back-button large-4 large-centered columns">
+    <%= link_to "Back", dashboard_path %>
+  </div>
+    </div>
+  </div>
 </div>
 
-<div id="back-button">
-  <%= link_to "Back", dashboard_path %>
-</div>
+

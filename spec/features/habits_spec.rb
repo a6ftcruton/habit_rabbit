@@ -10,11 +10,6 @@ describe 'habits', type: :feature do
     visit dashboard_path
   end
 
-  it 'can delete a habit' do
-    expect(page).to have_content('pushups')
-    click_link 'Delete Habit'
-    expect(page).to_not have_content('pushups')
-  end
 
   it 'can edit a habit' do
     click_link 'More Information'
@@ -36,10 +31,10 @@ describe 'habits', type: :feature do
     expect(page).to have_content 'pushups'
   end
 
-  it 'can tweet a habit' do
+  it 'can delete a habit' do
     expect(page).to have_content('pushups')
     click_link 'More Information'
-    expect(page).to have_content('Tweet My Streak')
+    expect(page).to have_content('Delete Habit')
   end
 
 end

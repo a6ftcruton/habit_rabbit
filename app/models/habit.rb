@@ -18,7 +18,12 @@ class Habit < ActiveRecord::Base
     end
   end
 
+#  increment until completed false
+  #  
+  #  
+
   def streaks
+
     events = sorted_events_for_habit
     current_streak = nil
     total_events = events.count

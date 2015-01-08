@@ -1,6 +1,7 @@
+<div>
 <%= @tweet %>
 
-<a class="btn btn-lg btn-default twitter popup" href="http://twitter.com/share?text=">Tweet My Streak</a>
+<a class="twitter popup" href="http://twitter.com/share?text=">Tweet My Streak</a>
 
 <script>
 $('.popup').click(function(event) {
@@ -8,7 +9,7 @@ $('.popup').click(function(event) {
   height = 400,
   left   = ($(window).width()  - width)  / 2,
   top    = ($(window).height() - height) / 2,
-  url    = 'https://twitter.com/intent/tweet?text=Check out my <%= @habit.name %> streak. I have been at it for <%= @habit.current_streak_days %> days. // brought to you by Habit Rabbit from @turingschool '
+  url    = 'https://twitter.com/intent/tweet?text=Check out my <%= habit.name %> streak. I have been at it for <%= habit.current_streak_days %> days. // brought to you by Habit Rabbit from @turingschool '
   opts   = 'status=1' +
   ',width='  + width  +
   ',height=' + height +
