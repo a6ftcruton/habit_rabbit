@@ -60,11 +60,7 @@ class HabitsController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:notice] = "Your Repo is being tracked"
-      @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
-      commit_dates = get_commit_dates(params).sort
-      @habit.create_events(commit_dates)
-      events = @habit.events.map {|d| d.created_at.to_date }.uniq.sort
-      @habit.create_false_events(events)
+      create_github_habit(params)
 
       redirect_to dashboard_path
     end
@@ -73,6 +69,14 @@ class HabitsController < ApplicationController
   private
   def verify_user
     redirect_to root_path unless current_user
+  end
+
+  def create_github_habit(params)
+    @habit = Habit.create(name: params[:repo], user_id: current_user.id, start_date: params[:start_date], github_repo: true)
+    commit_dates = get_commit_dates(params).sort
+    @habit.create_events(commit_dates)
+    events = @habit.events.map {|d| d.created_at.to_date }.uniq.sort
+    @habit.create_false_events(events)
   end
 
   def get_datetime(params)
