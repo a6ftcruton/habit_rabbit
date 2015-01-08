@@ -112,7 +112,9 @@ class Habit < ActiveRecord::Base
     counter = 0
 
     until counter == total - 1 do
-      if (events[counter] + 1.day != events[counter + 1])
+      if events[counter].nil?
+        break
+      elsif (events[counter] + 1.day != events[counter + 1])
         self.events.create(completed: false, created_at: events[counter])
       end
       counter += 1
