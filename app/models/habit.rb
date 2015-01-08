@@ -23,9 +23,9 @@ class Habit < ActiveRecord::Base
   end
 
   def longest_current_streak_days
-    longest_streak = streaks.max_by { |streak| streak.days }
+    longest_streak = streaks.max_by { |streak| streak.count }
     if longest_streak
-      longest_streak.days
+      longest_streak.count
     else
       0
     end
@@ -58,7 +58,7 @@ class Habit < ActiveRecord::Base
 
   def current_streak_days
     unless streaks.empty? || !events.by_most_recent.first.completed
-      streaks.first.days.count
+      streaks.last.days.count
     else
       0
     end

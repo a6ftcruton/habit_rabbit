@@ -1,5 +1,5 @@
 class Streak
-  attr_reader :events
+  attr_reader :days
 
   def initialize
     @days = []
@@ -10,7 +10,7 @@ class Streak
   end
 
   def count
-    days.count
+    @days.count
   end
 
   def empty?
