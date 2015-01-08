@@ -73,7 +73,7 @@ class HabitsController < ApplicationController
   end
 
   def verify_phone_number
-    if current_user.phone.empty?
+    if !current_user.phone || current_user.phone.empty?
       flash[:error] = "Please Update Your Information"
       redirect_to user_path(current_user)
     end

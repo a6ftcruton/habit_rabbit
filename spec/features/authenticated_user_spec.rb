@@ -5,6 +5,8 @@ describe 'authenticated user', type: :feature do
 
   before do
     sign_in_with_twitter
+    page.fill_in('phone', with: '5014993998')
+    click_link_or_button 'Create'
   end
 
   it 'can visit dashboard', js: true do

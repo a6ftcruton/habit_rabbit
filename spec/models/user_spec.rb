@@ -3,10 +3,7 @@ require 'rails_helper'
 describe "user" do
   describe "non-twitter user creation" do
     it 'can create a user with a name and email and password and confirmation' do
-      user = User.new(name: 'joe',
-                      email_address: 'stuff@yomama.com',
-                      password: "password",
-                      password_confirmation: "password")
+      user = create(:user)
       expect(user).to be_valid
     end
 
