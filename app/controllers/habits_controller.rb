@@ -1,6 +1,7 @@
 class HabitsController < ApplicationController
   before_action :verify_user
   before_filter :check_ownership, only: [:show]
+  before_action :verify_phone_number
 
   def index
     @habits = current_user.habits.all
@@ -76,6 +77,12 @@ class HabitsController < ApplicationController
   def check_ownership
     @habit = Habit.find(params[:id])
     redirect_to dashboard_path unless @habit.user == current_user
+
+  def verify_phone_number
+    if current_user.phone.empty?
+      flash[:error] = "Please Update Your Information"
+      redirect_to user_path(current_user)
+    end
   end
 
   def create_github_habit(params)
