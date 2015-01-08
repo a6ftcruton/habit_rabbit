@@ -1,5 +1,6 @@
 class HabitsController < ApplicationController
   before_action :verify_user
+  before_filter :check_ownership, only: [:show]
   before_action :verify_phone_number
 
   def index
@@ -68,8 +69,14 @@ class HabitsController < ApplicationController
   end
 
   private
+
   def verify_user
     redirect_to root_path unless current_user
+  end
+
+  def check_ownership
+    @habit = Habit.find(params[:id])
+    redirect_to dashboard_path unless @habit.user == current_user
   end
 
   def verify_phone_number

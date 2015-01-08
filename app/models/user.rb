@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
 
   with_options(:unless => :is_twitter?) do |non_twitter_user|
     non_twitter_user.validates :email_address, presence: true
-    non_twitter_user.validates :password, presence: true, confirmation: true
   end
 
   def self.from_omniauth(auth)
