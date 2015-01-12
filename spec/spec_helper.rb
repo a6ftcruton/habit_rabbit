@@ -36,18 +36,30 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
-  def sign_in_with_twitter
+  def sign_in_with_twitter_and_save_phone(username)
+    sign_in_with_twitter(username)
+    create_phone_number_for_user
+  end
+
+  def sign_in_with_twitter(username)
     user = attributes_for(:user)
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
       'provider' => 'twitter',
       'uid' => user[:uid], 
-      'info' => { "name" => user[:name], 
+      'info' => { "name" => user[:name] ||= username, 
                   "image" => user[:image] },
       'credentials' => {
                   "token" => user[:oauth_token], 
                   "secret" => user[:oauth_secret] }
     })
     visit "/auth/twitter/callback"
+  end
+
+  private
+
+  def create_phone_number_for_user
+    page.fill_in('phone', with: '5014993998')
+    click_link_or_button('Create')
   end
 end

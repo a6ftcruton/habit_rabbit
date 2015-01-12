@@ -4,9 +4,8 @@ describe 'authenticated user', type: :feature do
   include Capybara::DSL
 
   before do
-    sign_in_with_twitter
-    page.fill_in('phone', with: '5014993998')
-    click_link_or_button 'Create'
+    username = "Yukon Cornelius"
+    sign_in_with_twitter_and_save_phone(username)
   end
 
   it 'can visit dashboard', js: true do

@@ -33,7 +33,7 @@ describe 'habits', type: :feature do
     expect(page).to have_content @habit.name
     visit signout_path
     expect(current_path).to eq root_path
-    sign_in_with_twitter
+    sign_in_with_twitter("Yukon Cornelius")
     expect(page).to have_content @habit.name
   end
 

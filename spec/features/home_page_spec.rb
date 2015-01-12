@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "home page" do
   it 'has a button that takes you to the dashboard' do
-    sign_in_with_twitter
+    sign_in_with_twitter("Yukon Cornelius")
     visit root_path
     click_link_or_button "My Dashboard"
     page.fill_in('phone', with: '5014993998')
