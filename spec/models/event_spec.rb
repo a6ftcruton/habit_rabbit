@@ -17,7 +17,7 @@ describe 'event' do
   end
 
   it 'creates an event if user has not responded in 24 hours' do
-    event2 = Event.create(completed: true, habit_id: @habit.id, created_at: Time.now - 48.hours)
+    second_event = Event.create(completed: true, habit_id: @habit.id, created_at: Time.now - 48.hours)
     expect(Event.count).to eq(2)
 
     @user.habits.first.user_response?
